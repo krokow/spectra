@@ -7,3 +7,4 @@ package-lock.json
 supabase/seed/questions.json
 playwright-report
 test-results
+supabase/functions-bundled

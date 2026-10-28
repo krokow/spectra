@@ -44,4 +44,4 @@ npm run dev                  # http://localhost:5173
 
 ## État
 
-Étape 3 / 9 : comptes (e-mail ou pseudo + mot de passe, sans envoi d'e-mail), codes de secours, profils, confidentialité, export et suppression RGPD, RLS testée.
+Étape 4 / 9 : catalogue musical (Deezer, secours iTunes, tags Last.fm) avec cache en base, lecteur d'extraits global, recherche, bibliothèque d'ancrage de ~340 morceaux. Prochaine sous-étape : analyseur audio maison.

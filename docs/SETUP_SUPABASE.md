@@ -101,6 +101,32 @@ Déploiement depuis le tableau de bord, comme pour Synapse. Chaque fonction tien
 `SUPABASE_URL`, `SUPABASE_ANON_KEY` et `SUPABASE_SERVICE_ROLE_KEY` sont fournis automatiquement à la fonction
 par Supabase : tu n'as rien à saisir pour eux, et ils ne quittent jamais les serveurs Supabase.
 
+### `music` (étape 4 : recherche, extraits Deezer/iTunes, tags Last.fm)
+
+1. **Clé Last.fm (facultative mais conseillée, gratuite)** : `https://www.last.fm/api/account/create`.
+   Nom de l'application `Spectra`, description « découverte musicale, usage non commercial », site
+   `https://krokow.github.io/spectra/`, callback vide. Copie l'**API key** (pas le « shared secret »).
+   Puis **Edge Functions → Secrets → Add new secret** : nom `LASTFM_API_KEY`, valeur = la clé.
+   Sans cette clé, la fonction marche quand même (simplement sans tags).
+2. **Deploy a new function → Via Editor**, nom `music` (exactement).
+3. Colle le contenu de
+   [`supabase/functions-bundled/music.ts`](../supabase/functions-bundled/music.ts)
+   (**le fichier assemblé**, pas celui de `supabase/functions/music/` qui en importe d'autres).
+4. **Deploy function**. Cette fois, **laisse « Verify JWT » activé** : seules les personnes connectées
+   peuvent chercher et écouter.
+
+> Règle générale : les fichiers à coller dans Supabase sont toujours ceux de `supabase/functions-bundled/`.
+> Ils sont régénérés par `npm run functions:bundle` et la CI vérifie qu'ils sont à jour.
+
+## 5bis. Bibliothèque d'ancrage (étape 4)
+
+1. GitHub → onglet **Actions** → **Bibliothèque d'ancrage** → **Run workflow** (branche `main`).
+   Le workflow interroge Deezer (et iTunes en secours) pour les ~340 morceaux de
+   `supabase/seed/anchors/anchors.source.csv`, puis commite `anchors.sql` et `REPORT.md`.
+2. Quand il est vert : ouvre `supabase/seed/anchors/anchors.sql` sur GitHub → **Copy raw file** →
+   SQL Editor → **Run**. Le fichier peut être relancé sans risque.
+3. `REPORT.md` liste les morceaux introuvables : on corrige leur orthographe dans le CSV et on relance.
+
 ## 6. Te déclarer administrateur (après ta première inscription)
 
 **SQL Editor** (à taper dans Supabase, jamais à commiter avec ta vraie adresse) :

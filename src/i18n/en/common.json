@@ -45,8 +45,14 @@
     "emptyText": "A few questions and it draws itself before your eyes."
   },
   "discover": {
-    "emptyTitle": "Nothing to discover… yet",
-    "emptyText": "Draw your spectrum first so we know what to play you."
+    "emptyTitle": "What shall we play?",
+    "emptyText": "Type at least two letters. Previews come from Deezer (or Apple Music as a fallback).",
+    "searchIntro": "Search for an artist or a track and play a preview. Recommendations are coming soon.",
+    "searchLabel": "Search for a track",
+    "searchPlaceholder": "Artist, title…",
+    "noResultTitle": "Nothing found",
+    "noResultText": "No track for “{{q}}”. Try another spelling.",
+    "resultsLabel": "{{count}} results"
   },
   "friends": {
     "emptyTitle": "No friends here yet",
@@ -249,6 +255,36 @@
     "questions": {
       "title": "Question bank",
       "soon": "The question editor (add, edit, validate) arrives in step 5, along with the profiling engine."
+    }
+  },
+  "player": {
+    "label": "Player",
+    "play": "Play",
+    "pause": "Pause",
+    "next": "Next track",
+    "previous": "Previous track",
+    "close": "Close player",
+    "expand": "Open player",
+    "collapse": "Collapse player",
+    "seek": "Position in preview",
+    "coverOf": "Cover of {{title}}",
+    "playTrack": "Play {{title}} by {{artist}}",
+    "pauseTrack": "Pause {{title}}",
+    "previewNote": "30-second preview.",
+    "listenOn": "Listen in full on {{source}}",
+    "shortcuts": "Shortcuts: Space play/pause · ← → back/forward 5 s · N next · B previous · Esc collapse",
+    "errors": {
+      "playback": "Can't play this preview.",
+      "no_preview": "No preview available for this track.",
+      "not_deployed": "The catalogue isn't connected yet (music function).",
+      "rate_limited": "Easy! Too many requests, try again in a minute.",
+      "upstream_error": "Deezer isn't responding, try again later.",
+      "unauthorized": "Your session expired, please log in again.",
+      "origin_not_allowed": "This address isn't allowed (ALLOWED_ORIGINS).",
+      "invalid_input": "Invalid search.",
+      "not_found": "Track not found.",
+      "server_error": "The server had a problem.",
+      "network": "Can't reach the server."
     }
   }
 }

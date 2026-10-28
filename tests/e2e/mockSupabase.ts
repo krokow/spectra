@@ -27,6 +27,54 @@ export function fakeSession(userId: string, email: string) {
   }
 }
 
+/** Petit fichier WAV (2 s de La 440 Hz très doux) pour simuler un extrait. */
+export function wavTone(seconds = 2, rate = 8000): Buffer {
+  const n = seconds * rate
+  const buf = Buffer.alloc(44 + n * 2)
+  buf.write('RIFF', 0)
+  buf.writeUInt32LE(36 + n * 2, 4)
+  buf.write('WAVEfmt ', 8)
+  buf.writeUInt32LE(16, 16)
+  buf.writeUInt16LE(1, 20)
+  buf.writeUInt16LE(1, 22)
+  buf.writeUInt32LE(rate, 24)
+  buf.writeUInt32LE(rate * 2, 28)
+  buf.writeUInt16LE(2, 32)
+  buf.writeUInt16LE(16, 34)
+  buf.write('data', 36)
+  buf.writeUInt32LE(n * 2, 40)
+  for (let i = 0; i < n; i++)
+    buf.writeInt16LE(Math.round(Math.sin((2 * Math.PI * 440 * i) / rate) * 800), 44 + i * 2)
+  return buf
+}
+
+export const CATALOG = [
+  {
+    id: '11111111-1111-4111-8111-111111111111',
+    title: 'Get Lucky',
+    artist_name: 'Daft Punk',
+    album: 'Random Access Memories',
+    cover_url: null,
+    release_year: 2013,
+    deezer_id: 67238735,
+    preview_source: 'deezer',
+    preview_url: null,
+    preview_expires_at: null,
+  },
+  {
+    id: '22222222-2222-4222-8222-222222222222',
+    title: 'One More Time',
+    artist_name: 'Daft Punk',
+    album: 'Discovery',
+    cover_url: null,
+    release_year: 2000,
+    deezer_id: 3135553,
+    preview_source: 'deezer',
+    preview_url: null,
+    preview_expires_at: null,
+  },
+]
+
 type State = {
   users: { id: string; email: string; username: string; password: string }[]
   me?: string
@@ -38,6 +86,10 @@ const json = (route: Route, body: unknown, status = 200) =>
 /** Simule le strict nécessaire de Supabase (Auth + PostgREST) pour les parcours e2e. */
 export async function mockSupabase(page: Page, state: State = { users: [] }) {
   const current = () => state.users.find((u) => u.id === state.me)
+  // Extraits audio simulés (le CDN Deezer réel n'est jamais contacté).
+  await page.route('https://cdnt-preview.dzcdn.net/**', (route) =>
+    route.fulfill({ status: 200, contentType: 'audio/wav', body: wavTone() }),
+  )
 
   await page.route(`${SUPABASE}/**`, async (route) => {
     const req = route.request()
@@ -45,6 +97,22 @@ export async function mockSupabase(page: Page, state: State = { users: [] }) {
     const body = req.postDataJSON?.() as Record<string, string> | null
 
     switch (`${req.method()} ${url.pathname}`) {
+      case 'POST /functions/v1/music': {
+        const action = body?.action
+        if (action === 'search') return json(route, { tracks: CATALOG, cached: false })
+        if (action === 'preview') {
+          const t = CATALOG.find((c) => c.id === (body as unknown as { trackId: string }).trackId)
+          const exp = new Date(Date.now() + 3600_000).toISOString()
+          return json(route, {
+            track: {
+              ...t,
+              preview_url: `https://cdnt-preview.dzcdn.net/e2e/${t?.deezer_id}.wav?hdnea=exp=1`,
+              preview_expires_at: exp,
+            },
+          })
+        }
+        return json(route, { error: 'invalid_input' }, 400)
+      }
       case 'POST /rest/v1/rpc/username_available':
         return json(
           route,

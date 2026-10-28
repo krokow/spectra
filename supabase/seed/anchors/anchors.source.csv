@@ -1,0 +1,350 @@
+# Bibliothèque d'ancrage Spectra : source curée à la main.
+# Colonnes : artist;title;year;lang;genres;energy;valence;acoustic;tempo;dance;complexity;vocal;bass;polish;warmth;niche
+# - year : année de l'enregistrement de référence (sert à la dimension « époque »)
+# - lang : code ISO 639 de la langue chantée, « - » pour un instrumental
+# - genres : poids par macro-genre, ex. electro:0.9|pop:0.3 (cf. supabase/seed/questions.json)
+# - 11 dimensions sur [0,1] : estimations humaines, affinées ensuite par l'analyseur audio et Deezer (bpm, rang)
+# Pour enrichir : ajouter des lignes, puis lancer le workflow « Bibliothèque d'ancrage » (npm run anchors:validate en local).
+artist;title;year;lang;genres;energy;valence;acoustic;tempo;dance;complexity;vocal;bass;polish;warmth;niche
+Michael Jackson;Billie Jean;1982;en;pop:0.8|funk_disco:0.4|rnb_soul:0.3;0.75;0.6;0.15;0.6;0.9;0.4;0.85;0.75;0.85;0.5;0.05
+Madonna;Like a Prayer;1989;en;pop:0.9;0.7;0.6;0.25;0.6;0.7;0.4;0.9;0.5;0.8;0.6;0.1
+Whitney Houston;I Wanna Dance with Somebody (Who Loves Me);1987;en;pop:0.9|funk_disco:0.3;0.8;0.9;0.1;0.6;0.85;0.3;0.9;0.5;0.85;0.6;0.08
+Britney Spears;Toxic;2003;en;pop:0.9|electro:0.3;0.8;0.5;0.05;0.6;0.8;0.5;0.85;0.65;0.95;0.3;0.08
+Lady Gaga;Bad Romance;2009;en;pop:0.9|electro:0.4;0.85;0.4;0.05;0.6;0.75;0.5;0.9;0.7;0.95;0.3;0.08
+Adele;Someone Like You;2011;en;pop:0.8|rnb_soul:0.3;0.25;0.2;0.9;0.3;0.3;0.3;0.95;0.15;0.7;0.8;0.08
+Taylor Swift;Shake It Off;2014;en;pop:1.0;0.8;0.95;0.15;0.7;0.75;0.2;0.9;0.5;0.95;0.5;0.05
+Dua Lipa;Levitating;2020;en;pop:0.9|funk_disco:0.4;0.8;0.85;0.05;0.6;0.85;0.3;0.85;0.65;0.95;0.5;0.05
+The Weeknd;Blinding Lights;2019;en;pop:0.8|electro:0.5;0.8;0.5;0.0;0.85;0.6;0.3;0.85;0.6;0.95;0.3;0.03
+Billie Eilish;bad guy;2019;en;pop:0.8|electro:0.3;0.45;0.5;0.1;0.6;0.7;0.6;0.85;0.9;0.85;0.3;0.08
+Harry Styles;As It Was;2022;en;pop:0.9|indie:0.3;0.7;0.6;0.3;0.8;0.65;0.3;0.85;0.4;0.85;0.5;0.05
+ABBA;Dancing Queen;1976;en;pop:0.8|funk_disco:0.5;0.75;0.8;0.3;0.5;0.75;0.3;0.85;0.5;0.8;0.7;0.08
+The Beatles;Help!;1965;en;pop:0.6|rock:0.6;0.75;0.75;0.6;0.7;0.5;0.3;0.9;0.3;0.4;0.6;0.1
+Olivia Rodrigo;good 4 u;2021;en;pop:0.7|punk:0.4|rock:0.3;0.85;0.5;0.2;0.85;0.55;0.3;0.9;0.5;0.85;0.4;0.08
+Charli xcx;Speed Drive;2023;en;pop:0.7|electro:0.6;0.85;0.7;0.0;0.75;0.8;0.5;0.8;0.75;0.9;0.2;0.25
+Robyn;Dancing On My Own;2010;en;pop:0.8|electro:0.5;0.8;0.35;0.05;0.65;0.75;0.4;0.85;0.6;0.9;0.3;0.3
+Lana Del Rey;Video Games;2011;en;pop:0.6|indie:0.5;0.25;0.2;0.5;0.3;0.3;0.4;0.95;0.25;0.75;0.75;0.08
+Nena;99 Luftballons;1983;de;pop:0.8|rock:0.3;0.8;0.55;0.3;0.75;0.6;0.3;0.9;0.5;0.55;0.6;0.08
+A. R. Rahman;Jai Ho;2008;hi;pop:0.6|electro:0.3;0.85;0.85;0.3;0.65;0.8;0.5;0.9;0.6;0.8;0.6;0.1
+100 gecs;money machine;2019;en;pop:0.6|electro:0.6|punk:0.3;0.9;0.5;0.05;0.65;0.6;0.85;0.85;0.85;0.5;0.2;0.75
+The Rolling Stones;(I Can't Get No) Satisfaction;1965;en;rock:0.9;0.75;0.6;0.4;0.6;0.6;0.3;0.85;0.4;0.35;0.6;0.1
+Led Zeppelin;Whole Lotta Love;1969;en;rock:0.9|blues:0.3;0.85;0.5;0.3;0.45;0.5;0.6;0.75;0.6;0.4;0.5;0.15
+Queen;Bohemian Rhapsody;1975;en;rock:0.9|pop:0.3;0.6;0.4;0.4;0.4;0.3;0.95;0.9;0.4;0.75;0.5;0.05
+AC/DC;Highway to Hell;1979;en;rock:0.8|metal:0.3;0.85;0.65;0.2;0.55;0.6;0.2;0.85;0.5;0.5;0.5;0.08
+Fleetwood Mac;Dreams;1977;en;rock:0.6|pop:0.5;0.45;0.5;0.5;0.5;0.7;0.35;0.85;0.4;0.6;0.8;0.08
+Bruce Springsteen;Born to Run;1975;en;rock:0.9;0.85;0.65;0.4;0.65;0.45;0.5;0.9;0.4;0.55;0.65;0.15
+Guns N' Roses;Sweet Child O' Mine;1987;en;rock:0.9|metal:0.2;0.8;0.6;0.3;0.6;0.45;0.5;0.85;0.5;0.6;0.6;0.05
+Nirvana;Smells Like Teen Spirit;1991;en;rock:0.8|punk:0.3|indie:0.3;0.9;0.35;0.25;0.55;0.5;0.4;0.85;0.6;0.4;0.4;0.05
+Radiohead;Paranoid Android;1997;en;rock:0.7|indie:0.6;0.6;0.25;0.45;0.45;0.3;0.95;0.75;0.4;0.6;0.4;0.25
+Foo Fighters;Everlong;1997;en;rock:0.9;0.85;0.5;0.2;0.75;0.4;0.4;0.85;0.5;0.6;0.5;0.1
+The White Stripes;Seven Nation Army;2003;en;rock:0.8|blues:0.3;0.75;0.4;0.25;0.5;0.6;0.3;0.75;0.75;0.35;0.4;0.08
+Arctic Monkeys;Do I Wanna Know?;2013;en;rock:0.7|indie:0.5;0.55;0.35;0.2;0.35;0.6;0.4;0.85;0.7;0.75;0.4;0.08
+Muse;Knights of Cydonia;2006;en;rock:0.9;0.9;0.5;0.15;0.7;0.45;0.75;0.75;0.6;0.8;0.3;0.25
+Téléphone;Un autre monde;1984;fr;rock:0.9|chanson:0.3;0.7;0.55;0.4;0.6;0.55;0.35;0.85;0.5;0.45;0.6;0.3
+Måneskin;Beggin';2017;en;rock:0.8|pop:0.3;0.85;0.65;0.2;0.65;0.7;0.3;0.9;0.55;0.75;0.5;0.08
+King Gizzard & the Lizard Wizard;Rattlesnake;2017;en;rock:0.7|indie:0.5;0.85;0.5;0.3;0.8;0.6;0.85;0.55;0.6;0.4;0.4;0.65
+Jimi Hendrix;Voodoo Child (Slight Return);1968;en;rock:0.7|blues:0.6;0.85;0.35;0.2;0.5;0.5;0.75;0.7;0.55;0.35;0.5;0.15
+The Strokes;Last Nite;2001;en;indie:0.8|rock:0.5;0.8;0.6;0.3;0.75;0.65;0.3;0.8;0.5;0.35;0.5;0.15
+Arcade Fire;Wake Up;2004;en;indie:0.9|rock:0.3;0.75;0.6;0.5;0.6;0.4;0.6;0.85;0.4;0.5;0.6;0.3
+Tame Impala;The Less I Know the Better;2015;en;indie:0.8|funk_disco:0.3|electro:0.2;0.65;0.7;0.2;0.55;0.8;0.55;0.75;0.75;0.8;0.6;0.15
+Phoebe Bridgers;Motion Sickness;2017;en;indie:0.8|folk:0.4;0.55;0.35;0.6;0.6;0.4;0.4;0.9;0.3;0.55;0.6;0.45
+Mac DeMarco;Chamber of Reflection;2014;en;indie:0.9;0.3;0.4;0.3;0.35;0.55;0.45;0.65;0.4;0.3;0.75;0.5
+Beach House;Space Song;2015;en;indie:0.8|ambient:0.3;0.4;0.35;0.3;0.4;0.45;0.5;0.6;0.3;0.6;0.6;0.45
+Pixies;Where Is My Mind?;1988;en;indie:0.7|rock:0.6;0.6;0.45;0.35;0.5;0.45;0.4;0.75;0.5;0.3;0.5;0.25
+The Smiths;There Is a Light That Never Goes Out;1986;en;indie:0.8|rock:0.3;0.5;0.4;0.5;0.6;0.5;0.4;0.85;0.3;0.45;0.6;0.2
+Slowdive;When the Sun Hits;1993;en;indie:0.9|rock:0.3;0.6;0.4;0.2;0.45;0.3;0.65;0.4;0.5;0.35;0.5;0.6
+My Bloody Valentine;Only Shallow;1991;en;indie:0.8|rock:0.4;0.85;0.35;0.1;0.55;0.35;0.75;0.4;0.55;0.35;0.4;0.6
+Bon Iver;Holocene;2011;en;indie:0.7|folk:0.6;0.3;0.4;0.75;0.35;0.25;0.6;0.65;0.2;0.5;0.75;0.35
+Clairo;Pretty Girl;2017;en;indie:0.8|pop:0.3;0.35;0.5;0.2;0.45;0.6;0.3;0.8;0.4;0.25;0.6;0.5
+Cocteau Twins;Heaven or Las Vegas;1990;en;indie:0.8|ambient:0.3;0.6;0.65;0.2;0.55;0.45;0.65;0.8;0.4;0.6;0.65;0.5
+Björk;Army of Me;1995;en;electro:0.6|indie:0.5|pop:0.3;0.8;0.3;0.1;0.5;0.55;0.75;0.9;0.9;0.75;0.2;0.4
+Portishead;Glory Box;1994;en;electro:0.5|rnb_soul:0.4|indie:0.3;0.35;0.25;0.35;0.3;0.5;0.6;0.9;0.6;0.6;0.6;0.3
+Black Sabbath;Paranoid;1970;en;metal:0.8|rock:0.6;0.85;0.3;0.2;0.75;0.4;0.35;0.8;0.6;0.35;0.4;0.15
+Iron Maiden;The Trooper;1983;en;metal:1.0;0.9;0.45;0.1;0.85;0.35;0.55;0.85;0.55;0.5;0.3;0.15
+Metallica;Master of Puppets;1986;en;metal:1.0;0.95;0.25;0.1;0.85;0.3;0.75;0.75;0.65;0.55;0.2;0.15
+Slayer;Raining Blood;1986;en;metal:1.0;1.0;0.15;0.05;0.95;0.25;0.6;0.7;0.7;0.4;0.1;0.3
+System Of A Down;Chop Suey!;2001;en;metal:0.9|rock:0.3;0.95;0.3;0.1;0.75;0.4;0.8;0.85;0.65;0.65;0.3;0.1
+Rammstein;Du hast;1997;de;metal:0.9|electro:0.3;0.9;0.3;0.05;0.55;0.6;0.3;0.8;0.8;0.8;0.2;0.15
+Linkin Park;Numb;2003;en;metal:0.6|rock:0.6|hiphop:0.2;0.85;0.3;0.1;0.55;0.5;0.3;0.9;0.65;0.9;0.3;0.05
+Gojira;Stranded;2016;en;metal:1.0;0.95;0.3;0.05;0.6;0.45;0.75;0.75;0.85;0.8;0.2;0.45
+Sleep Token;The Summoning;2023;en;metal:0.8|rnb_soul:0.2;0.75;0.35;0.2;0.5;0.5;0.85;0.85;0.8;0.85;0.4;0.3
+Nightwish;Nemo;2004;en;metal:0.9|classical:0.3;0.8;0.35;0.3;0.5;0.3;0.6;0.9;0.6;0.85;0.4;0.3
+BABYMETAL;Gimme Chocolate!!;2014;ja;metal:0.8|kpop_jpop:0.6;0.95;0.85;0.05;0.9;0.55;0.6;0.9;0.7;0.85;0.3;0.4
+Deftones;Change (In the House of Flies);2000;en;metal:0.7|rock:0.5;0.6;0.3;0.15;0.4;0.45;0.55;0.8;0.7;0.7;0.4;0.2
+Motörhead;Ace of Spades;1980;en;metal:0.8|rock:0.5|punk:0.3;0.95;0.6;0.1;0.95;0.45;0.3;0.85;0.6;0.3;0.3;0.15
+Mastodon;Blood and Thunder;2004;en;metal:1.0;0.95;0.3;0.1;0.7;0.35;0.8;0.7;0.75;0.6;0.2;0.5
+Ramones;Blitzkrieg Bop;1976;en;punk:1.0|rock:0.4;0.9;0.75;0.2;0.9;0.45;0.1;0.85;0.5;0.2;0.4;0.15
+The Clash;London Calling;1979;en;punk:0.9|rock:0.4;0.8;0.4;0.25;0.6;0.55;0.35;0.85;0.6;0.35;0.4;0.1
+Sex Pistols;Anarchy in the U.K.;1976;en;punk:1.0;0.9;0.4;0.15;0.65;0.4;0.2;0.85;0.5;0.2;0.3;0.15
+Green Day;Basket Case;1994;en;punk:0.9|rock:0.4;0.9;0.6;0.15;0.85;0.45;0.2;0.9;0.5;0.6;0.4;0.05
+blink-182;All the Small Things;1999;en;punk:0.9|pop:0.3;0.85;0.8;0.2;0.75;0.55;0.15;0.9;0.5;0.7;0.5;0.05
+Bad Brains;Pay to Cum;1980;en;punk:1.0;1.0;0.5;0.15;1.0;0.35;0.5;0.8;0.4;0.1;0.3;0.6
+IDLES;Never Fight a Man with a Perm;2018;en;punk:0.9|rock:0.4;0.95;0.4;0.1;0.75;0.45;0.45;0.85;0.75;0.5;0.3;0.45
+Bérurier Noir;Salut à toi;1985;fr;punk:1.0|chanson:0.2;0.9;0.65;0.2;0.8;0.6;0.3;0.85;0.5;0.15;0.5;0.5
+Fontaines D.C.;Boys in the Better Land;2019;en;punk:0.8|indie:0.5;0.85;0.45;0.2;0.8;0.5;0.4;0.85;0.55;0.4;0.4;0.5
+Paramore;Misery Business;2007;en;punk:0.7|rock:0.6|pop:0.3;0.9;0.6;0.1;0.8;0.55;0.3;0.9;0.5;0.8;0.4;0.08
+My Chemical Romance;Welcome to the Black Parade;2006;en;punk:0.6|rock:0.7;0.8;0.4;0.15;0.55;0.4;0.6;0.9;0.5;0.8;0.4;0.08
+Siouxsie and the Banshees;Spellbound;1981;en;punk:0.7|indie:0.5;0.8;0.45;0.25;0.75;0.5;0.5;0.85;0.5;0.4;0.4;0.4
+The Cure;Boys Don't Cry;1979;en;punk:0.5|indie:0.6;0.75;0.6;0.3;0.8;0.6;0.3;0.85;0.4;0.3;0.5;0.15
+Joy Division;Love Will Tear Us Apart;1980;en;punk:0.5|indie:0.6;0.65;0.3;0.3;0.65;0.55;0.35;0.75;0.6;0.3;0.2;0.25
+Turnstile;MYSTERY;2021;en;punk:0.9|rock:0.4;0.9;0.6;0.15;0.75;0.55;0.45;0.8;0.6;0.65;0.5;0.5
+Death Grips;Get Got;2012;en;hiphop:0.7|punk:0.4|electro:0.4;0.95;0.25;0.05;0.6;0.5;0.95;0.9;0.85;0.4;0.1;0.75
+The Sugarhill Gang;Rapper's Delight;1979;en;hiphop:0.9|funk_disco:0.6;0.7;0.85;0.2;0.55;0.85;0.2;0.95;0.7;0.5;0.7;0.2
+Run-DMC;Walk This Way;1986;en;hiphop:0.8|rock:0.4;0.85;0.7;0.2;0.55;0.75;0.3;0.95;0.65;0.45;0.5;0.15
+Public Enemy;Fight the Power;1989;en;hiphop:1.0;0.85;0.45;0.15;0.55;0.75;0.55;0.95;0.75;0.5;0.4;0.25
+Dr. Dre;Still D.R.E.;1999;en;hiphop:1.0;0.65;0.45;0.1;0.45;0.85;0.3;0.95;0.85;0.85;0.45;0.05
+Nas;N.Y. State of Mind;1994;en;hiphop:1.0;0.6;0.3;0.3;0.45;0.75;0.5;0.95;0.7;0.35;0.5;0.35
+The Notorious B.I.G.;Juicy;1994;en;hiphop:0.9|rnb_soul:0.3;0.6;0.75;0.2;0.45;0.8;0.3;0.95;0.75;0.6;0.7;0.1
+Wu-Tang Clan;C.R.E.A.M.;1993;en;hiphop:1.0;0.55;0.3;0.35;0.45;0.7;0.5;0.95;0.7;0.3;0.55;0.3
+Eminem;Lose Yourself;2002;en;hiphop:1.0|rock:0.2;0.8;0.4;0.15;0.6;0.65;0.45;0.95;0.65;0.85;0.3;0.03
+Kendrick Lamar;HUMBLE.;2017;en;hiphop:1.0;0.65;0.4;0.05;0.5;0.9;0.4;0.95;0.9;0.9;0.3;0.05
+Travis Scott;SICKO MODE;2018;en;hiphop:1.0;0.75;0.4;0.0;0.55;0.8;0.6;0.9;0.95;0.9;0.2;0.05
+Pop Smoke;Dior;2019;en;hiphop:1.0;0.75;0.4;0.05;0.7;0.8;0.35;0.9;0.95;0.85;0.3;0.1
+IAM;Je danse le mia;1993;fr;hiphop:0.9|funk_disco:0.4;0.65;0.8;0.2;0.5;0.85;0.3;0.95;0.7;0.55;0.7;0.3
+MC Solaar;Caroline;1991;fr;hiphop:0.9|chanson:0.3;0.4;0.5;0.45;0.45;0.6;0.4;0.95;0.55;0.45;0.75;0.35
+Suprême NTM;Laisse pas traîner ton fils;1998;fr;hiphop:1.0;0.75;0.4;0.15;0.45;0.75;0.4;0.95;0.75;0.6;0.45;0.3
+PNL;Au DD;2019;fr;hiphop:1.0;0.5;0.35;0.05;0.65;0.7;0.4;0.9;0.85;0.85;0.4;0.15
+Booba;DKR;2016;fr;hiphop:1.0|afro:0.2;0.65;0.45;0.05;0.6;0.75;0.3;0.95;0.9;0.9;0.3;0.15
+Orelsan;La terre est ronde;2011;fr;hiphop:0.8|chanson:0.3;0.7;0.6;0.15;0.5;0.75;0.4;0.95;0.7;0.75;0.5;0.15
+Central Cee;Doja;2022;en;hiphop:1.0;0.6;0.6;0.15;0.75;0.85;0.3;0.95;0.85;0.85;0.4;0.1
+J Dilla;Don't Cry;2006;-;hiphop:0.8|rnb_soul:0.5;0.4;0.45;0.35;0.4;0.6;0.7;0.3;0.6;0.35;0.85;0.6
+Nujabes;Aruarian Dance;2005;-;hiphop:0.7|jazz:0.5|ambient:0.3;0.35;0.55;0.5;0.4;0.6;0.5;0.05;0.5;0.4;0.8;0.6
+MF DOOM;Accordion;2004;en;hiphop:1.0;0.45;0.4;0.4;0.4;0.65;0.7;0.9;0.5;0.3;0.6;0.55
+potsu;i'm closing my eyes;2017;en;hiphop:0.4|ambient:0.6;0.3;0.6;0.5;0.4;0.55;0.35;0.4;0.5;0.3;0.8;0.6
+Aretha Franklin;Respect;1967;en;rnb_soul:1.0;0.75;0.8;0.5;0.7;0.75;0.3;0.95;0.5;0.45;0.85;0.1
+Otis Redding;(Sittin' On) The Dock of the Bay;1968;en;rnb_soul:1.0;0.35;0.55;0.6;0.4;0.6;0.3;0.9;0.4;0.45;0.9;0.15
+Marvin Gaye;What's Going On;1971;en;rnb_soul:1.0;0.45;0.55;0.5;0.45;0.65;0.55;0.9;0.5;0.6;0.95;0.15
+Stevie Wonder;Superstition;1972;en;rnb_soul:0.8|funk_disco:0.6;0.8;0.75;0.3;0.6;0.85;0.55;0.9;0.7;0.6;0.8;0.08
+Al Green;Let's Stay Together;1971;en;rnb_soul:1.0;0.4;0.75;0.6;0.4;0.7;0.35;0.95;0.45;0.55;0.95;0.15
+Erykah Badu;On & On;1997;en;rnb_soul:0.9|hiphop:0.3|jazz:0.3;0.4;0.5;0.45;0.45;0.7;0.6;0.9;0.6;0.55;0.85;0.4
+D'Angelo;Untitled (How Does It Feel);2000;en;rnb_soul:1.0;0.35;0.45;0.45;0.3;0.55;0.6;0.9;0.5;0.55;0.95;0.35
+Lauryn Hill;Doo Wop (That Thing);1998;en;rnb_soul:0.8|hiphop:0.6;0.65;0.7;0.3;0.5;0.75;0.4;0.95;0.65;0.6;0.8;0.1
+Beyoncé;Crazy in Love;2003;en;rnb_soul:0.7|pop:0.6;0.85;0.75;0.15;0.5;0.8;0.35;0.95;0.65;0.9;0.6;0.03
+Frank Ocean;Pink + White;2016;en;rnb_soul:0.8|indie:0.3;0.4;0.6;0.5;0.4;0.5;0.55;0.9;0.4;0.6;0.8;0.2
+SZA;Kill Bill;2022;en;rnb_soul:0.9|pop:0.4;0.55;0.55;0.2;0.45;0.7;0.35;0.95;0.6;0.85;0.6;0.05
+Amy Winehouse;Rehab;2006;en;rnb_soul:0.9|jazz:0.2;0.65;0.6;0.5;0.7;0.7;0.3;0.95;0.55;0.7;0.85;0.05
+Sade;Smooth Operator;1984;en;rnb_soul:0.8|jazz:0.4;0.4;0.5;0.4;0.4;0.65;0.45;0.85;0.5;0.8;0.85;0.15
+Daniel Caesar;Get You;2016;en;rnb_soul:1.0;0.25;0.45;0.5;0.3;0.5;0.4;0.95;0.4;0.6;0.9;0.3
+Ray Charles;What'd I Say;1959;en;rnb_soul:0.7|blues:0.5;0.8;0.8;0.4;0.65;0.85;0.35;0.9;0.5;0.3;0.8;0.1
+BADBADNOTGOOD;Time Moves Slow;2016;en;jazz:0.6|rnb_soul:0.5|hiphop:0.2;0.35;0.4;0.6;0.35;0.5;0.6;0.85;0.5;0.5;0.85;0.55
+James Brown;Get Up (I Feel Like Being a) Sex Machine;1970;en;funk_disco:1.0|rnb_soul:0.5;0.85;0.75;0.4;0.6;0.9;0.4;0.85;0.6;0.3;0.75;0.15
+Parliament;Give Up the Funk (Tear the Roof off the Sucker);1975;en;funk_disco:1.0;0.75;0.8;0.3;0.5;0.9;0.5;0.8;0.8;0.5;0.75;0.25
+Chic;Le Freak;1978;en;funk_disco:1.0;0.8;0.85;0.25;0.6;0.95;0.35;0.75;0.7;0.75;0.75;0.1
+Donna Summer;I Feel Love;1977;en;funk_disco:0.7|electro:0.7;0.8;0.6;0.0;0.65;0.9;0.4;0.75;0.65;0.8;0.3;0.15
+Bee Gees;Stayin' Alive;1977;en;funk_disco:1.0|pop:0.4;0.75;0.75;0.25;0.55;0.9;0.3;0.9;0.6;0.75;0.7;0.05
+Earth, Wind & Fire;September;1978;en;funk_disco:0.9|rnb_soul:0.5;0.8;0.95;0.3;0.6;0.9;0.45;0.9;0.6;0.75;0.85;0.05
+Kool & The Gang;Celebration;1980;en;funk_disco:1.0;0.8;0.95;0.25;0.6;0.9;0.3;0.85;0.6;0.7;0.8;0.08
+Prince;Kiss;1986;en;funk_disco:0.8|pop:0.5;0.65;0.75;0.3;0.55;0.9;0.5;0.85;0.4;0.5;0.6;0.1
+Vulfpeck;Dean Town;2016;-;funk_disco:1.0|jazz:0.3;0.75;0.8;0.5;0.6;0.85;0.75;0.05;0.9;0.5;0.75;0.65
+Cerrone;Supernature;1977;en;funk_disco:0.8|electro:0.6;0.75;0.4;0.1;0.6;0.85;0.5;0.6;0.75;0.65;0.4;0.45
+Daft Punk;Get Lucky;2013;en;funk_disco:0.7|electro:0.5|pop:0.4;0.75;0.85;0.3;0.55;0.9;0.35;0.85;0.65;0.95;0.8;0.03
+Jamiroquai;Virtual Insanity;1996;en;funk_disco:0.8|pop:0.4|jazz:0.2;0.65;0.6;0.35;0.5;0.85;0.5;0.9;0.7;0.85;0.75;0.08
+Khruangbin;Maria También;2018;-;funk_disco:0.6|indie:0.5;0.6;0.6;0.45;0.6;0.75;0.5;0.1;0.6;0.55;0.75;0.5
+Juliette Armanet;Le dernier jour du disco;2021;fr;chanson:0.6|funk_disco:0.5|pop:0.3;0.7;0.6;0.3;0.6;0.8;0.35;0.9;0.6;0.75;0.8;0.3
+Kraftwerk;Trans-Europe Express;1977;de;electro:1.0;0.4;0.45;0.0;0.4;0.65;0.5;0.3;0.4;0.6;0.2;0.4
+Depeche Mode;Enjoy the Silence;1990;en;electro:0.7|pop:0.6;0.6;0.35;0.1;0.6;0.7;0.45;0.85;0.6;0.85;0.3;0.08
+New Order;Blue Monday;1983;en;electro:0.8|punk:0.2|pop:0.3;0.75;0.4;0.0;0.65;0.85;0.5;0.65;0.75;0.65;0.2;0.15
+Daft Punk;One More Time;2000;en;electro:0.9|funk_disco:0.4;0.8;0.85;0.0;0.6;0.9;0.35;0.7;0.75;0.85;0.5;0.05
+The Chemical Brothers;Block Rockin' Beats;1997;en;electro:1.0;0.9;0.5;0.05;0.6;0.8;0.6;0.3;0.85;0.75;0.3;0.3
+Aphex Twin;Windowlicker;1999;en;electro:0.9;0.6;0.45;0.05;0.55;0.6;0.95;0.25;0.75;0.8;0.3;0.7
+Massive Attack;Teardrop;1998;en;electro:0.6|rnb_soul:0.3|ambient:0.3;0.35;0.25;0.3;0.35;0.5;0.6;0.65;0.65;0.8;0.5;0.15
+Justice;D.A.N.C.E.;2007;en;electro:0.8|funk_disco:0.5;0.85;0.85;0.0;0.6;0.9;0.5;0.7;0.75;0.85;0.4;0.25
+Avicii;Levels;2011;en;electro:1.0|pop:0.3;0.9;0.75;0.0;0.65;0.8;0.25;0.15;0.75;0.95;0.4;0.05
+Skrillex;Scary Monsters and Nice Sprites;2010;en;electro:1.0;1.0;0.45;0.0;0.7;0.6;0.6;0.3;1.0;0.9;0.1;0.2
+Disclosure;Latch;2012;en;electro:0.8|pop:0.4;0.75;0.6;0.05;0.6;0.8;0.4;0.85;0.75;0.9;0.4;0.15
+Fred again..;Delilah (pull me out of this);2022;en;electro:1.0;0.75;0.6;0.15;0.65;0.8;0.6;0.7;0.75;0.8;0.5;0.3
+Peggy Gou;Starry Night;2019;en;electro:1.0;0.75;0.7;0.05;0.6;0.9;0.4;0.5;0.75;0.85;0.5;0.45
+Charlotte de Witte;Sgadi Li Mi;2020;en;electro:1.0;0.95;0.2;0.0;0.85;0.85;0.5;0.15;0.95;0.85;0.1;0.6
+Jeff Mills;The Bells;1997;-;electro:1.0;0.9;0.4;0.0;0.9;0.85;0.55;0.0;0.8;0.6;0.2;0.65
+Goldie;Inner City Life;1994;en;electro:1.0;0.75;0.35;0.1;0.95;0.6;0.7;0.6;0.8;0.65;0.4;0.55
+Pendulum;Watercolour;2010;en;electro:0.9|rock:0.3;0.95;0.45;0.05;0.95;0.65;0.5;0.75;0.85;0.9;0.2;0.3
+Kavinsky;Nightcall;2010;en;electro:1.0;0.6;0.35;0.0;0.5;0.6;0.4;0.6;0.7;0.85;0.35;0.3
+Paul Kalkbrenner;Sky and Sand;2009;en;electro:1.0;0.65;0.55;0.05;0.6;0.8;0.4;0.6;0.7;0.75;0.5;0.4
+Bicep;Glue;2017;-;electro:1.0;0.65;0.4;0.05;0.6;0.75;0.55;0.15;0.8;0.85;0.4;0.45
+Stromae;Alors on danse;2009;fr;electro:0.7|pop:0.4|chanson:0.3;0.75;0.4;0.05;0.6;0.85;0.35;0.85;0.75;0.85;0.3;0.1
+Burial;Archangel;2007;en;electro:0.8|ambient:0.4;0.45;0.2;0.15;0.55;0.5;0.7;0.4;0.65;0.3;0.3;0.7
+Jean-Michel Jarre;Oxygène (Pt. IV);1976;-;electro:0.8|ambient:0.4;0.45;0.6;0.0;0.5;0.55;0.5;0.0;0.4;0.6;0.4;0.25
+Arca;Nonbinary;2020;es;electro:0.9|pop:0.2;0.75;0.25;0.0;0.55;0.45;0.95;0.6;0.9;0.75;0.1;0.9
+Boards of Canada;Roygbiv;1998;-;electro:0.5|ambient:0.7;0.4;0.55;0.1;0.4;0.5;0.6;0.0;0.55;0.4;0.6;0.6
+Tycho;Awake;2014;-;electro:0.6|ambient:0.5|indie:0.3;0.55;0.65;0.3;0.55;0.55;0.5;0.0;0.5;0.8;0.6;0.45
+Brian Eno;An Ending (Ascent);1983;-;ambient:1.0;0.05;0.45;0.2;0.1;0.05;0.5;0.0;0.1;0.6;0.7;0.55
+Sigur Rós;Hoppípolla;2005;is;ambient:0.5|indie:0.6|classical:0.2;0.55;0.6;0.5;0.4;0.25;0.6;0.6;0.3;0.7;0.7;0.3
+Max Richter;On the Nature of Daylight;2004;-;classical:0.7|ambient:0.6;0.15;0.15;0.9;0.2;0.05;0.4;0.0;0.15;0.75;0.8;0.3
+Moby;Porcelain;1999;en;electro:0.5|ambient:0.5;0.35;0.4;0.35;0.4;0.5;0.4;0.6;0.45;0.7;0.6;0.15
+Nils Frahm;Says;2013;-;ambient:0.6|classical:0.5|electro:0.3;0.4;0.4;0.6;0.4;0.3;0.6;0.0;0.3;0.7;0.6;0.5
+Grouper;Heavy Water/I'd Rather Be Sleeping;2008;en;ambient:0.8|folk:0.3;0.1;0.3;0.7;0.2;0.05;0.5;0.45;0.1;0.2;0.6;0.8
+Enya;Orinoco Flow;1988;en;ambient:0.6|pop:0.4|folk:0.3;0.45;0.65;0.4;0.45;0.45;0.4;0.85;0.3;0.8;0.7;0.1
+Vangelis;Chariots of Fire;1981;-;ambient:0.4|electro:0.5|classical:0.4;0.4;0.65;0.2;0.35;0.25;0.3;0.0;0.3;0.7;0.6;0.1
+Ólafur Arnalds;Near Light;2013;-;classical:0.6|ambient:0.5;0.35;0.35;0.7;0.45;0.3;0.5;0.0;0.3;0.75;0.7;0.45
+Hans Zimmer;Time;2010;-;classical:0.6|ambient:0.5;0.5;0.3;0.5;0.3;0.15;0.4;0.0;0.4;0.9;0.6;0.08
+Midori Takada;Mr. Henri Rousseau's Dream;1983;-;ambient:0.8|classical:0.3;0.25;0.6;0.85;0.35;0.2;0.6;0.0;0.15;0.5;0.7;0.85
+Miles Davis;So What;1959;-;jazz:1.0;0.35;0.5;0.85;0.5;0.4;0.8;0.0;0.3;0.3;0.85;0.2
+John Coltrane;Giant Steps;1960;-;jazz:1.0;0.65;0.55;0.9;0.85;0.3;0.95;0.0;0.25;0.3;0.8;0.4
+The Dave Brubeck Quartet;Take Five;1959;-;jazz:1.0;0.4;0.6;0.9;0.5;0.45;0.8;0.0;0.3;0.35;0.85;0.15
+Nina Simone;Feeling Good;1965;en;jazz:0.8|rnb_soul:0.5;0.45;0.6;0.65;0.35;0.35;0.5;0.95;0.35;0.5;0.9;0.1
+Louis Armstrong;What a Wonderful World;1967;en;jazz:0.8|pop:0.3;0.2;0.85;0.75;0.25;0.3;0.3;0.95;0.3;0.5;0.95;0.05
+Herbie Hancock;Chameleon;1973;-;jazz:0.8|funk_disco:0.7;0.65;0.65;0.2;0.5;0.8;0.75;0.05;0.75;0.5;0.6;0.35
+Weather Report;Birdland;1977;-;jazz:0.9|funk_disco:0.3;0.65;0.75;0.3;0.55;0.65;0.8;0.0;0.6;0.6;0.6;0.35
+Chet Baker;My Funny Valentine;1954;en;jazz:1.0;0.1;0.3;0.85;0.2;0.15;0.5;0.85;0.2;0.3;0.9;0.25
+Stan Getz;The Girl from Ipanema;1964;pt;jazz:0.7|latin:0.7;0.3;0.7;0.85;0.4;0.5;0.5;0.85;0.3;0.45;0.95;0.1
+Kamasi Washington;Truth;2017;-;jazz:1.0;0.55;0.55;0.75;0.4;0.3;0.85;0.3;0.5;0.7;0.8;0.6
+Snarky Puppy;Lingus;2014;-;jazz:0.8|funk_disco:0.4;0.75;0.6;0.45;0.55;0.6;0.95;0.0;0.65;0.75;0.65;0.6
+Norah Jones;Don't Know Why;2002;en;jazz:0.7|pop:0.4|folk:0.2;0.2;0.5;0.85;0.3;0.4;0.3;0.95;0.3;0.7;0.95;0.05
+Esperanza Spalding;I Know You Know;2008;en;jazz:0.9;0.5;0.7;0.75;0.5;0.6;0.7;0.9;0.5;0.6;0.85;0.5
+GoGo Penguin;Hopopono;2014;-;jazz:0.8|electro:0.3;0.55;0.45;0.75;0.6;0.45;0.8;0.0;0.4;0.7;0.6;0.65
+Ahmad Jamal;Poinciana;1958;-;jazz:1.0;0.3;0.65;0.9;0.45;0.5;0.6;0.0;0.3;0.3;0.85;0.4
+Billie Holiday;Strange Fruit;1939;en;jazz:0.7|blues:0.6;0.1;0.05;0.8;0.2;0.1;0.4;0.95;0.1;0.15;0.7;0.3
+Johann Sebastian Bach;Cello Suite No. 1 in G Major, BWV 1007: I. Prélude;1983;-;classical:1.0;0.3;0.55;1.0;0.45;0.2;0.6;0.0;0.15;0.6;0.8;0.15
+Claude Debussy;Clair de lune;1990;-;classical:1.0;0.1;0.5;1.0;0.25;0.05;0.4;0.0;0.05;0.65;0.85;0.05
+Erik Satie;Gymnopédie No. 1;1980;-;classical:1.0;0.05;0.4;1.0;0.15;0.05;0.2;0.0;0.05;0.6;0.85;0.05
+Wolfgang Amadeus Mozart;Requiem in D Minor, K. 626: Lacrimosa;1991;la;classical:1.0;0.4;0.15;0.95;0.3;0.1;0.6;0.7;0.2;0.7;0.7;0.1
+Ludwig van Beethoven;Für Elise;1990;-;classical:1.0;0.2;0.5;1.0;0.45;0.15;0.3;0.0;0.05;0.6;0.75;0.03
+Igor Stravinsky;The Rite of Spring: Augurs of Spring;1960;-;classical:1.0;0.85;0.3;0.95;0.6;0.3;0.95;0.0;0.5;0.6;0.4;0.45
+Arvo Pärt;Spiegel im Spiegel;1999;-;classical:1.0;0.05;0.4;1.0;0.1;0.05;0.35;0.0;0.05;0.7;0.75;0.35
+Philip Glass;Opening;1982;-;classical:1.0;0.25;0.4;1.0;0.5;0.15;0.55;0.0;0.05;0.6;0.65;0.4
+Frédéric Chopin;Nocturne in E-Flat Major, Op. 9 No. 2;1985;-;classical:1.0;0.1;0.55;1.0;0.3;0.1;0.4;0.0;0.05;0.6;0.85;0.05
+Ludovico Einaudi;Nuvole Bianche;2004;-;classical:0.8|ambient:0.3;0.2;0.4;1.0;0.35;0.15;0.3;0.0;0.05;0.7;0.75;0.08
+Pyotr Ilyich Tchaikovsky;Dance of the Sugar Plum Fairy;1985;-;classical:1.0;0.25;0.6;0.95;0.4;0.4;0.4;0.0;0.15;0.6;0.7;0.05
+Johann Pachelbel;Canon in D;1983;-;classical:1.0;0.2;0.75;1.0;0.3;0.2;0.3;0.0;0.15;0.65;0.85;0.03
+Giuseppe Verdi;Messa da Requiem: Dies irae;1990;la;classical:1.0;0.95;0.15;0.9;0.6;0.2;0.7;0.85;0.6;0.75;0.4;0.1
+Antonio Vivaldi;The Four Seasons, Winter: I. Allegro non molto;1988;-;classical:1.0;0.8;0.35;0.95;0.75;0.35;0.6;0.0;0.3;0.65;0.55;0.05
+Joe Hisaishi;One Summer's Day;2001;-;classical:0.7|kpop_jpop:0.2|ambient:0.2;0.25;0.6;0.9;0.35;0.2;0.4;0.0;0.15;0.75;0.85;0.15
+Ryuichi Sakamoto;Merry Christmas Mr. Lawrence;1983;-;classical:0.6|kpop_jpop:0.3|ambient:0.3;0.3;0.45;0.6;0.4;0.25;0.5;0.0;0.15;0.65;0.75;0.3
+Bob Dylan;Blowin' in the Wind;1963;en;folk:1.0;0.25;0.6;1.0;0.5;0.3;0.3;0.95;0.05;0.15;0.8;0.1
+Simon & Garfunkel;The Sound of Silence;1965;en;folk:0.9|rock:0.2;0.3;0.3;0.85;0.5;0.3;0.35;0.95;0.15;0.45;0.75;0.05
+Joni Mitchell;A Case of You;1971;en;folk:1.0;0.15;0.35;0.95;0.35;0.2;0.5;0.95;0.1;0.35;0.9;0.25
+Nick Drake;Pink Moon;1972;en;folk:1.0;0.15;0.35;1.0;0.4;0.2;0.4;0.9;0.05;0.3;0.85;0.4
+Leonard Cohen;Suzanne;1967;en;folk:0.9|chanson:0.3;0.15;0.4;0.95;0.35;0.15;0.3;0.95;0.1;0.3;0.85;0.2
+Cat Stevens;Father and Son;1970;en;folk:1.0;0.3;0.45;0.95;0.4;0.25;0.35;0.95;0.1;0.4;0.9;0.1
+Fleet Foxes;White Winter Hymnal;2008;en;folk:0.8|indie:0.6;0.5;0.6;0.8;0.5;0.4;0.55;0.85;0.3;0.5;0.8;0.35
+Sufjan Stevens;Chicago;2005;en;folk:0.7|indie:0.7;0.55;0.65;0.65;0.55;0.4;0.7;0.9;0.25;0.55;0.75;0.35
+Mumford & Sons;Little Lion Man;2009;en;folk:0.8|rock:0.3;0.8;0.5;0.8;0.75;0.5;0.3;0.95;0.3;0.7;0.7;0.08
+Ed Sheeran;The A Team;2011;en;folk:0.6|pop:0.6;0.3;0.35;0.85;0.5;0.4;0.25;0.95;0.15;0.75;0.7;0.05
+Tracy Chapman;Fast Car;1988;en;folk:0.9|pop:0.3;0.45;0.5;0.85;0.65;0.45;0.3;0.95;0.25;0.5;0.8;0.05
+Hozier;Take Me to Church;2013;en;folk:0.5|rnb_soul:0.4|indie:0.4;0.6;0.25;0.6;0.45;0.45;0.35;0.95;0.4;0.75;0.75;0.03
+Big Thief;Not;2019;en;folk:0.6|indie:0.7|rock:0.3;0.75;0.35;0.45;0.6;0.35;0.65;0.85;0.5;0.3;0.55;0.6
+Mercedes Sosa;Gracias a la vida;1971;es;folk:0.9|latin:0.5;0.25;0.55;0.95;0.35;0.25;0.3;0.95;0.1;0.4;0.95;0.35
+Alan Stivell;Tri martolod;1972;br;folk:1.0;0.6;0.7;0.85;0.55;0.6;0.4;0.85;0.25;0.35;0.85;0.5
+Iron & Wine;Naked As We Came;2004;en;folk:1.0;0.1;0.45;1.0;0.45;0.2;0.3;0.9;0.05;0.4;0.8;0.5
+Cesária Évora;Sodade;1992;pt;folk:0.6|latin:0.4|afro:0.3;0.25;0.45;0.9;0.35;0.45;0.35;0.95;0.2;0.45;0.95;0.3
+Oum Kalthoum;Enta Omri;1964;ar;folk:0.6|classical:0.4;0.4;0.5;0.8;0.4;0.35;0.7;0.95;0.2;0.3;0.85;0.4
+Fairuz;Kifak Inta;1991;ar;folk:0.5|chanson:0.3;0.3;0.4;0.7;0.4;0.4;0.45;0.95;0.25;0.5;0.85;0.4
+Johnny Cash;Ring of Fire;1963;en;country:1.0;0.6;0.8;0.6;0.6;0.55;0.2;0.9;0.4;0.35;0.8;0.08
+Johnny Cash;Hurt;2002;en;country:0.6|folk:0.6;0.2;0.1;0.9;0.3;0.2;0.3;0.95;0.15;0.5;0.7;0.05
+Dolly Parton;Jolene;1973;en;country:1.0;0.55;0.45;0.75;0.75;0.55;0.3;0.9;0.3;0.4;0.75;0.05
+Willie Nelson;On the Road Again;1980;en;country:1.0;0.55;0.85;0.75;0.65;0.6;0.3;0.9;0.3;0.4;0.85;0.15
+Patsy Cline;Crazy;1961;en;country:0.9|pop:0.2;0.2;0.3;0.7;0.3;0.3;0.3;0.95;0.25;0.4;0.9;0.15
+John Denver;Take Me Home, Country Roads;1971;en;country:0.8|folk:0.5;0.5;0.85;0.85;0.55;0.45;0.25;0.95;0.25;0.45;0.95;0.05
+Shania Twain;Man! I Feel Like a Woman!;1997;en;country:0.6|pop:0.6;0.85;0.85;0.3;0.65;0.75;0.25;0.9;0.5;0.8;0.6;0.08
+Kacey Musgraves;Slow Burn;2018;en;country:0.8|folk:0.3;0.35;0.6;0.75;0.4;0.45;0.35;0.9;0.25;0.65;0.8;0.35
+Chris Stapleton;Tennessee Whiskey;2015;en;country:0.8|rnb_soul:0.4|blues:0.3;0.4;0.45;0.7;0.3;0.4;0.35;0.95;0.35;0.6;0.95;0.05
+Zach Bryan;Something in the Orange;2022;en;country:0.8|folk:0.5;0.35;0.3;0.9;0.4;0.35;0.3;0.95;0.15;0.45;0.8;0.15
+Lil Nas X;Old Town Road;2019;en;country:0.5|hiphop:0.7;0.6;0.65;0.4;0.5;0.85;0.2;0.9;0.75;0.8;0.5;0.03
+Hank Williams;I'm So Lonesome I Could Cry;1949;en;country:1.0;0.25;0.25;0.85;0.35;0.35;0.2;0.95;0.15;0.2;0.85;0.3
+Beyoncé;TEXAS HOLD 'EM;2024;en;country:0.7|pop:0.5;0.7;0.75;0.6;0.6;0.75;0.3;0.95;0.55;0.85;0.75;0.08
+Bob Marley & The Wailers;Is This Love;1978;en;reggae:1.0;0.5;0.75;0.4;0.4;0.85;0.3;0.9;0.75;0.5;0.9;0.05
+Bob Marley & The Wailers;Get Up, Stand Up;1973;en;reggae:1.0;0.55;0.6;0.35;0.45;0.8;0.3;0.9;0.75;0.4;0.85;0.08
+Peter Tosh;Legalize It;1976;en;reggae:1.0;0.45;0.6;0.35;0.4;0.8;0.3;0.9;0.75;0.4;0.85;0.25
+Toots & The Maytals;Pressure Drop;1969;en;reggae:1.0|rnb_soul:0.3;0.65;0.75;0.45;0.55;0.8;0.3;0.9;0.6;0.3;0.85;0.3
+Jimmy Cliff;The Harder They Come;1972;en;reggae:1.0;0.6;0.75;0.4;0.55;0.8;0.3;0.9;0.65;0.35;0.85;0.25
+Desmond Dekker;Israelites;1968;en;reggae:1.0;0.6;0.65;0.4;0.55;0.8;0.25;0.9;0.55;0.3;0.85;0.25
+Augustus Pablo;King Tubby Meets Rockers Uptown;1976;-;reggae:1.0;0.4;0.5;0.2;0.4;0.75;0.6;0.1;0.95;0.3;0.6;0.65
+Sean Paul;Get Busy;2002;en;reggae:0.8|hiphop:0.4|pop:0.3;0.75;0.7;0.05;0.5;0.9;0.25;0.95;0.85;0.8;0.5;0.05
+Damian Marley;Welcome to Jamrock;2005;en;reggae:0.9|hiphop:0.4;0.75;0.45;0.15;0.5;0.8;0.35;0.95;0.85;0.75;0.5;0.15
+Chronixx;Skankin' Sweet;2017;en;reggae:1.0;0.55;0.75;0.35;0.45;0.8;0.3;0.9;0.75;0.75;0.8;0.35
+Tiken Jah Fakoly;Plus rien ne m'étonne;2004;fr;reggae:0.9|afro:0.3;0.55;0.55;0.45;0.45;0.8;0.3;0.9;0.7;0.6;0.8;0.3
+Alpha Blondy;Jerusalem;1986;en;reggae:1.0|afro:0.3;0.55;0.65;0.4;0.45;0.8;0.3;0.9;0.7;0.45;0.85;0.3
+Koffee;Toast;2019;en;reggae:0.9|pop:0.3;0.6;0.85;0.3;0.5;0.85;0.25;0.9;0.75;0.75;0.75;0.2
+Tito Puente;Oye Como Va;1962;es;latin:1.0|jazz:0.3;0.6;0.75;0.65;0.55;0.85;0.45;0.6;0.5;0.3;0.85;0.25
+Santana;Oye Como Va;1970;es;latin:0.8|rock:0.6;0.6;0.65;0.4;0.5;0.8;0.5;0.5;0.55;0.45;0.8;0.08
+Buena Vista Social Club;Chan Chan;1997;es;latin:1.0;0.35;0.6;0.95;0.4;0.6;0.4;0.85;0.35;0.4;0.95;0.15
+Celia Cruz;La Vida Es un Carnaval;1998;es;latin:1.0;0.8;0.95;0.4;0.6;0.85;0.4;0.95;0.55;0.65;0.85;0.08
+Héctor Lavoe;El Cantante;1978;es;latin:1.0;0.7;0.6;0.65;0.55;0.85;0.5;0.9;0.5;0.4;0.85;0.3
+Shakira;Hips Don't Lie;2006;en;latin:0.7|pop:0.6;0.85;0.85;0.25;0.6;0.9;0.35;0.9;0.6;0.9;0.6;0.03
+Daddy Yankee;Gasolina;2004;es;latin:0.9|hiphop:0.4;0.9;0.75;0.05;0.55;0.85;0.2;0.95;0.85;0.75;0.4;0.05
+Bad Bunny;Tití Me Preguntó;2022;es;latin:0.9|hiphop:0.3;0.75;0.7;0.1;0.6;0.85;0.4;0.95;0.85;0.9;0.5;0.03
+ROSALÍA;MALAMENTE - Cap.1: Augurio;2018;es;latin:0.7|pop:0.4|electro:0.3;0.55;0.45;0.35;0.55;0.75;0.7;0.9;0.75;0.85;0.6;0.3
+Juan Luis Guerra 4.40;Ojalá Que Llueva Café;1989;es;latin:1.0;0.55;0.8;0.6;0.55;0.75;0.4;0.9;0.45;0.55;0.9;0.25
+Jorge Ben Jor;Mas Que Nada;1963;pt;latin:1.0;0.65;0.85;0.7;0.55;0.85;0.4;0.9;0.45;0.4;0.9;0.25
+Caetano Veloso;Leãozinho;1977;pt;latin:0.7|folk:0.5;0.25;0.75;0.9;0.4;0.45;0.35;0.95;0.15;0.45;0.95;0.4
+Anitta;Envolver;2021;es;latin:0.9|pop:0.3;0.6;0.6;0.1;0.45;0.85;0.25;0.9;0.85;0.85;0.5;0.1
+Los Ángeles Azules;Cómo Te Voy a Olvidar;1996;es;latin:1.0;0.6;0.6;0.5;0.5;0.85;0.3;0.9;0.5;0.45;0.85;0.3
+KAROL G;PROVENZA;2022;es;latin:0.9|pop:0.3;0.55;0.75;0.2;0.5;0.85;0.3;0.9;0.7;0.85;0.7;0.08
+Gipsy Kings;Bamboléo;1987;es;latin:0.9|folk:0.3;0.8;0.85;0.85;0.65;0.75;0.35;0.9;0.4;0.55;0.85;0.1
+Fela Kuti;Water No Get Enemy;1975;pcm;afro:1.0|funk_disco:0.5|jazz:0.3;0.65;0.65;0.4;0.5;0.85;0.7;0.6;0.65;0.4;0.85;0.4
+Miriam Makeba;Pata Pata;1967;xh;afro:1.0|pop:0.3;0.7;0.9;0.6;0.6;0.85;0.3;0.9;0.45;0.4;0.9;0.2
+Youssou N'Dour;7 Seconds;1994;wo;afro:0.5|pop:0.6;0.45;0.45;0.35;0.45;0.6;0.35;0.95;0.5;0.75;0.75;0.08
+Salif Keita;Madan;2002;bm;afro:1.0;0.8;0.75;0.5;0.6;0.85;0.4;0.9;0.6;0.6;0.8;0.4
+Amadou & Mariam;Dimanche à Bamako;2004;fr;afro:0.9|pop:0.4;0.7;0.85;0.5;0.55;0.8;0.3;0.9;0.5;0.55;0.85;0.3
+Ali Farka Touré;Diaraby;1994;son;afro:0.8|blues:0.6;0.35;0.5;0.95;0.4;0.45;0.5;0.8;0.3;0.3;0.85;0.5
+Burna Boy;Last Last;2022;en;afro:1.0|pop:0.3;0.6;0.6;0.15;0.5;0.85;0.3;0.9;0.75;0.85;0.75;0.05
+Wizkid;Essence;2020;en;afro:1.0|rnb_soul:0.4;0.45;0.6;0.2;0.45;0.85;0.3;0.9;0.7;0.85;0.8;0.08
+Rema;Calm Down;2022;en;afro:1.0|pop:0.4;0.6;0.8;0.2;0.5;0.85;0.25;0.9;0.75;0.85;0.75;0.03
+Tems;Free Mind;2020;en;afro:0.7|rnb_soul:0.6;0.35;0.4;0.25;0.4;0.75;0.35;0.95;0.65;0.8;0.8;0.2
+Tinariwen;Cler Achel;2007;tmh;afro:0.8|blues:0.6|rock:0.3;0.55;0.45;0.6;0.5;0.6;0.5;0.8;0.45;0.4;0.75;0.55
+Tyla;Water;2023;en;afro:0.8|pop:0.4|rnb_soul:0.3;0.55;0.75;0.1;0.5;0.9;0.25;0.9;0.7;0.85;0.7;0.08
+Magic System;1er gaou;2000;fr;afro:1.0;0.8;0.9;0.3;0.6;0.9;0.25;0.95;0.6;0.55;0.8;0.3
+Mory Kanté;Yé ké yé ké;1987;man;afro:0.9|pop:0.3;0.85;0.85;0.3;0.65;0.9;0.35;0.9;0.6;0.65;0.75;0.2
+Angélique Kidjo;Agolo;1994;fon;afro:0.9|pop:0.3;0.75;0.8;0.3;0.6;0.85;0.4;0.9;0.6;0.7;0.75;0.35
+Aya Nakamura;Djadja;2018;fr;afro:0.6|rnb_soul:0.5|pop:0.4;0.65;0.7;0.1;0.5;0.85;0.25;0.95;0.75;0.85;0.6;0.15
+Khaled;Didi;1992;ar;afro:0.4|pop:0.6;0.85;0.85;0.3;0.65;0.85;0.35;0.95;0.6;0.65;0.75;0.15
+Édith Piaf;La Vie en rose;1947;fr;chanson:1.0;0.25;0.65;0.7;0.35;0.35;0.3;0.95;0.25;0.35;0.95;0.05
+Édith Piaf;Non, je ne regrette rien;1960;fr;chanson:1.0;0.5;0.55;0.6;0.4;0.3;0.3;0.95;0.3;0.4;0.85;0.05
+Jacques Brel;Ne me quitte pas;1959;fr;chanson:1.0;0.25;0.1;0.85;0.25;0.1;0.45;0.95;0.1;0.3;0.8;0.1
+Georges Brassens;Les copains d'abord;1964;fr;chanson:1.0|folk:0.4;0.4;0.75;1.0;0.5;0.4;0.3;0.95;0.15;0.2;0.9;0.2
+Serge Gainsbourg;Je t'aime... moi non plus;1969;fr;chanson:0.9|pop:0.3;0.25;0.5;0.6;0.3;0.45;0.35;0.8;0.35;0.5;0.85;0.1
+Serge Gainsbourg;Requiem pour un con;1968;fr;chanson:0.7|funk_disco:0.3;0.6;0.35;0.4;0.45;0.6;0.45;0.85;0.6;0.45;0.5;0.35
+Barbara;L'Aigle noir;1970;fr;chanson:1.0;0.3;0.3;0.8;0.35;0.2;0.45;0.95;0.15;0.45;0.8;0.3
+Charles Aznavour;La Bohème;1965;fr;chanson:1.0;0.35;0.35;0.75;0.4;0.25;0.4;0.95;0.2;0.45;0.9;0.08
+Françoise Hardy;Tous les garçons et les filles;1962;fr;chanson:0.9|pop:0.4;0.3;0.45;0.75;0.5;0.45;0.25;0.95;0.25;0.35;0.85;0.15
+Alain Bashung;Osez Joséphine;1991;fr;chanson:0.7|rock:0.5;0.55;0.5;0.5;0.45;0.6;0.35;0.9;0.5;0.55;0.75;0.25
+Christine and the Queens;Tilted;2014;fr;pop:0.7|chanson:0.4|electro:0.3;0.5;0.55;0.15;0.45;0.75;0.4;0.9;0.6;0.8;0.6;0.2
+Stromae;Papaoutai;2013;fr;chanson:0.4|electro:0.6;0.7;0.45;0.1;0.5;0.85;0.45;0.9;0.7;0.85;0.5;0.08
+Angèle;Balance ton quoi;2019;fr;pop:0.8|chanson:0.4;0.6;0.7;0.2;0.55;0.8;0.3;0.9;0.6;0.85;0.5;0.2
+Zaz;Je veux;2010;fr;chanson:0.9|jazz:0.3;0.7;0.75;0.85;0.6;0.65;0.35;0.95;0.3;0.5;0.9;0.1
+Indochine;L'aventurier;1982;fr;chanson:0.4|rock:0.5|pop:0.4;0.8;0.6;0.2;0.75;0.7;0.3;0.9;0.55;0.45;0.5;0.15
+France Gall;Ella, elle l'a;1987;fr;chanson:0.5|pop:0.6;0.75;0.75;0.3;0.6;0.75;0.3;0.9;0.5;0.65;0.7;0.1
+Clara Luciani;La grenade;2018;fr;pop:0.6|chanson:0.5;0.65;0.55;0.3;0.55;0.7;0.3;0.9;0.5;0.75;0.6;0.2
+Domenico Modugno;Nel blu dipinto di blu;1958;it;chanson:0.6|pop:0.5;0.5;0.8;0.65;0.45;0.45;0.3;0.95;0.25;0.4;0.9;0.1
+BTS;Dynamite;2020;en;kpop_jpop:0.9|pop:0.6|funk_disco:0.3;0.8;0.9;0.1;0.6;0.85;0.3;0.9;0.55;0.95;0.6;0.03
+BLACKPINK;DDU-DU DDU-DU;2018;ko;kpop_jpop:1.0|hiphop:0.3;0.9;0.55;0.05;0.7;0.8;0.5;0.9;0.85;0.95;0.3;0.05
+NewJeans;Ditto;2022;ko;kpop_jpop:0.9|rnb_soul:0.3;0.5;0.45;0.15;0.6;0.75;0.4;0.9;0.6;0.9;0.6;0.08
+BIGBANG;FANTASTIC BABY;2012;ko;kpop_jpop:1.0|electro:0.4;0.9;0.75;0.0;0.65;0.85;0.5;0.9;0.8;0.9;0.3;0.15
+IU;Blueming;2019;ko;kpop_jpop:0.9|pop:0.4;0.7;0.85;0.4;0.65;0.65;0.35;0.95;0.4;0.85;0.7;0.25
+Stray Kids;God's Menu;2020;ko;kpop_jpop:1.0|hiphop:0.4;0.95;0.5;0.05;0.6;0.8;0.6;0.9;0.9;0.9;0.2;0.2
+TWICE;TT;2016;ko;kpop_jpop:1.0;0.8;0.85;0.05;0.65;0.8;0.35;0.95;0.6;0.95;0.5;0.15
+Utada Hikaru;First Love;1999;ja;kpop_jpop:0.9|rnb_soul:0.3;0.3;0.3;0.5;0.35;0.4;0.3;0.95;0.3;0.75;0.8;0.2
+YOASOBI;Idol;2023;ja;kpop_jpop:1.0;0.9;0.7;0.1;0.95;0.65;0.75;0.95;0.6;0.95;0.4;0.08
+Mariya Takeuchi;Plastic Love;1984;ja;kpop_jpop:0.8|funk_disco:0.5;0.6;0.6;0.3;0.55;0.8;0.45;0.9;0.6;0.8;0.85;0.3
+Yellow Magic Orchestra;Rydeen;1980;-;kpop_jpop:0.5|electro:0.8;0.75;0.75;0.0;0.75;0.7;0.55;0.0;0.55;0.6;0.4;0.45
+Kenshi Yonezu;Lemon;2018;ja;kpop_jpop:1.0|pop:0.4;0.6;0.4;0.35;0.45;0.5;0.4;0.95;0.5;0.85;0.6;0.15
+Fujii Kaze;Shinunoga E-Wa;2020;ja;kpop_jpop:0.8|rnb_soul:0.4;0.55;0.6;0.4;0.5;0.75;0.5;0.95;0.6;0.8;0.8;0.25
+Perfume;Polyrhythm;2007;ja;kpop_jpop:0.8|electro:0.6;0.85;0.75;0.0;0.75;0.7;0.75;0.85;0.6;0.95;0.3;0.4
+Robert Johnson;Cross Road Blues;1936;en;blues:1.0;0.4;0.35;1.0;0.5;0.35;0.4;0.9;0.05;0.0;0.7;0.45
+Muddy Waters;Mannish Boy;1955;en;blues:1.0;0.6;0.5;0.5;0.3;0.6;0.2;0.95;0.5;0.15;0.75;0.3
+B.B. King;The Thrill Is Gone;1969;en;blues:1.0;0.45;0.25;0.55;0.4;0.5;0.4;0.85;0.45;0.45;0.85;0.15
+John Lee Hooker;Boom Boom;1962;en;blues:1.0;0.6;0.65;0.55;0.5;0.75;0.2;0.9;0.5;0.25;0.75;0.3
+Howlin' Wolf;Smokestack Lightnin';1956;en;blues:1.0;0.55;0.4;0.6;0.45;0.6;0.3;0.9;0.45;0.15;0.75;0.4
+Etta James;At Last;1960;en;blues:0.5|rnb_soul:0.7|jazz:0.3;0.3;0.6;0.6;0.3;0.3;0.3;0.95;0.3;0.55;0.95;0.05
+Stevie Ray Vaughan;Pride and Joy;1983;en;blues:0.9|rock:0.4;0.75;0.75;0.35;0.65;0.65;0.45;0.8;0.5;0.5;0.75;0.2
+The Black Keys;Lonely Boy;2011;en;blues:0.5|rock:0.7;0.85;0.7;0.3;0.75;0.7;0.3;0.85;0.6;0.6;0.6;0.08
+Gary Clark Jr.;Bright Lights;2011;en;blues:0.8|rock:0.5;0.75;0.4;0.25;0.45;0.6;0.45;0.85;0.7;0.6;0.6;0.35
+Rag'n'Bone Man;Human;2016;en;blues:0.4|pop:0.6|rnb_soul:0.4;0.6;0.3;0.35;0.5;0.6;0.3;0.95;0.6;0.85;0.6;0.05
+Daniel Johnston;True Love Will Find You in the End;1990;en;folk:0.6|indie:0.6;0.15;0.45;0.95;0.3;0.2;0.15;0.9;0.05;0.05;0.6;0.85
+Guided by Voices;Game of Pricks;1995;en;indie:0.8|rock:0.4;0.7;0.55;0.3;0.7;0.4;0.2;0.85;0.4;0.1;0.5;0.8
+Duster;Inside Out;1998;en;indie:0.8|ambient:0.3;0.25;0.2;0.4;0.2;0.2;0.3;0.6;0.3;0.1;0.4;0.9
+Have a Nice Life;Bloodhail;2008;en;indie:0.7|punk:0.4|ambient:0.3;0.45;0.1;0.3;0.25;0.15;0.5;0.6;0.4;0.1;0.2;0.95
+Sun Ra;Space Is the Place;1973;en;jazz:0.9;0.6;0.55;0.6;0.45;0.45;0.95;0.5;0.4;0.25;0.5;0.85
+Sunn O)));It Took the Night to Believe;2005;en;metal:0.6|ambient:0.6;0.4;0.05;0.1;0.0;0.0;0.5;0.2;1.0;0.3;0.1;0.95
+Nine Inch Nails;Closer;1994;en;electro:0.5|metal:0.4|rock:0.3;0.75;0.2;0.0;0.4;0.7;0.5;0.8;0.85;0.85;0.1;0.1
+Queen;We Will Rock You;1977;en;rock:0.9;0.7;0.6;0.6;0.45;0.6;0.05;0.9;0.5;0.6;0.5;0.03
+Trio;Da Da Da;1982;de;pop:0.6|punk:0.3|electro:0.3;0.5;0.6;0.3;0.6;0.65;0.05;0.85;0.4;0.3;0.3;0.3
+The Prodigy;Smack My Bitch Up;1997;en;electro:0.9|punk:0.3;0.95;0.35;0.0;0.7;0.75;0.5;0.3;0.9;0.85;0.1;0.2
+Underworld;Born Slippy (Nuxx);1995;en;electro:1.0;0.9;0.5;0.0;0.75;0.8;0.5;0.35;0.85;0.8;0.2;0.3
+Mazzy Star;Fade Into You;1993;en;indie:0.7|folk:0.4;0.2;0.2;0.6;0.15;0.25;0.2;0.9;0.2;0.4;0.6;0.3
+Low;Words;1994;en;indie:0.8|ambient:0.3;0.15;0.1;0.5;0.05;0.1;0.25;0.8;0.2;0.3;0.4;0.75
+Henryk Górecki;Symphony No. 3, Op. 36: II. Lento e largo;1992;pl;classical:1.0;0.15;0.05;0.95;0.05;0.0;0.3;0.8;0.2;0.7;0.5;0.4
+Samuel Barber;Adagio for Strings;1990;-;classical:1.0;0.2;0.05;1.0;0.05;0.0;0.4;0.0;0.2;0.8;0.6;0.08
+The Shaggs;My Pal Foot Foot;1969;en;rock:0.6|folk:0.3;0.5;0.6;0.6;0.5;0.3;0.3;0.85;0.2;0.0;0.4;0.9
+Las Ketchup;The Ketchup Song (Aserejé);2002;es;pop:0.7|latin:0.5;0.75;0.85;0.4;0.6;0.85;0.1;0.9;0.5;0.7;0.6;0.15
+Los Del Rio;Macarena;1993;es;latin:0.8|pop:0.5;0.75;0.9;0.3;0.55;0.9;0.1;0.9;0.5;0.65;0.6;0.1
+PSY;Gangnam Style;2012;ko;kpop_jpop:0.8|electro:0.4|pop:0.3;0.9;0.85;0.0;0.6;0.9;0.15;0.85;0.75;0.85;0.4;0.03

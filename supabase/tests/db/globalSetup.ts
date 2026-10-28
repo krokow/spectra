@@ -40,7 +40,9 @@ export default async function setup() {
     try {
       await client.query(await readFile(join(root, 'migrations', file), 'utf8'))
     } catch (e) {
-      throw new Error(`Échec de la migration ${file} : ${(e as Error).message}`, { cause: e })
+      // Pas de `cause` : Vitest plante en affichant les erreurs pg imbriquées.
+      // eslint-disable-next-line preserve-caught-error
+      throw new Error(`Échec de la migration ${file} : ${(e as Error).message}`)
     }
   }
   await client.end()

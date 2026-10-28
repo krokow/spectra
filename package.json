@@ -20,7 +20,10 @@
     "test:e2e": "playwright test",
     "build:e2e": "VITE_SUPABASE_URL=http://127.0.0.1:54321 VITE_SUPABASE_ANON_KEY=e2e-public-anon-key-not-a-secret npm run build",
     "test:db": "vitest run -c vitest.db.config.ts",
-    "check:functions": "cd supabase/functions && deno check */index.ts"
+    "check:functions": "node scripts/functions/bundle.mjs && cd supabase/functions && deno check */index.ts && deno test music/ && cd ../functions-bundled && deno check *.ts",
+    "functions:bundle": "node scripts/functions/bundle.mjs",
+    "anchors:validate": "node scripts/anchors/validate.ts",
+    "anchors:build": "node scripts/anchors/build.ts"
   },
   "dependencies": {
     "@fontsource-variable/inter": "5.3.0",

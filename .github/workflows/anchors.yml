@@ -1,0 +1,41 @@
+name: Bibliothèque d'ancrage
+
+# Lancement manuel (onglet Actions → « Bibliothèque d'ancrage » → Run workflow).
+# Résout chaque morceau de supabase/seed/anchors/anchors.source.csv sur Deezer (secours iTunes),
+# puis commite anchors.json, anchors.sql (à coller dans le SQL Editor) et REPORT.md sur la branche choisie.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: anchors-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run anchors:validate
+      - run: npm run anchors:build
+      - name: Commiter le résultat
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add supabase/seed/anchors/anchors.json supabase/seed/anchors/anchors.sql supabase/seed/anchors/REPORT.md
+          if git diff --cached --quiet; then
+            echo "Rien de nouveau."
+          else
+            git commit -m "chore(anchors): reconstruction de la bibliothèque d'ancrage"
+            git push
+          fi
+      - name: Résumé
+        run: cat supabase/seed/anchors/REPORT.md >> "$GITHUB_STEP_SUMMARY"

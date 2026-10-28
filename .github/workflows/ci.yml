@@ -39,6 +39,8 @@ jobs:
       - run: npm run format:check
       - run: npm run typecheck
       - run: npm test
+      - name: Bibliothèque d'ancrage (format et couverture)
+        run: npm run anchors:validate
       # Build de contrôle sans variables Supabase : l'app doit compiler sans aucun secret.
       - run: npm run build
 
@@ -78,12 +80,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
       - uses: denoland/setup-deno@v2.0.5
         with:
           deno-version: v2.x
+      - name: Les fichiers à coller dans Supabase sont à jour
+        run: |
+          node scripts/functions/bundle.mjs
+          git diff --exit-code supabase/functions-bundled || (echo "::error::Lance npm run functions:bundle et commite le résultat." && exit 1)
       # Depuis supabase/functions pour utiliser son deno.json (et non le package.json racine).
-      - run: deno check */index.ts
+      - run: deno check */index.ts && deno test music/
         working-directory: supabase/functions
+      - run: deno check *.ts
+        working-directory: supabase/functions-bundled
 
   e2e:
     name: Parcours e2e (Playwright)

@@ -45,8 +45,14 @@
     "emptyText": "Quelques questions, et il se dessine sous tes yeux."
   },
   "discover": {
-    "emptyTitle": "Rien à découvrir… pour l'instant",
-    "emptyText": "Dessine d'abord ton spectre : on saura quoi te faire écouter."
+    "emptyTitle": "Qu'est-ce qu'on écoute ?",
+    "emptyText": "Tape au moins deux lettres. Les extraits viennent de Deezer (ou d'Apple Music en secours).",
+    "searchIntro": "Cherche un artiste ou un morceau et écoute un extrait. Les recommandations arrivent bientôt.",
+    "searchLabel": "Rechercher un morceau",
+    "searchPlaceholder": "Artiste, titre…",
+    "noResultTitle": "Rien trouvé",
+    "noResultText": "Aucun morceau pour « {{q}} ». Essaie une autre orthographe.",
+    "resultsLabel": "{{count}} résultats"
   },
   "friends": {
     "emptyTitle": "Pas encore d'amis ici",
@@ -249,6 +255,36 @@
     "questions": {
       "title": "Banque de questions",
       "soon": "L'éditeur de questions (ajout, modification, validation) arrive à l'étape 5, avec le moteur de profilage."
+    }
+  },
+  "player": {
+    "label": "Lecteur",
+    "play": "Lecture",
+    "pause": "Pause",
+    "next": "Morceau suivant",
+    "previous": "Morceau précédent",
+    "close": "Fermer le lecteur",
+    "expand": "Ouvrir le lecteur",
+    "collapse": "Réduire le lecteur",
+    "seek": "Position dans l'extrait",
+    "coverOf": "Pochette de {{title}}",
+    "playTrack": "Écouter {{title}} de {{artist}}",
+    "pauseTrack": "Mettre {{title}} en pause",
+    "previewNote": "Extrait de 30 secondes.",
+    "listenOn": "Écouter en entier sur {{source}}",
+    "shortcuts": "Raccourcis : Espace lecture/pause · ← → reculer/avancer de 5 s · N suivant · B précédent · Échap réduire",
+    "errors": {
+      "playback": "Impossible de lire cet extrait.",
+      "no_preview": "Pas d'extrait disponible pour ce morceau.",
+      "not_deployed": "Le catalogue n'est pas encore branché (fonction music).",
+      "rate_limited": "Doucement ! Trop de demandes, réessaie dans une minute.",
+      "upstream_error": "Deezer ne répond pas, réessaie un peu plus tard.",
+      "unauthorized": "Ta session a expiré, reconnecte-toi.",
+      "origin_not_allowed": "Cette adresse n'est pas autorisée (ALLOWED_ORIGINS).",
+      "invalid_input": "Recherche invalide.",
+      "not_found": "Morceau introuvable.",
+      "server_error": "Le serveur a eu un souci.",
+      "network": "Impossible de joindre le serveur."
     }
   }
 }

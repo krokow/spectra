@@ -10,6 +10,10 @@ import { useIsAdmin, useMyProfile, useMySettings } from '@/features/profile/api'
 import { setLanguage } from '@/i18n'
 import { useTheme } from '@/lib/theme'
 import { cn } from '@/lib/utils'
+import { AudioEngine } from '@/player/AudioEngine'
+import { FullPlayer } from '@/player/FullPlayer'
+import { MiniPlayer } from '@/player/MiniPlayer'
+import { usePlayer } from '@/player/store'
 import { UpdatePrompt } from './pwa/UpdatePrompt'
 
 const NAV = [
@@ -42,6 +46,7 @@ export function AppLayout() {
   }, [locale, i18n.language])
 
   const isAdmin = useIsAdmin().data === true
+  const hasPlayer = usePlayer((st) => st.index >= 0)
   const p = profile.data
 
   return (
@@ -153,7 +158,13 @@ export function AppLayout() {
         <main
           id="main"
           tabIndex={-1}
-          className="mx-auto w-full max-w-6xl flex-1 px-4 pb-[calc(var(--nav-height)+1.5rem)] outline-none sm:px-6 lg:px-10 lg:pt-6 lg:pb-12"
+          className={cn(
+            'mx-auto w-full max-w-6xl flex-1 px-4 outline-none sm:px-6 lg:px-10 lg:pt-6',
+            // Réserve la place de la barre du bas et du mini-lecteur.
+            hasPlayer
+              ? 'pb-[calc(var(--nav-height)+6.5rem)] lg:pb-32'
+              : 'pb-[calc(var(--nav-height)+1.5rem)] lg:pb-12',
+          )}
         >
           <Suspense fallback={<PageFallback />}>
             <Outlet />
@@ -196,6 +207,9 @@ export function AppLayout() {
           ))}
         </ul>
       </nav>
+      <AudioEngine />
+      <MiniPlayer />
+      <FullPlayer />
       <UpdatePrompt />
     </div>
   )
