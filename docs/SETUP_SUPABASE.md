@@ -31,57 +31,49 @@ Dans Supabase, **Project Settings** :
 
 Où les mettre sur GitHub : `https://github.com/krokow/spectra/settings/variables/actions` (variables) et `https://github.com/krokow/spectra/settings/secrets/actions` (secrets). Voir aussi `SETUP_GITHUB.md`.
 
-## 3. Authentification : OAuth uniquement, aucun e-mail
+## 3. Authentification : e-mail + mot de passe, aucun e-mail envoyé
+
+Choix validé : inscription avec **e-mail + mot de passe + pseudo**, pas de fournisseur externe
+(GitHub, Discord, Google) et **aucun e-mail envoyé** par Supabase.
 
 ### 3.1 URL de l'app
 
 **Authentication → URL Configuration** :
 
 - **Site URL** : `https://krokow.github.io/spectra/`
-- **Redirect URLs** (Add URL, une par ligne) :
+- **Redirect URLs** (bouton **Add URL**, une entrée à la fois) :
   - `https://krokow.github.io/spectra/**`
   - `http://localhost:5173/**`
-  - `http://localhost:4173/**`
 
-### 3.2 Couper l'e-mail
+> Sans e-mail ni OAuth, ces URL ne servent presque jamais (aucun lien de redirection n'est envoyé).
+> Elles limitent seulement les adresses vers lesquelles Supabase accepterait de rediriger, si un jour
+> on ajoute un fournisseur. La seconde sert au développement local.
+
+### 3.2 Provider Email, sans confirmation
 
 **Authentication → Sign In / Providers** :
 
-- **Email** : désactive le provider (**Enable Email provider** décoché). Personne ne pourra s'inscrire par e-mail, donc Supabase n'en enverra jamais.
-- Laisse **Allow new users to sign up** activé (sinon personne ne peut créer de compte via OAuth).
+- **Allow new users to sign up** : activé.
+- **Allow anonymous sign-ins** : désactivé.
+- **Email** : activé, avec :
+  - **Confirm email** : ❌ **désactivé** (sinon Supabase enverrait un e-mail de confirmation) ;
+  - **Secure email change** : ❌ désactivé (l'app ne proposera pas de changer d'e-mail au départ) ;
+  - **Minimum password length** : `10` ; **Password requirements** : lettres minuscules, majuscules et chiffres.
+- Tous les autres providers (GitHub, Google, Discord…) : désactivés.
 
-L'URL de callback à utiliser partout ci-dessous est affichée dans chaque provider Supabase (**Callback URL (for OAuth)**) ; elle a la forme :
+**Authentication → Rate Limits** : garde les valeurs par défaut (elles limitent les inscriptions et
+connexions par IP).
 
-```
-https://<ref>.supabase.co/auth/v1/callback
-```
+### 3.3 Conséquences à connaître
 
-### 3.3 GitHub
-
-1. Va sur `https://github.com/settings/developers` → **OAuth Apps → New OAuth App**.
-2. Application name : `Spectra` · Homepage URL : `https://krokow.github.io/spectra/` · Authorization callback URL : la callback Supabase.
-3. **Register application**, puis **Generate a new client secret**.
-4. Dans Supabase → **Sign In / Providers → GitHub** : active, colle **Client ID** et **Client Secret**, **Save**.
-
-### 3.4 Discord
-
-1. `https://discord.com/developers/applications` → **New Application** → nom `Spectra`.
-2. Menu **OAuth2** → **Redirects → Add Redirect** : la callback Supabase → **Save Changes**.
-3. Toujours dans **OAuth2** : copie **Client ID**, puis **Reset Secret** pour obtenir le **Client Secret**.
-4. Supabase → **Discord** : active, colle les deux valeurs, **Save**.
-
-### 3.5 Google (gratuit, sans carte bancaire)
-
-1. `https://console.cloud.google.com/` → sélecteur de projet → **Nouveau projet** `spectra`.
-2. **API et services → Écran de consentement OAuth** (ou « Google Auth Platform ») :
-   - Type d'utilisateur **Externe** ; nom de l'app `Spectra` ; e-mail d'assistance = le tien ;
-   - Domaines autorisés : `supabase.co` et `github.io` ;
-   - Scopes : uniquement `openid`, `.../auth/userinfo.email`, `.../auth/userinfo.profile` (scopes « non sensibles » : **aucune vérification Google requise**) ;
-   - **Publier l'application** (passer de « Test » à « En production ») pour que tout le monde puisse se connecter.
-3. **Identifiants → Créer des identifiants → ID client OAuth** → type **Application Web** :
-   - Origines JavaScript autorisées : `https://krokow.github.io`
-   - URI de redirection autorisés : la callback Supabase.
-4. Supabase → **Google** : active, colle **Client ID** et **Client Secret**, **Save**.
+- **Mot de passe oublié** : impossible par e-mail. Spectra génère à l'inscription des **codes de
+  secours** (à conserver par l'utilisateur, stockés hachés en base) qui permettent de choisir un
+  nouveau mot de passe via une Edge Function.
+- **Adresse non vérifiée** : n'importe qui peut s'inscrire avec une adresse qui n'est pas la sienne.
+  L'e-mail sert seulement d'identifiant de connexion ; il n'est jamais affiché aux autres. Le **pseudo**
+  (unique) est l'identité publique.
+- **Robots** : les limites de Supabase suffisent au départ. Si des inscriptions automatisées apparaissent,
+  on ajoutera Cloudflare Turnstile (gratuit, sans carte).
 
 ## 4. Extensions (étape 3 et suivantes)
 
@@ -94,6 +86,7 @@ Les migrations les activent elles-mêmes (`vector`, `pg_jsonschema`, `pg_cron`, 
 ```sql
 insert into public.app_admins (user_id)
 select id from auth.users where email = 'TON_EMAIL_ICI';
+-- (requête à taper dans le SQL Editor de Supabase, jamais à commiter avec ta vraie adresse)
 ```
 
 ## 6. Ce qui viendra aux étapes suivantes

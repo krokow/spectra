@@ -23,14 +23,14 @@
 
 ## 0bis. Arbitrages validés (28/10/2026)
 
-| Sujet          | Décision                                                                                                                                                                                                                 |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Routage        | **HashRouter** + Auth en PKCE (D4 confirmé).                                                                                                                                                                             |
-| E-mails        | **Aucun e-mail envoyé, jamais.** Connexion **uniquement OAuth** : GitHub, Discord, Google. Pas d'e-mail + mot de passe (la réinitialisation exigerait un SMTP), pas de magic link. Le SMTP Supabase n'est pas configuré. |
-| Accès          | **Pas de compte, pas d'accès** : la seule page publique est l'écran d'accueil/connexion. D5 (mode local + `import_local_answers`) est **supprimé**.                                                                      |
-| Features audio | **Calcul 100 % maison** par notre propre analyseur audio (§7bis), fusionné avec les métadonnées (date, popularité, tags). ReccoBeats est **abandonné**.                                                                  |
-| Duels          | Duels descriptifs du JSON + `track_duel` générés (D6 confirmé).                                                                                                                                                          |
-| Moteur         | plpgsql (RPC) comme source de vérité, plus un miroir TS pur pour l'animation optimiste et les tests de propriétés (D1 confirmé).                                                                                         |
+| Sujet          | Décision                                                                                                                                                                                                                                                                                                      |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Routage        | **HashRouter** + Auth en PKCE (D4 confirmé).                                                                                                                                                                                                                                                                  |
+| E-mails        | **Aucun e-mail envoyé, jamais** (mise à jour du 28/10 : remplace l'OAuth). Inscription **e-mail + mot de passe + pseudo unique**, « Confirm email » désactivé, aucun fournisseur OAuth. Mot de passe oublié : **codes de secours** générés à l'inscription (hachés en base, Edge Function `account-recover`). |
+| Accès          | **Pas de compte, pas d'accès** : la seule page publique est l'écran d'accueil/connexion. D5 (mode local + `import_local_answers`) est **supprimé**.                                                                                                                                                           |
+| Features audio | **Calcul 100 % maison** par notre propre analyseur audio (§7bis), fusionné avec les métadonnées (date, popularité, tags). ReccoBeats est **abandonné**.                                                                                                                                                       |
+| Duels          | Duels descriptifs du JSON + `track_duel` générés (D6 confirmé).                                                                                                                                                                                                                                               |
+| Moteur         | plpgsql (RPC) comme source de vérité, plus un miroir TS pur pour l'animation optimiste et les tests de propriétés (D1 confirmé).                                                                                                                                                                              |
 
 ---
 
