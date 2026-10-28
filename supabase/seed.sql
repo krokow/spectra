@@ -1,0 +1,2 @@
+-- Seed de développement local (supabase db reset). Les données de référence
+-- (questions, ancres) arriveront aux étapes 4 et 5.

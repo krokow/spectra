@@ -7,7 +7,9 @@
     "dontKnow": "I don't know",
     "continue": "Continue",
     "close": "Close",
-    "comingSoon": "Coming soon"
+    "comingSoon": "Coming soon",
+    "cancel": "Cancel",
+    "skipToContent": "Skip to content"
   },
   "nav": {
     "label": "Main navigation",
@@ -54,7 +56,46 @@
   },
   "profile": {
     "title": "Profile",
-    "language": "Language"
+    "language": "Language",
+    "identity": "Identity",
+    "displayName": "Display name",
+    "save": "Save",
+    "shuffleAvatar": "Shuffle my avatar colours",
+    "logout": "Log out",
+    "privacy": {
+      "title": "Privacy",
+      "explain": "Choose who sees what. “Friends” = only requests you accepted.",
+      "profile_visibility": "My profile",
+      "stats_visibility": "My spectrum and stats",
+      "activity_visibility": "My activity",
+      "level": {
+        "public": "Everyone",
+        "friends": "Friends",
+        "private": "Only me"
+      },
+      "searchable": "Find me by username",
+      "searchableHint": "Others can find you in search to add you.",
+      "twins": "Music twins",
+      "twinsHint": "Suggest you to strangers with a spectrum very close to yours (and vice versa)."
+    },
+    "security": {
+      "title": "Recovery codes",
+      "remaining_one": "You have {{count}} valid recovery code left.",
+      "remaining_other": "You have {{count}} valid recovery codes left.",
+      "regenerate": "Generate new codes",
+      "regenerateWarn": "Your old codes will stop working. The new ones will be shown only once.",
+      "regenerateConfirm": "Generate"
+    },
+    "data": {
+      "title": "My data",
+      "explain": "Download everything Spectra knows about you, or delete your account for good.",
+      "export": "Export my data",
+      "delete": "Delete my account",
+      "deleteTitle": "Permanently delete your account?",
+      "deleteWarn": "Your profile, spectrum, friends and whole history will be erased. This cannot be undone.",
+      "deleteConfirmLabel": "Type your username ({{username}}) to confirm",
+      "deleteConfirm": "Delete forever"
+    }
   },
   "daily": {
     "title": "Question of the day"
@@ -68,17 +109,136 @@
     "text": "Something went wrong. Reload the page and it should be fine."
   },
   "dimensions": {
-    "energy": { "label": "Energy", "low": "calm", "high": "explosive" },
-    "valence": { "label": "Mood", "low": "melancholic", "high": "bright" },
-    "acoustic": { "label": "Texture", "low": "electronic", "high": "acoustic" },
-    "tempo": { "label": "Tempo", "low": "slow", "high": "fast" },
-    "dance": { "label": "Groove", "low": "floating", "high": "danceable" },
-    "complexity": { "label": "Complexity", "low": "straightforward", "high": "experimental" },
-    "vocal": { "label": "Vocals", "low": "instrumental", "high": "very vocal" },
-    "bass": { "label": "Bass", "low": "light", "high": "deep" },
-    "polish": { "label": "Production", "low": "raw / lo-fi", "high": "ultra polished" },
-    "warmth": { "label": "Warmth", "low": "cold", "high": "warm" },
-    "era": { "label": "Era", "low": "retro", "high": "current" },
-    "niche": { "label": "Uniqueness", "low": "mainstream", "high": "underground" }
+    "energy": {
+      "label": "Energy",
+      "low": "calm",
+      "high": "explosive"
+    },
+    "valence": {
+      "label": "Mood",
+      "low": "melancholic",
+      "high": "bright"
+    },
+    "acoustic": {
+      "label": "Texture",
+      "low": "electronic",
+      "high": "acoustic"
+    },
+    "tempo": {
+      "label": "Tempo",
+      "low": "slow",
+      "high": "fast"
+    },
+    "dance": {
+      "label": "Groove",
+      "low": "floating",
+      "high": "danceable"
+    },
+    "complexity": {
+      "label": "Complexity",
+      "low": "straightforward",
+      "high": "experimental"
+    },
+    "vocal": {
+      "label": "Vocals",
+      "low": "instrumental",
+      "high": "very vocal"
+    },
+    "bass": {
+      "label": "Bass",
+      "low": "light",
+      "high": "deep"
+    },
+    "polish": {
+      "label": "Production",
+      "low": "raw / lo-fi",
+      "high": "ultra polished"
+    },
+    "warmth": {
+      "label": "Warmth",
+      "low": "cold",
+      "high": "warm"
+    },
+    "era": {
+      "label": "Era",
+      "low": "retro",
+      "high": "current"
+    },
+    "niche": {
+      "label": "Uniqueness",
+      "low": "mainstream",
+      "high": "underground"
+    }
+  },
+  "auth": {
+    "signup": "Sign up",
+    "login": "Log in",
+    "chooseAction": "Log in or sign up",
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
+    "identifier": "Email or username",
+    "usernameHint": "3 to 20 characters: letters, digits or _. This is what your friends will see.",
+    "usernameFree": "Available!",
+    "checking": "Checking…",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "ok": "done",
+    "missing": "missing",
+    "passwordRules": {
+      "title": "Password rules",
+      "length": "10 characters",
+      "lower": "a lowercase letter",
+      "upper": "an uppercase letter",
+      "digit": "a digit"
+    },
+    "createAccount": "Let's go",
+    "forgot": "Forgot your password?",
+    "privacyNote": "Your email is only used to log in: it is never shown to others, and we will never email you.",
+    "configMissing": {
+      "title": "Spectra isn't connected yet",
+      "text": "The server connection isn't configured on this version. Please try again later."
+    },
+    "codes": {
+      "welcomeTitle": "Welcome! One last thing",
+      "title": "Your new recovery codes",
+      "explain": "With no email, these codes are the only way to recover your account if you forget your password. Each code works once. Keep them somewhere safe: we can't show them again.",
+      "listLabel": "Recovery codes",
+      "download": "Download",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "confirm": "I've stored my codes safely (password manager, file, paper…).",
+      "start": "Discover my spectrum",
+      "fileNote": "Each code only works once. Never share them."
+    },
+    "recover": {
+      "title": "Recover my account",
+      "explain": "Use one of your recovery codes to choose a new password.",
+      "code": "Recovery code",
+      "newPassword": "New password",
+      "submit": "Change my password",
+      "done": "Done, your password has been changed.",
+      "doneHint": "All your devices were signed out for safety. Remember to generate new codes from your profile."
+    },
+    "errors": {
+      "email_invalid": "This email address doesn't look valid.",
+      "username_format": "3 to 20 characters: letters, digits or _.",
+      "username_taken": "This username is already taken (or reserved).",
+      "password_weak": "The password doesn't meet all the rules.",
+      "weak_password": "This password is too weak.",
+      "identifier_required": "Enter your email or username.",
+      "password_required": "Enter your password.",
+      "code_format": "Expected format: ABCD-EFGH.",
+      "invalid_credentials": "Incorrect credentials.",
+      "email_taken": "An account already exists with this email.",
+      "rate_limited": "Too many attempts. Please wait a few minutes.",
+      "invalid_code": "This code isn't valid (or was already used).",
+      "invalid_input": "Please check the form fields.",
+      "network": "Can't reach the server. Check your connection.",
+      "confirmation_enabled": "The server requires email confirmation, which isn't expected. Please tell the administrator.",
+      "origin_not_allowed": "This address isn't allowed to contact the server.",
+      "server_error": "The server had a problem. Try again shortly.",
+      "unknown": "Something went wrong. Please try again."
+    }
   }
 }

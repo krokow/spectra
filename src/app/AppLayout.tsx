@@ -1,10 +1,13 @@
 import { Compass, ListMusic, Moon, AudioLines, Sun, User, Users } from 'lucide-react'
-import { Suspense } from 'react'
+import { Suspense, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavLink, Outlet } from 'react-router'
 import { Wordmark } from '@/components/brand/Wordmark'
+import { Avatar } from '@/components/profile/Avatar'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useMyProfile, useMySettings } from '@/features/profile/api'
+import { setLanguage } from '@/i18n'
 import { useTheme } from '@/lib/theme'
 import { cn } from '@/lib/utils'
 import { UpdatePrompt } from './pwa/UpdatePrompt'
@@ -28,8 +31,15 @@ function PageFallback() {
 }
 
 export function AppLayout() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { theme, toggle } = useTheme()
+  const profile = useMyProfile()
+  const locale = useMySettings().data?.locale
+
+  // La langue enregistrée dans le profil suit l'utilisateur d'un appareil à l'autre.
+  useEffect(() => {
+    if (locale && locale !== i18n.language) setLanguage(locale)
+  }, [locale, i18n.language])
 
   return (
     <div className="mx-auto flex min-h-dvh max-w-2xl flex-col">
@@ -42,15 +52,30 @@ export function AppLayout() {
           document.getElementById('main')?.focus()
         }}
       >
-        Aller au contenu
+        {t('common.skipToContent')}
       </a>
       <header className="safe-top sticky top-0 z-30 flex h-(--header-height) items-center justify-between px-4 backdrop-blur-md">
         <NavLink to="/" aria-label="Spectra, accueil" className="rounded-md">
           <Wordmark />
         </NavLink>
-        <Button variant="ghost" size="icon" onClick={toggle} aria-label={t('theme.toggle')}>
-          {theme === 'dark' ? <Sun aria-hidden /> : <Moon aria-hidden />}
-        </Button>
+        <div className="flex items-center gap-1">
+          <Button variant="ghost" size="icon" onClick={toggle} aria-label={t('theme.toggle')}>
+            {theme === 'dark' ? <Sun aria-hidden /> : <Moon aria-hidden />}
+          </Button>
+          {profile.data && (
+            <NavLink
+              to="/profile"
+              aria-label={t('nav.profile')}
+              className="tap flex items-center justify-center rounded-full"
+            >
+              <Avatar
+                seed={profile.data.avatar_seed}
+                name={profile.data.display_name || profile.data.username}
+                size={34}
+              />
+            </NavLink>
+          )}
+        </div>
       </header>
 
       <main

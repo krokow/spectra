@@ -18,6 +18,10 @@ export default tseslint.config(
     },
   },
   {
+    files: ['**/*.test.{ts,tsx}', 'supabase/tests/**', 'tests/e2e/**'],
+    rules: { '@typescript-eslint/no-non-null-assertion': 'off' },
+  },
+  {
     // Modules de configuration (routes) et composants shadcn qui exportent leurs variantes.
     files: ['src/app/router.tsx', 'src/components/ui/**'],
     rules: { 'react-refresh/only-export-components': 'off' },

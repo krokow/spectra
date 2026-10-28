@@ -4,6 +4,7 @@ PWA de découverte musicale sociale. Un questionnaire adaptatif et ludique const
 
 - Plan d'architecture : [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md)
 - Configuration GitHub : [`docs/SETUP_GITHUB.md`](docs/SETUP_GITHUB.md)
+- Configuration Supabase : [`docs/SETUP_SUPABASE.md`](docs/SETUP_SUPABASE.md)
 - Marque : `design/brand/` · Banque de questions (source de vérité) : `supabase/seed/questions.json`
 
 ## Démarrage local
@@ -43,4 +44,4 @@ npm run dev                  # http://localhost:5173
 
 ## État
 
-Étape 2 / 9 : socle (Vite + React + TS strict, Tailwind v4, design system, PWA, i18n FR/EN, CI, déploiement Pages).
+Étape 3 / 9 : comptes (e-mail ou pseudo + mot de passe, sans envoi d'e-mail), codes de secours, profils, confidentialité, export et suppression RGPD, RLS testée.

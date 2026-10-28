@@ -8,6 +8,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router'
 import { ErrorBoundary } from './app/ErrorBoundary'
+import { AuthProvider } from './features/auth/AuthProvider'
 import { router } from './app/router'
 
 const queryClient = new QueryClient({
@@ -25,7 +26,9 @@ createRoot(root).render(
       {/* reducedMotion="user" : Framer Motion respecte prefers-reduced-motion partout. */}
       <MotionConfig reducedMotion="user">
         <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
+          <AuthProvider>
+            <RouterProvider router={router} />
+          </AuthProvider>
         </QueryClientProvider>
       </MotionConfig>
     </ErrorBoundary>

@@ -79,11 +79,27 @@ select version, name, applied_at from ops.schema_migrations order by version;
 
 Avant chaque fichier, il est testé en CI sur une base Supabase locale (tests des règles RLS inclus).
 
-## 5. Edge Functions (à partir de l'étape 4)
+## 5. Edge Functions
 
-Déploiement depuis le tableau de bord, comme pour Synapse : **Edge Functions → Deploy a new function → Via
-Editor**, nom de la fonction, coller le fichier **déjà assemblé** que je fournirai (`supabase/functions-bundled/<nom>.ts`,
-un seul fichier par fonction), **Deploy**. Les secrets de fonction se règlent dans **Edge Functions → Secrets**.
+Déploiement depuis le tableau de bord, comme pour Synapse. Chaque fonction tient dans **un seul fichier**.
+
+### `account-recover` (étape 3 : mot de passe oublié via code de secours)
+
+1. **Edge Functions → Secrets → Add new secret** : nom `ALLOWED_ORIGINS`, valeur `https://krokow.github.io`
+   (c'est une origine, pas une URL : pas de `/spectra`, pas de `/` final). Pour tester en local aussi :
+   `https://krokow.github.io,http://localhost:5173`.
+2. **Edge Functions → Deploy a new function → Via Editor**.
+3. Nom : `account-recover` (exactement).
+4. Remplace le code d'exemple par le contenu de
+   [`supabase/functions/account-recover/index.ts`](../supabase/functions/account-recover/index.ts)
+   (bouton **Copy raw file** sur GitHub).
+5. **Deploy function**.
+6. Ouvre la fonction → **Details** (ou Settings) → **désactive « Enforce JWT verification » / « Verify JWT »**,
+   puis enregistre. Raison : la personne qui a oublié son mot de passe n'est, par définition, pas connectée.
+   La fonction se protège elle-même : origine autorisée, validation des entrées, limites de tentatives en base.
+
+`SUPABASE_URL`, `SUPABASE_ANON_KEY` et `SUPABASE_SERVICE_ROLE_KEY` sont fournis automatiquement à la fonction
+par Supabase : tu n'as rien à saisir pour eux, et ils ne quittent jamais les serveurs Supabase.
 
 ## 6. Te déclarer administrateur (après ta première inscription)
 

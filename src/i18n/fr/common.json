@@ -7,7 +7,9 @@
     "dontKnow": "Je ne sais pas",
     "continue": "Continuer",
     "close": "Fermer",
-    "comingSoon": "Bientôt ici"
+    "comingSoon": "Bientôt ici",
+    "cancel": "Annuler",
+    "skipToContent": "Aller au contenu"
   },
   "nav": {
     "label": "Navigation principale",
@@ -54,7 +56,46 @@
   },
   "profile": {
     "title": "Profil",
-    "language": "Langue"
+    "language": "Langue",
+    "identity": "Identité",
+    "displayName": "Nom affiché",
+    "save": "Enregistrer",
+    "shuffleAvatar": "Changer les couleurs de mon avatar",
+    "logout": "Se déconnecter",
+    "privacy": {
+      "title": "Confidentialité",
+      "explain": "Choisis qui peut voir quoi. « Amis » = uniquement les demandes que tu as acceptées.",
+      "profile_visibility": "Mon profil",
+      "stats_visibility": "Mon spectre et mes stats",
+      "activity_visibility": "Mon activité",
+      "level": {
+        "public": "Public",
+        "friends": "Amis",
+        "private": "Moi seul"
+      },
+      "searchable": "Me trouver par mon pseudo",
+      "searchableHint": "Les autres peuvent te trouver dans la recherche pour t'ajouter.",
+      "twins": "Jumeaux musicaux",
+      "twinsHint": "Te proposer à des inconnus qui ont un spectre très proche du tien (et inversement)."
+    },
+    "security": {
+      "title": "Codes de secours",
+      "remaining_one": "Il te reste {{count}} code de secours valide.",
+      "remaining_other": "Il te reste {{count}} codes de secours valides.",
+      "regenerate": "Générer de nouveaux codes",
+      "regenerateWarn": "Tes anciens codes ne fonctionneront plus. Les nouveaux s'afficheront une seule fois.",
+      "regenerateConfirm": "Générer"
+    },
+    "data": {
+      "title": "Mes données",
+      "explain": "Télécharge tout ce que Spectra sait de toi, ou supprime ton compte pour de bon.",
+      "export": "Exporter mes données",
+      "delete": "Supprimer mon compte",
+      "deleteTitle": "Supprimer définitivement ton compte ?",
+      "deleteWarn": "Ton profil, ton spectre, tes amis et tout ton historique seront effacés. C'est irréversible.",
+      "deleteConfirmLabel": "Tape ton pseudo ({{username}}) pour confirmer",
+      "deleteConfirm": "Supprimer pour toujours"
+    }
   },
   "daily": {
     "title": "Question du jour"
@@ -68,17 +109,136 @@
     "text": "Quelque chose s'est mal passé. Recharge la page, ça devrait repartir."
   },
   "dimensions": {
-    "energy": { "label": "Énergie", "low": "calme", "high": "explosif" },
-    "valence": { "label": "Humeur", "low": "mélancolique", "high": "lumineux" },
-    "acoustic": { "label": "Texture", "low": "électronique", "high": "acoustique" },
-    "tempo": { "label": "Tempo", "low": "lent", "high": "rapide" },
-    "dance": { "label": "Groove", "low": "planant", "high": "dansant" },
-    "complexity": { "label": "Complexité", "low": "direct", "high": "expérimental" },
-    "vocal": { "label": "Voix", "low": "instrumental", "high": "très vocal" },
-    "bass": { "label": "Basses", "low": "légères", "high": "profondes" },
-    "polish": { "label": "Production", "low": "brute / lo-fi", "high": "ultra polie" },
-    "warmth": { "label": "Chaleur", "low": "froid", "high": "chaleureux" },
-    "era": { "label": "Époque", "low": "rétro", "high": "actuel" },
-    "niche": { "label": "Singularité", "low": "mainstream", "high": "confidentiel" }
+    "energy": {
+      "label": "Énergie",
+      "low": "calme",
+      "high": "explosif"
+    },
+    "valence": {
+      "label": "Humeur",
+      "low": "mélancolique",
+      "high": "lumineux"
+    },
+    "acoustic": {
+      "label": "Texture",
+      "low": "électronique",
+      "high": "acoustique"
+    },
+    "tempo": {
+      "label": "Tempo",
+      "low": "lent",
+      "high": "rapide"
+    },
+    "dance": {
+      "label": "Groove",
+      "low": "planant",
+      "high": "dansant"
+    },
+    "complexity": {
+      "label": "Complexité",
+      "low": "direct",
+      "high": "expérimental"
+    },
+    "vocal": {
+      "label": "Voix",
+      "low": "instrumental",
+      "high": "très vocal"
+    },
+    "bass": {
+      "label": "Basses",
+      "low": "légères",
+      "high": "profondes"
+    },
+    "polish": {
+      "label": "Production",
+      "low": "brute / lo-fi",
+      "high": "ultra polie"
+    },
+    "warmth": {
+      "label": "Chaleur",
+      "low": "froid",
+      "high": "chaleureux"
+    },
+    "era": {
+      "label": "Époque",
+      "low": "rétro",
+      "high": "actuel"
+    },
+    "niche": {
+      "label": "Singularité",
+      "low": "mainstream",
+      "high": "confidentiel"
+    }
+  },
+  "auth": {
+    "signup": "Créer un compte",
+    "login": "Se connecter",
+    "chooseAction": "Connexion ou inscription",
+    "email": "E-mail",
+    "username": "Pseudo",
+    "password": "Mot de passe",
+    "identifier": "E-mail ou pseudo",
+    "usernameHint": "3 à 20 caractères : lettres, chiffres ou _. C'est ce que verront tes amis.",
+    "usernameFree": "Disponible !",
+    "checking": "Vérification…",
+    "showPassword": "Afficher le mot de passe",
+    "hidePassword": "Masquer le mot de passe",
+    "ok": "validé",
+    "missing": "manquant",
+    "passwordRules": {
+      "title": "Règles du mot de passe",
+      "length": "10 caractères",
+      "lower": "une minuscule",
+      "upper": "une majuscule",
+      "digit": "un chiffre"
+    },
+    "createAccount": "C'est parti",
+    "forgot": "Mot de passe oublié ?",
+    "privacyNote": "Ton e-mail ne sert qu'à te connecter : il n'est jamais montré aux autres, et on ne t'enverra aucun mail.",
+    "configMissing": {
+      "title": "Spectra n'est pas encore branché",
+      "text": "La connexion au serveur n'est pas configurée sur cette version. Réessaie un peu plus tard."
+    },
+    "codes": {
+      "welcomeTitle": "Bienvenue ! Une dernière chose",
+      "title": "Tes nouveaux codes de secours",
+      "explain": "Sans e-mail, ces codes sont ta seule façon de récupérer ton compte si tu oublies ton mot de passe. Chaque code ne sert qu'une fois. Garde-les en lieu sûr : on ne pourra plus te les remontrer.",
+      "listLabel": "Codes de secours",
+      "download": "Télécharger",
+      "copy": "Copier",
+      "copied": "Copié !",
+      "confirm": "J'ai mis mes codes à l'abri (gestionnaire de mots de passe, fichier, papier…).",
+      "start": "Découvrir mon spectre",
+      "fileNote": "Chaque code ne fonctionne qu'une seule fois. Ne les partage avec personne."
+    },
+    "recover": {
+      "title": "Récupérer mon compte",
+      "explain": "Utilise l'un de tes codes de secours pour choisir un nouveau mot de passe.",
+      "code": "Code de secours",
+      "newPassword": "Nouveau mot de passe",
+      "submit": "Changer mon mot de passe",
+      "done": "C'est fait, ton mot de passe est changé.",
+      "doneHint": "Tous tes appareils ont été déconnectés par sécurité. Pense à générer de nouveaux codes depuis ton profil."
+    },
+    "errors": {
+      "email_invalid": "Cette adresse e-mail n'a pas l'air valide.",
+      "username_format": "3 à 20 caractères : lettres, chiffres ou _.",
+      "username_taken": "Ce pseudo est déjà pris (ou réservé).",
+      "password_weak": "Le mot de passe ne respecte pas toutes les règles.",
+      "weak_password": "Ce mot de passe est trop faible.",
+      "identifier_required": "Indique ton e-mail ou ton pseudo.",
+      "password_required": "Indique ton mot de passe.",
+      "code_format": "Format attendu : ABCD-EFGH.",
+      "invalid_credentials": "Identifiants incorrects.",
+      "email_taken": "Un compte existe déjà avec cet e-mail.",
+      "rate_limited": "Trop de tentatives. Patiente quelques minutes avant de réessayer.",
+      "invalid_code": "Ce code n'est pas valide (ou a déjà servi).",
+      "invalid_input": "Vérifie les champs du formulaire.",
+      "network": "Impossible de joindre le serveur. Vérifie ta connexion.",
+      "confirmation_enabled": "Le serveur demande une confirmation par e-mail, ce qui n'est pas prévu. Préviens l'administrateur.",
+      "origin_not_allowed": "Cette adresse n'est pas autorisée à contacter le serveur.",
+      "server_error": "Le serveur a eu un souci. Réessaie dans un instant.",
+      "unknown": "Quelque chose s'est mal passé. Réessaie."
+    }
   }
 }
