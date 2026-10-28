@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 640 160" role="img" aria-label="Spectra">
+  <!-- Le texte utilise une police du système en secours ; à convertir en tracés (outlines) une fois la police finale choisie (ex. Sora ou Space Grotesk, licence libre). -->
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="18%" r="95%">
+      <stop offset="0" stop-color="#241A5C"/>
+      <stop offset="0.55" stop-color="#0F0B26"/>
+      <stop offset="1" stop-color="#07060F"/>
+    </radialGradient>
+    <linearGradient id="spec" gradientUnits="userSpaceOnUse" x1="70" y1="0" x2="442" y2="0">
+      <stop offset="0" stop-color="#8B5CF6"/>
+      <stop offset="0.5" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#F472B6"/>
+    </linearGradient>
+    <linearGradient id="word" gradientUnits="userSpaceOnUse" x1="170" y1="0" x2="610" y2="0">
+      <stop offset="0" stop-color="#A78BFA"/>
+      <stop offset="0.5" stop-color="#22D3EE"/>
+      <stop offset="1" stop-color="#F472B6"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.45"/>
+      <stop offset="0.5" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <g id="bars">
+      <rect x="70"  y="181" width="36" height="150" rx="18"/>
+      <rect x="126" y="126" width="36" height="260" rx="18"/>
+      <rect x="182" y="156" width="36" height="200" rx="18"/>
+      <rect x="238" y="86"  width="36" height="340" rx="18"/>
+      <rect x="294" y="141" width="36" height="230" rx="18"/>
+      <rect x="350" y="106" width="36" height="300" rx="18"/>
+      <rect x="406" y="196" width="36" height="120" rx="18"/>
+    </g>
+  </defs>
+  <g transform="translate(8 16) scale(0.25)">
+    <rect width="512" height="512" rx="116" fill="url(#bg)"/>
+    <use xlink:href="#bars" href="#bars" fill="url(#spec)"/>
+    <use xlink:href="#bars" href="#bars" fill="url(#shine)"/>
+  </g>
+  <text x="170" y="104" font-family="Sora, 'Space Grotesk', 'Segoe UI', system-ui, -apple-system, sans-serif" font-size="82" font-weight="700" letter-spacing="-2" fill="url(#word)">spectra</text>
+</svg>

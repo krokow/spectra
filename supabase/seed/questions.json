@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "locale": "fr",
+  "_notes": [
+    "Textes en FR ici ; à extraire dans les fichiers i18n (react-i18next) pour l'EN.",
+    "Toutes les valeurs de dimensions sont sur [0,1]. 0.5 = neutre/inconnu.",
+    "obs = observation [valeur_cible, fiabilité r] sur une dimension. genres = delta de poids de genre dans [-1,1].",
+    "Duel : choisir A => observations sur les clés de 'sig' de A uniquement (les dimensions non testées ne bougent pas). Choisir B => idem avec B. 'sig' vide => duel de genres uniquement.",
+    "Les extraits d'un duel sont choisis dans anchor_tracks par proximité avec 'sig' + 'genres' (pas de morceau en dur).",
+    "Visuels (cartes d'ambiances, bulles) : générés par le front à partir de l'id de l'option (dégradés + icônes), aucun asset payant."
+  ],
+  "model": {
+    "prior": { "mean": 0.5, "variance": 0.083 },
+    "obs_variance": "v = 0.12 * (1 - r) / r + 0.01",
+    "update": "Kalman 1D : K = var / (var + v) ; mean += K * (cible - mean) ; var *= (1 - K)",
+    "confidence": "1 - var / 0.083",
+    "multi_select_reliability_scale": 0.6,
+    "time_decay": "var += 0.0005 * jours_depuis_reponse, plafonné à 0.083 (l'historique n'est jamais supprimé)",
+    "genre_update": "g += 0.35 * delta * (1 - abs(g)), g dans [-1,1] ; rejet (double-tap) => g = min(g, -0.8)",
+    "both": "observation = moyenne des deux signatures, fiabilité r * 0.5",
+    "none": "aucune mise à jour de dimension, réponse journalisée",
+    "skip": "aucun signal, jamais compté comme négatif",
+    "manual_edit": "ajustement manuel d'un curseur du spectre = observation de fiabilité 0.95"
+  },
+  "dimensions": [
+    { "id": "energy", "fr": "Énergie", "low": "calme", "high": "explosif" },
+    { "id": "valence", "fr": "Humeur", "low": "mélancolique", "high": "lumineux" },
+    { "id": "acoustic", "fr": "Texture", "low": "électronique", "high": "acoustique" },
+    { "id": "tempo", "fr": "Tempo", "low": "lent", "high": "rapide" },
+    { "id": "dance", "fr": "Groove", "low": "planant", "high": "dansant" },
+    { "id": "complexity", "fr": "Complexité", "low": "direct", "high": "expérimental" },
+    { "id": "vocal", "fr": "Voix", "low": "instrumental", "high": "très vocal" },
+    { "id": "bass", "fr": "Basses", "low": "légères", "high": "profondes" },
+    { "id": "polish", "fr": "Production", "low": "brute / lo-fi", "high": "ultra polie" },
+    { "id": "warmth", "fr": "Chaleur", "low": "froid", "high": "chaleureux" },
+    { "id": "era", "fr": "Époque", "low": "rétro", "high": "actuel" },
+    { "id": "niche", "fr": "Singularité", "low": "mainstream", "high": "confidentiel" }
+  ],
+  "genres": ["pop", "rock", "indie", "metal", "punk", "hiphop", "rnb_soul", "funk_disco", "electro", "ambient", "jazz", "classical", "folk", "country", "reggae", "latin", "afro", "chanson", "kpop_jpop", "blues"],
+  "params": {
+    "openness": { "default": 0.5, "use": "valeur par défaut du curseur 'reste dans ma zone <-> sors de ma bulle'" },
+    "nostalgia": { "default": 0.5, "use": "poids des morceaux de l'époque de jeunesse dans les recos" },
+    "languages": { "default": [], "use": "filtre/boost de langue des paroles" }
+  },
+  "era_scale": { "1960s": 0.0, "1970s": 0.1, "1980s": 0.25, "1990s": 0.45, "2000s": 0.6, "2010s": 0.8, "2020s": 1.0 },
+  "onboarding_order": ["q01", "q02", "q03", "q04", "q05", "q06", "q07", "q08", "q09", "q10", "q11", "q12"],
+  "questions": [
+    { "id": "q01", "type": "slider", "tier": 1, "fr": "Ton niveau d'énergie musicale par défaut ?", "dim": "energy", "low": "Calme et posé", "high": "Explosif", "r": 0.6 },
+
+    { "id": "q02", "type": "duel", "tier": 1, "fr": "Lequel te donne le plus envie ?", "r": 0.7,
+      "A": { "fr": "Synthés brillants, production lisse, ambiance club", "sig": { "acoustic": 0.1, "polish": 0.9 }, "genres": { "electro": 0.5, "pop": 0.3 } },
+      "B": { "fr": "Guitare sèche, voix proche, enregistré à la maison", "sig": { "acoustic": 0.95, "polish": 0.25 }, "genres": { "folk": 0.5, "indie": 0.4 } } },
+
+    { "id": "q03", "type": "vibes", "tier": 1, "fr": "Choisis 2 ou 3 ambiances qui te parlent", "pick": [2, 3], "options": [
+      { "id": "neon", "fr": "Néons de nuit", "obs": { "energy": [0.7, 0.5], "acoustic": [0.1, 0.5], "bass": [0.75, 0.4], "valence": [0.4, 0.3] }, "genres": { "electro": 0.5, "rnb_soul": 0.2 } },
+      { "id": "campfire", "fr": "Feu de camp", "obs": { "acoustic": [0.95, 0.6], "warmth": [0.9, 0.5], "energy": [0.3, 0.4] }, "genres": { "folk": 0.6, "country": 0.2 } },
+      { "id": "rockstage", "fr": "Scène rock en sueur", "obs": { "energy": [0.85, 0.6], "polish": [0.3, 0.4], "acoustic": [0.2, 0.3] }, "genres": { "rock": 0.6, "punk": 0.3, "metal": 0.2 } },
+      { "id": "rainy", "fr": "Dimanche pluvieux", "obs": { "valence": [0.25, 0.5], "energy": [0.2, 0.5], "warmth": [0.7, 0.4] }, "genres": { "indie": 0.3, "chanson": 0.3, "jazz": 0.2 } },
+      { "id": "sunset", "fr": "Coucher de soleil sur la plage", "obs": { "valence": [0.85, 0.5], "tempo": [0.45, 0.3], "warmth": [0.8, 0.4] }, "genres": { "reggae": 0.3, "latin": 0.3, "pop": 0.3 } },
+      { "id": "adrenaline", "fr": "Adrénaline pure", "obs": { "energy": [0.95, 0.6], "tempo": [0.85, 0.5] }, "genres": { "metal": 0.3, "hiphop": 0.2, "electro": 0.3 } },
+      { "id": "focus", "fr": "Bulle de concentration", "obs": { "vocal": [0.1, 0.6], "energy": [0.2, 0.4], "complexity": [0.55, 0.3] }, "genres": { "ambient": 0.4, "classical": 0.4, "jazz": 0.3 } },
+      { "id": "club", "fr": "Club en sous-sol", "obs": { "dance": [0.95, 0.6], "bass": [0.9, 0.5], "vocal": [0.2, 0.3] }, "genres": { "electro": 0.6, "funk_disco": 0.2 } },
+      { "id": "street", "fr": "Le quartier, la rue", "obs": { "vocal": [0.9, 0.5], "bass": [0.8, 0.5] }, "genres": { "hiphop": 0.6, "rnb_soul": 0.3, "afro": 0.2 } },
+      { "id": "party", "fr": "Fête de famille, tout le monde danse", "obs": { "valence": [0.9, 0.5], "dance": [0.85, 0.5], "niche": [0.1, 0.4] }, "genres": { "pop": 0.4, "funk_disco": 0.4, "latin": 0.3 } }
+    ] },
+
+    { "id": "q04", "type": "duel", "tier": 1, "fr": "Lequel te donne le plus envie ?", "r": 0.7,
+      "A": { "fr": "Une voix qui raconte, des paroles qui marquent", "sig": { "vocal": 0.95 }, "genres": { "chanson": 0.3, "pop": 0.3, "folk": 0.2 } },
+      "B": { "fr": "Pas un mot : l'instrumental porte tout", "sig": { "vocal": 0.05 }, "genres": { "jazz": 0.3, "classical": 0.2, "ambient": 0.3, "electro": 0.1 } } },
+
+    { "id": "q05", "type": "scenario", "tier": 1, "fr": "Route de nuit, vitres entrouvertes. Tu mets…", "options": [
+      { "id": "a", "fr": "Du synthwave qui défile comme les lumières", "obs": { "energy": [0.6, 0.5], "acoustic": [0.1, 0.5], "warmth": [0.4, 0.3], "tempo": [0.55, 0.3] }, "genres": { "electro": 0.5 } },
+      { "id": "b", "fr": "Un classique rock qu'on chante à pleine voix", "obs": { "energy": [0.8, 0.5], "vocal": [0.85, 0.5], "era": [0.3, 0.4] }, "genres": { "rock": 0.6 } },
+      { "id": "c", "fr": "Du rap sombre, basses à fond", "obs": { "bass": [0.9, 0.6], "vocal": [0.9, 0.5], "valence": [0.3, 0.4] }, "genres": { "hiphop": 0.6 } },
+      { "id": "d", "fr": "Quelque chose de doux et planant", "obs": { "energy": [0.2, 0.5], "valence": [0.5, 0.2], "acoustic": [0.5, 0.3] }, "genres": { "ambient": 0.3, "indie": 0.3, "folk": 0.2 } }
+    ] },
+
+    { "id": "q06", "type": "bubbles", "tier": 1, "fr": "Touche ceux que tu aimes, double-tape ceux que tu rejettes", "on": 0.5, "reject": -0.8, "options": [
+      { "id": "pop", "fr": "Pop", "genre": "pop" }, { "id": "rock", "fr": "Rock", "genre": "rock" }, { "id": "indie", "fr": "Indie", "genre": "indie" },
+      { "id": "metal", "fr": "Metal", "genre": "metal" }, { "id": "punk", "fr": "Punk", "genre": "punk" }, { "id": "hiphop", "fr": "Hip-hop / Rap", "genre": "hiphop" },
+      { "id": "rnb_soul", "fr": "R&B / Soul", "genre": "rnb_soul" }, { "id": "funk_disco", "fr": "Funk / Disco", "genre": "funk_disco" }, { "id": "electro", "fr": "Électro", "genre": "electro" },
+      { "id": "ambient", "fr": "Ambient", "genre": "ambient" }, { "id": "jazz", "fr": "Jazz", "genre": "jazz" }, { "id": "classical", "fr": "Classique", "genre": "classical" },
+      { "id": "folk", "fr": "Folk", "genre": "folk" }, { "id": "country", "fr": "Country", "genre": "country" }, { "id": "reggae", "fr": "Reggae", "genre": "reggae" },
+      { "id": "latin", "fr": "Latino", "genre": "latin" }, { "id": "afro", "fr": "Afro", "genre": "afro" }, { "id": "chanson", "fr": "Chanson", "genre": "chanson" },
+      { "id": "kpop_jpop", "fr": "K-pop / J-pop", "genre": "kpop_jpop" }, { "id": "blues", "fr": "Blues", "genre": "blues" }
+    ] },
+
+    { "id": "q07", "type": "slider", "tier": 1, "fr": "Ton humeur musicale préférée ?", "dim": "valence", "low": "Mélancolique", "high": "Lumineuse", "r": 0.6 },
+
+    { "id": "q08", "type": "duel", "tier": 1, "fr": "Lequel te donne le plus envie ?", "r": 0.7,
+      "A": { "fr": "Un beat régulier qui te force à bouger", "sig": { "dance": 0.95, "tempo": 0.6 }, "genres": { "electro": 0.4, "funk_disco": 0.4, "pop": 0.2 } },
+      "B": { "fr": "Un morceau qui flotte, sans rythme évident", "sig": { "dance": 0.1, "tempo": 0.2 }, "genres": { "ambient": 0.4, "classical": 0.2, "jazz": 0.2 } } },
+
+    { "id": "q09", "type": "era", "tier": 1, "fr": "La musique qui te fait le plus d'effet vient plutôt des années…", "pick": [1, 3], "options": [
+      { "id": "d60", "fr": "60", "obs": { "era": [0.0, 0.5] }, "genres": { "rock": 0.2, "rnb_soul": 0.3, "blues": 0.2 } },
+      { "id": "d70", "fr": "70", "obs": { "era": [0.1, 0.5] }, "genres": { "rock": 0.3, "funk_disco": 0.3, "folk": 0.2 } },
+      { "id": "d80", "fr": "80", "obs": { "era": [0.25, 0.5] }, "genres": { "pop": 0.3, "electro": 0.2 } },
+      { "id": "d90", "fr": "90", "obs": { "era": [0.45, 0.5] }, "genres": { "hiphop": 0.3, "rock": 0.2, "rnb_soul": 0.3 } },
+      { "id": "d00", "fr": "2000", "obs": { "era": [0.6, 0.5] }, "genres": { "pop": 0.2, "hiphop": 0.2, "indie": 0.2 } },
+      { "id": "d10", "fr": "2010", "obs": { "era": [0.8, 0.5] }, "genres": { "electro": 0.2, "hiphop": 0.2, "pop": 0.2 } },
+      { "id": "d20", "fr": "2020", "obs": { "era": [1.0, 0.5] }, "genres": { "pop": 0.2, "hiphop": 0.2, "kpop_jpop": 0.2 } }
+    ] },
+
+    { "id": "q10", "type": "slider", "tier": 1, "fr": "Tubes ou pépites ?", "dim": "niche", "low": "Les tubes que tout le monde connaît", "high": "Les pépites que personne ne connaît", "r": 0.55 },
+
+    { "id": "q11", "type": "duel", "tier": 1, "fr": "Lequel te donne le plus envie ?", "r": 0.7,
+      "A": { "fr": "Des basses qui font vibrer la poitrine", "sig": { "bass": 0.95, "energy": 0.65 }, "genres": { "hiphop": 0.4, "electro": 0.3 } },
+      "B": { "fr": "Léger et aérien, aucune basse écrasante", "sig": { "bass": 0.1 }, "genres": { "indie": 0.3, "folk": 0.3, "pop": 0.1 } } },
+
+    { "id": "q12", "type": "duel", "tier": 1, "fr": "Lequel te donne le plus envie ?", "r": 0.7,
+      "A": { "fr": "Structure simple, refrain qui reste en tête", "sig": { "complexity": 0.1 }, "genres": { "pop": 0.4 } },
+      "B": { "fr": "Rythmes impairs, longues progressions, surprises", "sig": { "complexity": 0.9 }, "genres": { "jazz": 0.4, "classical": 0.2, "rock": 0.2 } } },
+
+    { "id": "q13", "type": "scenario", "tier": 2, "fr": "Matin tranquille, café en main. Tu mets…", "options": [
+      { "id": "a", "fr": "Du jazz doux ou de la bossa", "obs": { "warmth": [0.85, 0.5], "energy": [0.25, 0.5], "acoustic": [0.8, 0.5], "vocal": [0.5, 0.2] }, "genres": { "jazz": 0.5, "latin": 0.2 } },
+      { "id": "b", "fr": "De la chanson française ou de la folk", "obs": { "vocal": [0.9, 0.5], "acoustic": [0.85, 0.5], "warmth": [0.8, 0.4] }, "genres": { "chanson": 0.5, "folk": 0.4 } },
+      { "id": "c", "fr": "Du lo-fi ou de l'ambient", "obs": { "vocal": [0.15, 0.5], "energy": [0.15, 0.5], "polish": [0.3, 0.3] }, "genres": { "ambient": 0.4, "electro": 0.1 } },
+      { "id": "d", "fr": "De la pop lumineuse", "obs": { "valence": [0.85, 0.5], "energy": [0.5, 0.3], "polish": [0.8, 0.4] }, "genres": { "pop": 0.5 } },
+      { "id": "e", "fr": "Rien, j'aime le silence", "obs": { "energy": [0.1, 0.2] } }
+    ] },
+
+    { "id": "q14", "type": "scenario", "tier": 2, "fr": "Footing ou salle de sport. Dans les oreilles…", "options": [
+      { "id": "a", "fr": "Du hip-hop ou de la trap", "obs": { "energy": [0.85, 0.5], "bass": [0.8, 0.5], "vocal": [0.9, 0.4], "tempo": [0.6, 0.3] }, "genres": { "hiphop": 0.5 } },
+      { "id": "b", "fr": "De la techno ou de la drum'n'bass", "obs": { "energy": [0.95, 0.6], "tempo": [0.9, 0.6], "vocal": [0.15, 0.4] }, "genres": { "electro": 0.6 } },
+      { "id": "c", "fr": "Du rock ou du metal", "obs": { "energy": [0.95, 0.6], "acoustic": [0.1, 0.4] }, "genres": { "rock": 0.4, "metal": 0.4 } },
+      { "id": "d", "fr": "De la pop énergique", "obs": { "energy": [0.8, 0.5], "valence": [0.85, 0.5], "tempo": [0.7, 0.4], "polish": [0.85, 0.4] }, "genres": { "pop": 0.5 } },
+      { "id": "e", "fr": "Des podcasts, pas de musique" }
+    ] },
+
+    { "id": "q15", "type": "scenario", "tier": 2, "fr": "Soirée entre potes, c'est toi qui tiens la playlist…", "options": [
+      { "id": "a", "fr": "Les tubes d'hier et d'aujourd'hui", "obs": { "niche": [0.05, 0.6], "valence": [0.9, 0.4] }, "genres": { "pop": 0.4, "funk_disco": 0.3 } },
+      { "id": "b", "fr": "Du latino et de l'afro qui font danser", "obs": { "dance": [0.9, 0.5], "valence": [0.85, 0.4] }, "genres": { "latin": 0.5, "afro": 0.5 } },
+      { "id": "c", "fr": "Une sélection pointue qui fait découvrir", "obs": { "niche": [0.85, 0.6], "complexity": [0.6, 0.3] } },
+      { "id": "d", "fr": "Du rap qu'on connaît par cœur", "obs": { "vocal": [0.9, 0.4], "bass": [0.75, 0.4] }, "genres": { "hiphop": 0.5 } },
+      { "id": "e", "fr": "Du rock et du punk à hurler", "obs": { "energy": [0.9, 0.5] }, "genres": { "rock": 0.4, "punk": 0.4 } }
+    ] },
+
+    { "id": "q16", "type": "scenario", "tier": 2, "fr": "Pour bosser ou étudier, il te faut…", "options": [
+      { "id": "a", "fr": "De l'instrumental ou du classique", "obs": { "vocal": [0.05, 0.6], "energy": [0.2, 0.4] }, "genres": { "classical": 0.5 } },
+      { "id": "b", "fr": "Des lo-fi beats", "obs": { "vocal": [0.15, 0.5], "polish": [0.3, 0.4], "energy": [0.25, 0.4], "dance": [0.35, 0.3] }, "genres": { "ambient": 0.2, "hiphop": 0.2 } },
+      { "id": "c", "fr": "Mes morceaux préférés, avec les paroles", "obs": { "vocal": [0.8, 0.5], "energy": [0.5, 0.2] } },
+      { "id": "d", "fr": "De l'électro minimale", "obs": { "vocal": [0.1, 0.5], "energy": [0.45, 0.3], "dance": [0.6, 0.3], "acoustic": [0.05, 0.4] }, "genres": { "electro": 0.5 } },
+      { "id": "e", "fr": "Silence ou bruit blanc" }
+    ] },
+
+    { "id": "q17", "type": "duel", "tier": 2, "fr": "Lequel te donne le plus envie ?", "r": 0.7,
+      "A": { "fr": "Lent, une ballade qui prend son temps", "sig": { "tempo": 0.1, "energy": 0.3 }, "genres": { "folk": 0.2, "rnb_soul": 0.3, "jazz": 0.2 } },
+      "B": { "fr": "Rapide, ça file à toute vitesse", "sig": { "tempo": 0.95, "energy": 0.8 }, "genres": { "punk": 0.3, "electro": 0.3, "metal": 0.2 } } },
+
+    { "id": "q18", "type": "duel", "tier": 2, "fr": "Lequel te donne le plus envie ?", "r": 0.7,
+      "A": { "fr": "Lo-fi : bruit de bande, imperfections assumées", "sig": { "polish": 0.1 }, "genres": { "indie": 0.4, "punk": 0.2, "hiphop": 0.1 } },
+      "B": { "fr": "Studio ultra-propre, chaque détail poli", "sig": { "polish": 0.95 }, "genres": { "pop": 0.4, "electro": 0.2, "rnb_soul": 0.2 } } },
+
+    { "id": "q19", "type": "duel", "tier": 2, "fr": "Lequel te donne le plus envie ?", "r": 0.7,
+      "A": { "fr": "Chaleureux, vintage, comme un vinyle de soul", "sig": { "warmth": 0.9, "acoustic": 0.6 }, "genres": { "rnb_soul": 0.4, "funk_disco": 0.3, "jazz": 0.2 } },
+      "B": { "fr": "Froid et nocturne, synthés métalliques", "sig": { "warmth": 0.15, "acoustic": 0.1 }, "genres": { "electro": 0.4, "indie": 0.2, "ambient": 0.2 } } },
+
+    { "id": "q20", "type": "duel", "tier": 2, "fr": "Qui mène la danse ?", "r": 0.6,
+      "A": { "fr": "Les guitares", "sig": {}, "genres": { "rock": 0.5, "indie": 0.3, "metal": 0.2 } },
+      "B": { "fr": "Les synthés et les machines", "sig": {}, "genres": { "electro": 0.5, "pop": 0.2, "kpop_jpop": 0.1 } } },
+
+    { "id": "q21", "type": "duel", "tier": 2, "fr": "Lequel te donne le plus envie ?", "r": 0.6,
+      "A": { "fr": "Un flow rap, des mots qui s'enchaînent", "sig": {}, "genres": { "hiphop": 0.6 } },
+      "B": { "fr": "Une mélodie chantée, une voix qui plane", "sig": {}, "genres": { "rnb_soul": 0.4, "pop": 0.3 } } },
+
+    { "id": "q22", "type": "bubbles", "tier": 2, "fr": "Dans l'électro, qu'est-ce qui te parle ?", "on": 0.5, "reject": -0.8, "options": [
+      { "id": "house", "fr": "House", "genre": "electro", "sub": "house" }, { "id": "techno", "fr": "Techno", "genre": "electro", "sub": "techno" },
+      { "id": "trance", "fr": "Trance", "genre": "electro", "sub": "trance" }, { "id": "dnb", "fr": "Drum'n'bass", "genre": "electro", "sub": "dnb" },
+      { "id": "dubstep", "fr": "Dubstep", "genre": "electro", "sub": "dubstep" }, { "id": "synthwave", "fr": "Synthwave", "genre": "electro", "sub": "synthwave" },
+      { "id": "ambient", "fr": "Ambient", "genre": "ambient", "sub": "ambient" }, { "id": "hyperpop", "fr": "Hyperpop", "genre": "pop", "sub": "hyperpop" },
+      { "id": "lofi", "fr": "Lo-fi", "genre": "ambient", "sub": "lofi" }, { "id": "electro_pop", "fr": "Electro-pop", "genre": "pop", "sub": "electropop" }
+    ] },
+
+    { "id": "q23", "type": "bubbles", "tier": 2, "fr": "Dans le rock et ses cousins, qu'est-ce qui te parle ?", "on": 0.5, "reject": -0.8, "options": [
+      { "id": "classic_rock", "fr": "Rock classique", "genre": "rock", "sub": "classic" }, { "id": "grunge", "fr": "Grunge", "genre": "rock", "sub": "grunge" },
+      { "id": "punk", "fr": "Punk", "genre": "punk", "sub": "punk" }, { "id": "post_punk", "fr": "Post-punk", "genre": "punk", "sub": "postpunk" },
+      { "id": "metal", "fr": "Metal", "genre": "metal", "sub": "metal" }, { "id": "shoegaze", "fr": "Shoegaze", "genre": "indie", "sub": "shoegaze" },
+      { "id": "math_rock", "fr": "Math rock", "genre": "rock", "sub": "mathrock" }, { "id": "emo", "fr": "Emo", "genre": "punk", "sub": "emo" },
+      { "id": "indie_rock", "fr": "Indie rock", "genre": "indie", "sub": "indierock" }, { "id": "blues_rock", "fr": "Blues rock", "genre": "blues", "sub": "bluesrock" }
+    ] },
+
+    { "id": "q24", "type": "bubbles", "tier": 2, "fr": "Côté rap, soul et groove, qu'est-ce qui te parle ?", "on": 0.5, "reject": -0.8, "options": [
+      { "id": "boom_bap", "fr": "Boom bap", "genre": "hiphop", "sub": "boombap" }, { "id": "trap", "fr": "Trap", "genre": "hiphop", "sub": "trap" },
+      { "id": "drill", "fr": "Drill", "genre": "hiphop", "sub": "drill" }, { "id": "cloud_rap", "fr": "Cloud rap", "genre": "hiphop", "sub": "cloudrap" },
+      { "id": "neo_soul", "fr": "Néo-soul", "genre": "rnb_soul", "sub": "neosoul" }, { "id": "funk", "fr": "Funk", "genre": "funk_disco", "sub": "funk" },
+      { "id": "motown", "fr": "Soul classique", "genre": "rnb_soul", "sub": "classicsoul" }, { "id": "rnb_moderne", "fr": "R&B moderne", "genre": "rnb_soul", "sub": "modernrnb" },
+      { "id": "afrobeats", "fr": "Afrobeats", "genre": "afro", "sub": "afrobeats" }, { "id": "disco", "fr": "Disco", "genre": "funk_disco", "sub": "disco" }
+    ] },
+
+    { "id": "q25", "type": "era", "tier": 2, "fr": "La musique de tes 15 ans, c'était…", "pick": [1, 1], "params_effect": { "nostalgia": 0.15 }, "options": [
+      { "id": "d70", "fr": "Les années 70", "obs": { "era": [0.1, 0.4] }, "genres": { "rock": 0.3, "funk_disco": 0.3 } },
+      { "id": "d80", "fr": "Les années 80", "obs": { "era": [0.25, 0.4] }, "genres": { "pop": 0.3, "electro": 0.2 } },
+      { "id": "d90", "fr": "Les années 90", "obs": { "era": [0.45, 0.4] }, "genres": { "hiphop": 0.3, "rock": 0.3 } },
+      { "id": "d00", "fr": "Les années 2000", "obs": { "era": [0.6, 0.4] }, "genres": { "pop": 0.3, "hiphop": 0.2, "indie": 0.2 } },
+      { "id": "d10", "fr": "Les années 2010", "obs": { "era": [0.8, 0.4] }, "genres": { "electro": 0.3, "hiphop": 0.3 } },
+      { "id": "d20", "fr": "Les années 2020", "obs": { "era": [1.0, 0.4] }, "genres": { "pop": 0.2, "hiphop": 0.3, "kpop_jpop": 0.2 } }
+    ] },
+
+    { "id": "q26", "type": "scenario", "tier": 2, "fr": "Un morceau te déroute dès la première écoute. Tu…", "options": [
+      { "id": "a", "fr": "Passes au suivant", "obs": { "complexity": [0.2, 0.4] }, "params": { "openness": -0.1 } },
+      { "id": "b", "fr": "Lui laisses une deuxième chance", "obs": { "complexity": [0.5, 0.3] }, "params": { "openness": 0.05 } },
+      { "id": "c", "fr": "Accroches d'autant plus que c'est étrange", "obs": { "complexity": [0.9, 0.5], "niche": [0.8, 0.4] }, "params": { "openness": 0.2 } }
+    ] },
+
+    { "id": "q27", "type": "slider", "tier": 2, "fr": "Confort ou nouveauté ?", "param": "openness", "low": "Je réécoute mes favoris", "high": "Je cherche toujours du neuf", "r": 0.6 },
+
+    { "id": "q28", "type": "vibes", "tier": 2, "fr": "Ce que tu cherches avant tout dans une chanson", "pick": [1, 3], "options": [
+      { "id": "lyrics", "fr": "Des paroles qui touchent", "obs": { "vocal": [0.85, 0.5] }, "genres": { "chanson": 0.2, "hiphop": 0.2, "folk": 0.2 } },
+      { "id": "groove", "fr": "Un groove irrésistible", "obs": { "dance": [0.85, 0.5], "bass": [0.65, 0.4] }, "genres": { "funk_disco": 0.3, "electro": 0.2 } },
+      { "id": "melody", "fr": "Une mélodie qui reste en tête", "obs": { "complexity": [0.2, 0.4], "polish": [0.7, 0.3] }, "genres": { "pop": 0.3 } },
+      { "id": "chills", "fr": "Des frissons, une montée qui emporte", "obs": { "energy": [0.7, 0.3], "complexity": [0.6, 0.3] }, "genres": { "electro": 0.2, "classical": 0.2, "rock": 0.2 } },
+      { "id": "sound", "fr": "Un son, une production unique", "obs": { "complexity": [0.75, 0.4], "niche": [0.7, 0.4], "polish": [0.8, 0.2] }, "genres": { "indie": 0.2, "electro": 0.2 } },
+      { "id": "raw", "fr": "L'énergie brute, sans filtre", "obs": { "energy": [0.9, 0.5], "polish": [0.15, 0.5] }, "genres": { "punk": 0.3, "rock": 0.3, "metal": 0.2 } }
+    ] },
+
+    { "id": "q29", "type": "scenario", "tier": 2, "fr": "Gros coup de blues. Tu mets…", "options": [
+      { "id": "a", "fr": "Des ballades déchirantes", "obs": { "valence": [0.15, 0.5], "acoustic": [0.7, 0.4], "energy": [0.2, 0.4] }, "genres": { "folk": 0.2, "rnb_soul": 0.2, "chanson": 0.2 } },
+      { "id": "b", "fr": "Du rap ou du rock pour évacuer", "obs": { "energy": [0.85, 0.5], "valence": [0.3, 0.4] }, "genres": { "hiphop": 0.3, "rock": 0.3, "punk": 0.2 } },
+      { "id": "c", "fr": "De la pop triste sur laquelle on peut danser", "obs": { "valence": [0.4, 0.4], "dance": [0.7, 0.4], "polish": [0.8, 0.3] }, "genres": { "pop": 0.4, "electro": 0.2 } },
+      { "id": "d", "fr": "De l'ambient ou de l'instrumental", "obs": { "vocal": [0.1, 0.5], "energy": [0.1, 0.5] }, "genres": { "ambient": 0.4, "classical": 0.3 } },
+      { "id": "e", "fr": "Du feel-good pour remonter la pente", "obs": { "valence": [0.9, 0.5], "energy": [0.7, 0.3] }, "genres": { "pop": 0.3, "funk_disco": 0.3, "reggae": 0.2 } }
+    ] },
+
+    { "id": "q30", "type": "languages", "tier": 2, "fr": "Dans quelle(s) langue(s) tu écoutes volontiers ?", "pick": [1, 4], "options": [
+      { "id": "fr", "fr": "Français", "languages": ["fr"], "genres": { "chanson": 0.2 } },
+      { "id": "en", "fr": "Anglais", "languages": ["en"] },
+      { "id": "es_pt", "fr": "Espagnol / Portugais", "languages": ["es", "pt"], "genres": { "latin": 0.3 } },
+      { "id": "ko_ja", "fr": "Coréen / Japonais", "languages": ["ko", "ja"], "genres": { "kpop_jpop": 0.5 } },
+      { "id": "afro", "fr": "Langues africaines / créole", "languages": ["afr", "cr"], "genres": { "afro": 0.4, "reggae": 0.1 } },
+      { "id": "any", "fr": "Peu importe", "languages": [] }
+    ] }
+  ]
+}
