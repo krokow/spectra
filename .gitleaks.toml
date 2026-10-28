@@ -16,3 +16,7 @@ regex = '''eyJ[A-Za-z0-9_\-]+\.eyJ[A-Za-z0-9_\-]*c2VydmljZV9yb2xl[A-Za-z0-9_\-]*
 id = "postgres-connection-string-with-password"
 description = "Chaîne de connexion Postgres avec mot de passe"
 regex = '''postgres(?:ql)?://[^:\s]+:[^@\s]{6,}@[^\s]+'''
+# Seule exception : la base de TEST jetable, en local (identifiants publics par défaut).
+[[rules.allowlists]]
+regexTarget = "match"
+regexes = ['''^postgres(?:ql)?://postgres:postgres@(?:127\.0\.0\.1|localhost):''']
