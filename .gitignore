@@ -11,3 +11,4 @@ supabase/.temp/
 supabase/.branches/
 *.local
 .DS_Store
+public/icons/

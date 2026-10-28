@@ -1,0 +1,9 @@
+dist
+dev-dist
+coverage
+node_modules
+public/icons
+package-lock.json
+supabase/seed/questions.json
+playwright-report
+test-results

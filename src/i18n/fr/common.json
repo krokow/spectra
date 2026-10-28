@@ -1,0 +1,84 @@
+{
+  "common": {
+    "loading": "Ça se prépare…",
+    "retry": "Réessayer",
+    "back": "Retour",
+    "skip": "Passer",
+    "dontKnow": "Je ne sais pas",
+    "continue": "Continuer",
+    "close": "Fermer",
+    "comingSoon": "Bientôt ici"
+  },
+  "nav": {
+    "label": "Navigation principale",
+    "discover": "Découvrir",
+    "spectrum": "Mon spectre",
+    "friends": "Amis",
+    "playlists": "Playlists",
+    "profile": "Profil"
+  },
+  "theme": {
+    "toggle": "Changer de thème",
+    "dark": "Sombre",
+    "light": "Clair"
+  },
+  "pwa": {
+    "updateAvailable": "Nouvelle version disponible",
+    "reload": "Recharger",
+    "offlineReady": "Spectra fonctionne maintenant hors ligne (sauf les extraits).",
+    "install": "Installer Spectra",
+    "installHint": "Ajoute Spectra à ton écran d'accueil, comme une vraie app."
+  },
+  "home": {
+    "title": "Chacun son spectre.",
+    "subtitle": "Une minute et demie de questions ludiques, et on te dessine ton empreinte musicale. Sans importer quoi que ce soit.",
+    "cta": "Dessiner mon spectre",
+    "preview": "Aperçu d'un spectre"
+  },
+  "spectrum": {
+    "confidence": "confiance",
+    "emptyTitle": "Ton spectre n'attend que toi",
+    "emptyText": "Quelques questions, et il se dessine sous tes yeux."
+  },
+  "discover": {
+    "emptyTitle": "Rien à découvrir… pour l'instant",
+    "emptyText": "Dessine d'abord ton spectre : on saura quoi te faire écouter."
+  },
+  "friends": {
+    "emptyTitle": "Pas encore d'amis ici",
+    "emptyText": "La musique, c'est meilleur à plusieurs. Les invitations arrivent très vite."
+  },
+  "playlists": {
+    "emptyTitle": "Aucune playlist commune",
+    "emptyText": "Bientôt : une playlist qui met tout le monde d'accord (ou presque)."
+  },
+  "profile": {
+    "title": "Profil",
+    "language": "Langue"
+  },
+  "daily": {
+    "title": "Question du jour"
+  },
+  "notFound": {
+    "title": "Cette page fait un silence radio",
+    "cta": "Retour à l'accueil"
+  },
+  "error": {
+    "title": "Oups, une fausse note",
+    "text": "Quelque chose s'est mal passé. Recharge la page, ça devrait repartir."
+  },
+  "dimensions": {
+    "energy": { "label": "Énergie", "low": "calme", "high": "explosif" },
+    "valence": { "label": "Humeur", "low": "mélancolique", "high": "lumineux" },
+    "acoustic": { "label": "Texture", "low": "électronique", "high": "acoustique" },
+    "tempo": { "label": "Tempo", "low": "lent", "high": "rapide" },
+    "dance": { "label": "Groove", "low": "planant", "high": "dansant" },
+    "complexity": { "label": "Complexité", "low": "direct", "high": "expérimental" },
+    "vocal": { "label": "Voix", "low": "instrumental", "high": "très vocal" },
+    "bass": { "label": "Basses", "low": "légères", "high": "profondes" },
+    "polish": { "label": "Production", "low": "brute / lo-fi", "high": "ultra polie" },
+    "warmth": { "label": "Chaleur", "low": "froid", "high": "chaleureux" },
+    "era": { "label": "Époque", "low": "rétro", "high": "actuel" },
+    "niche": { "label": "Singularité", "low": "mainstream", "high": "confidentiel" }
+  }
+}

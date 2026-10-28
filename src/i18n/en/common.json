@@ -1,0 +1,84 @@
+{
+  "common": {
+    "loading": "Getting things ready…",
+    "retry": "Try again",
+    "back": "Back",
+    "skip": "Skip",
+    "dontKnow": "I don't know",
+    "continue": "Continue",
+    "close": "Close",
+    "comingSoon": "Coming soon"
+  },
+  "nav": {
+    "label": "Main navigation",
+    "discover": "Discover",
+    "spectrum": "My spectrum",
+    "friends": "Friends",
+    "playlists": "Playlists",
+    "profile": "Profile"
+  },
+  "theme": {
+    "toggle": "Toggle theme",
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "pwa": {
+    "updateAvailable": "New version available",
+    "reload": "Reload",
+    "offlineReady": "Spectra now works offline (except previews).",
+    "install": "Install Spectra",
+    "installHint": "Add Spectra to your home screen, just like a real app."
+  },
+  "home": {
+    "title": "Everyone has a spectrum.",
+    "subtitle": "Ninety seconds of playful questions and we'll draw your musical fingerprint. No imports needed.",
+    "cta": "Draw my spectrum",
+    "preview": "Spectrum preview"
+  },
+  "spectrum": {
+    "confidence": "confidence",
+    "emptyTitle": "Your spectrum is waiting",
+    "emptyText": "A few questions and it draws itself before your eyes."
+  },
+  "discover": {
+    "emptyTitle": "Nothing to discover… yet",
+    "emptyText": "Draw your spectrum first so we know what to play you."
+  },
+  "friends": {
+    "emptyTitle": "No friends here yet",
+    "emptyText": "Music is better together. Invites are coming very soon."
+  },
+  "playlists": {
+    "emptyTitle": "No shared playlist",
+    "emptyText": "Soon: a playlist everyone agrees on (almost)."
+  },
+  "profile": {
+    "title": "Profile",
+    "language": "Language"
+  },
+  "daily": {
+    "title": "Question of the day"
+  },
+  "notFound": {
+    "title": "This page is radio silent",
+    "cta": "Back home"
+  },
+  "error": {
+    "title": "Oops, a wrong note",
+    "text": "Something went wrong. Reload the page and it should be fine."
+  },
+  "dimensions": {
+    "energy": { "label": "Energy", "low": "calm", "high": "explosive" },
+    "valence": { "label": "Mood", "low": "melancholic", "high": "bright" },
+    "acoustic": { "label": "Texture", "low": "electronic", "high": "acoustic" },
+    "tempo": { "label": "Tempo", "low": "slow", "high": "fast" },
+    "dance": { "label": "Groove", "low": "floating", "high": "danceable" },
+    "complexity": { "label": "Complexity", "low": "straightforward", "high": "experimental" },
+    "vocal": { "label": "Vocals", "low": "instrumental", "high": "very vocal" },
+    "bass": { "label": "Bass", "low": "light", "high": "deep" },
+    "polish": { "label": "Production", "low": "raw / lo-fi", "high": "ultra polished" },
+    "warmth": { "label": "Warmth", "low": "cold", "high": "warm" },
+    "era": { "label": "Era", "low": "retro", "high": "current" },
+    "niche": { "label": "Uniqueness", "low": "mainstream", "high": "underground" }
+  }
+}

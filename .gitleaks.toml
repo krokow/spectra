@@ -1,0 +1,18 @@
+# Règles par défaut de gitleaks + règles spécifiques à Supabase.
+[extend]
+useDefault = true
+
+[[rules]]
+id = "supabase-secret-key"
+description = "Clé secrète Supabase (sb_secret_…) : ne doit JAMAIS être commitée"
+regex = '''sb_secret_[A-Za-z0-9_\-]{20,}'''
+
+[[rules]]
+id = "supabase-service-role-jwt"
+description = "JWT avec le rôle service_role"
+regex = '''eyJ[A-Za-z0-9_\-]+\.eyJ[A-Za-z0-9_\-]*c2VydmljZV9yb2xl[A-Za-z0-9_\-]*\.[A-Za-z0-9_\-]+'''
+
+[[rules]]
+id = "postgres-connection-string-with-password"
+description = "Chaîne de connexion Postgres avec mot de passe"
+regex = '''postgres(?:ql)?://[^:\s]+:[^@\s]{6,}@[^\s]+'''

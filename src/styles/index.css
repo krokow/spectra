@@ -1,0 +1,148 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import './tokens.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-danger: var(--danger);
+  --color-success: var(--success);
+  --color-violet: var(--brand-violet);
+  --color-violet-soft: var(--brand-violet-soft);
+  --color-cyan: var(--brand-cyan);
+  --color-pink: var(--brand-pink);
+  --color-night: var(--brand-night);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  --font-display: 'Sora Variable', 'Space Grotesk', system-ui, sans-serif;
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --ease-spring: var(--ease-spring);
+  --ease-out-soft: var(--ease-out);
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-bg font-sans text-fg antialiased;
+    min-height: 100dvh;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: 0.375rem;
+  }
+  ::selection {
+    background: rgb(139 92 246 / 0.35);
+  }
+}
+
+@layer utilities {
+  .text-spectrum {
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .bg-spectrum {
+    background: var(--gradient-spectrum);
+  }
+  .bg-spectrum-soft {
+    background: var(--gradient-spectrum-soft);
+  }
+  .glass {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(var(--blur-glass)) saturate(140%);
+    -webkit-backdrop-filter: blur(var(--blur-glass)) saturate(140%);
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .tap {
+    min-height: var(--tap-min);
+    min-width: var(--tap-min);
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Lueurs de fond floues, signature visuelle. */
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ambient-glow::before,
+.ambient-glow::after {
+  content: '';
+  position: absolute;
+  width: 60vmax;
+  height: 60vmax;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: var(--glow-opacity);
+}
+.ambient-glow::before {
+  top: -25vmax;
+  left: -20vmax;
+  background: radial-gradient(circle, var(--brand-violet), transparent 65%);
+}
+.ambient-glow::after {
+  bottom: -30vmax;
+  right: -25vmax;
+  background: radial-gradient(circle, var(--brand-pink), transparent 60%);
+  opacity: calc(var(--glow-opacity) * 0.7);
+}
+
+/* Logo : barres qui « respirent ». Désactivé si prefers-reduced-motion. */
+@keyframes spectra-breathe {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(var(--breathe-to, 0.55));
+  }
+}
+.logo-bar {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.logo-animated .logo-bar {
+  animation: spectra-breathe var(--breathe-dur, 1.6s) var(--ease-out) infinite;
+  animation-delay: var(--breathe-delay, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-animated .logo-bar {
+    animation: none;
+  }
+}
