@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-28T23:30:19.862Z",
+ "generated_at": "2026-10-28T23:40:10.781Z",
  "count": 340,
  "anchors": [
   {
@@ -354,8 +354,8 @@
     "niche": 0.08
    },
    "match": {
-    "provider": "deezer",
-    "score": 0.8
+    "provider": "itunes",
+    "score": 1
    },
    "lang": "en",
    "cell": "pop|2010s|low",
@@ -374,26 +374,20 @@
     "bass": 0.15,
     "polish": 0.7,
     "warmth": 0.8,
-    "niche": 0.441,
+    "niche": 0.08,
     "era": 0.82
    },
-   "confidence": 0.6,
+   "confidence": 0.55,
    "track": {
     "title": "Someone Like You",
     "artist": {
-     "name": "Sing To Adele",
-     "deezer_id": 12157314,
-     "image_url": "https://cdn-images.dzcdn.net/images/artist/3702e44e6ca58b34ab8559e864f70aa6/250x250-000000-80-0-0.jpg"
+     "name": "Adele"
     },
-    "album": "Rolling In The Deep",
-    "cover_url": "https://cdn-images.dzcdn.net/images/cover/3702e44e6ca58b34ab8559e864f70aa6/1000x1000-000000-80-0-0.jpg",
-    "duration_s": 89,
+    "album": "21",
+    "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/eb/ca/25/ebca2596-cd1e-b295-91a3-771c868d0a79/191404113868.png/600x600bb.jpg",
+    "duration_s": 285,
     "release_year": 2011,
-    "isrc": "UKG8V1600024",
-    "deezer_id": 144602658,
-    "rank": 24848,
-    "gain": -11.2,
-    "explicit": false
+    "itunes_id": 1544491998
    }
   },
   {
@@ -14229,66 +14223,69 @@
   },
   {
    "source": {
-    "artist": "Umm Kulthum",
-    "title": "Enta Omri",
-    "year": 1964,
+    "artist": "Rachid Taha",
+    "title": "Ya Rayah",
+    "year": 1997,
     "lang": "ar",
     "genres": {
-     "folk": 0.6,
-     "classical": 0.4
+     "folk": 0.5,
+     "rock": 0.4,
+     "afro": 0.3
     },
-    "energy": 0.4,
-    "valence": 0.5,
-    "acoustic": 0.8,
-    "tempo": 0.4,
-    "dance": 0.35,
-    "complexity": 0.7,
-    "vocal": 0.95,
-    "bass": 0.2,
-    "polish": 0.3,
-    "warmth": 0.85,
-    "niche": 0.4
+    "energy": 0.75,
+    "valence": 0.75,
+    "acoustic": 0.4,
+    "tempo": 0.6,
+    "dance": 0.75,
+    "complexity": 0.4,
+    "vocal": 0.9,
+    "bass": 0.6,
+    "polish": 0.65,
+    "warmth": 0.75,
+    "niche": 0.3
    },
    "match": {
     "provider": "deezer",
-    "score": 0.8
+    "score": 1
    },
    "lang": "ar",
-   "cell": "folk|1960s|mid",
+   "cell": "folk|1990s|high",
    "genres": {
-    "folk": 0.6,
-    "classical": 0.4
+    "folk": 0.5,
+    "rock": 0.4,
+    "afro": 0.3
    },
    "features": {
-    "energy": 0.4,
-    "valence": 0.5,
-    "acoustic": 0.8,
-    "tempo": 0.4,
-    "dance": 0.35,
-    "complexity": 0.7,
-    "vocal": 0.95,
-    "bass": 0.2,
-    "polish": 0.3,
-    "warmth": 0.85,
-    "niche": 0.318,
-    "era": 0.04
+    "energy": 0.75,
+    "valence": 0.75,
+    "acoustic": 0.4,
+    "tempo": 0.445,
+    "dance": 0.75,
+    "complexity": 0.4,
+    "vocal": 0.9,
+    "bass": 0.6,
+    "polish": 0.65,
+    "warmth": 0.75,
+    "niche": 0.186,
+    "era": 0.555
    },
-   "confidence": 0.6,
+   "confidence": 0.65,
    "track": {
-    "title": "الف ليله وليله",
+    "title": "Ya Rayah",
     "artist": {
-     "name": "Umm Kulthum",
-     "deezer_id": 1236161,
-     "image_url": "https://cdn-images.dzcdn.net/images/artist/e9fee29059b16f7304a4030afbfb4a63/250x250-000000-80-0-0.jpg"
+     "name": "Rachid Taha",
+     "deezer_id": 1012,
+     "image_url": "https://cdn-images.dzcdn.net/images/artist/81cc488d4ecaeb3130f24b87095b1d3d/250x250-000000-80-0-0.jpg"
     },
-    "album": "الف ليلة وليلة",
-    "cover_url": "https://cdn-images.dzcdn.net/images/cover/93b68338fbe951ae2af9d968cbd39ed2/1000x1000-000000-80-0-0.jpg",
-    "duration_s": 2497,
-    "release_year": 1964,
-    "isrc": "TCAJY2515975",
-    "deezer_id": 3623232582,
-    "rank": 337190,
-    "gain": -12.8,
+    "album": "Carte Blanche",
+    "cover_url": "https://cdn-images.dzcdn.net/images/cover/1c045ffc8544d6cef89ea58978cba076/1000x1000-000000-80-0-0.jpg",
+    "duration_s": 373,
+    "release_year": 1997,
+    "isrc": "FRZ019203450",
+    "deezer_id": 2120967,
+    "rank": 716780,
+    "bpm": 101.1,
+    "gain": -12.2,
     "explicit": false
    }
   },
@@ -19871,7 +19868,7 @@
   {
    "source": {
     "artist": "YOASOBI",
-    "title": "Idol",
+    "title": "アイドル",
     "year": 2023,
     "lang": "ja",
     "genres": {
@@ -19891,7 +19888,7 @@
    },
    "match": {
     "provider": "deezer",
-    "score": 0.8
+    "score": 1
    },
    "lang": "ja",
    "cell": "kpop_jpop|2020s|high",
