@@ -202,7 +202,7 @@
     "codes": {
       "welcomeTitle": "Bienvenue ! Une dernière chose",
       "title": "Tes nouveaux codes de secours",
-      "explain": "Sans e-mail, ces codes sont ta seule façon de récupérer ton compte si tu oublies ton mot de passe. Chaque code ne sert qu'une fois. Garde-les en lieu sûr : on ne pourra plus te les remontrer.",
+      "explain": "Spectra ne t'envoie jamais d'e-mail : ces codes sont ta seule façon de récupérer ton compte si tu oublies ton mot de passe. Chaque code ne sert qu'une fois. Garde-les en lieu sûr : on ne pourra plus te les remontrer.",
       "listLabel": "Codes de secours",
       "download": "Télécharger",
       "copy": "Copier",

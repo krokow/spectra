@@ -202,7 +202,7 @@
     "codes": {
       "welcomeTitle": "Welcome! One last thing",
       "title": "Your new recovery codes",
-      "explain": "With no email, these codes are the only way to recover your account if you forget your password. Each code works once. Keep them somewhere safe: we can't show them again.",
+      "explain": "Spectra never sends you emails: these codes are the only way to recover your account if you forget your password. Each code works once. Keep them somewhere safe: we can't show them again.",
       "listLabel": "Recovery codes",
       "download": "Download",
       "copy": "Copy",
