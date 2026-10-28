@@ -274,10 +274,27 @@ export function simplify(s: string): string {
 }
 
 /** Score de ressemblance [0, 1] entre une ligne source et un résultat. */
+// Versions à écarter : karaoké, hommages, reprises « à la manière de », medleys, berceuses…
+const JUNK_ARTIST =
+  /karaoke|tribute|made famous|in the style of|originally performed|hello i'?m|cover band|lullaby|baby/i
+const JUNK_TITLE =
+  /karaoke|tribute|medley|instrumental version|8-?bit|lullaby|cover version|baby'?s brain|mozart effect|remake/i
+
+export function isJunk(
+  cand: { artist: string; title: string },
+  row?: { artist: string; title: string },
+): boolean {
+  // Un mot « suspect » présent dans la source elle-même n'est pas un motif de rejet.
+  const artistJunk = JUNK_ARTIST.test(cand.artist) && !(row && JUNK_ARTIST.test(row.artist))
+  const titleJunk = JUNK_TITLE.test(cand.title) && !(row && JUNK_TITLE.test(row.title))
+  return artistJunk || titleJunk
+}
+
 export function matchScore(
   row: { artist: string; title: string },
   cand: { artist: string; title: string },
 ): number {
+  if (isJunk(cand, row)) return 0
   const ta = simplify(row.title)
   const tb = simplify(cand.title)
   const aa = simplify(row.artist)

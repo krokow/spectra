@@ -8,3 +8,6 @@ supabase/seed/questions.json
 playwright-report
 test-results
 supabase/functions-bundled
+supabase/seed/anchors/anchors.json
+supabase/seed/anchors/anchors.sql
+supabase/seed/anchors/REPORT.md

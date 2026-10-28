@@ -98,6 +98,43 @@ describe('correspondance Deezer', () => {
       ),
     ).toBe(0)
   })
+
+  it('écarte karaoké, hommages, medleys et compilations « pour bébé »', () => {
+    const row = { artist: 'Mumford & Sons', title: 'Little Lion Man' }
+    expect(
+      matchScore(row, { artist: 'Made famous by Mumford & Sons', title: 'Little lion man' }),
+    ).toBe(0)
+    expect(
+      matchScore(
+        { artist: 'Adele', title: 'Someone Like You' },
+        { artist: "Hello I'm Adele", title: 'Someone Like You' },
+      ),
+    ).toBe(0)
+    expect(
+      matchScore(
+        { artist: 'Hozier', title: 'Take Me to Church' },
+        { artist: 'Hozier', title: 'Take Me to Church (Karaoke)' },
+      ),
+    ).toBe(0)
+    expect(
+      matchScore(
+        { artist: 'Gipsy Kings', title: 'Bamboleo' },
+        { artist: 'Gipsy Kings', title: 'Medley: Bamboleo, Volare' },
+      ),
+    ).toBe(0)
+    expect(
+      matchScore(
+        { artist: 'Antonio Vivaldi', title: 'Winter' },
+        { artist: 'Antonio Vivaldi', title: "Winter. Great for Baby's Brain, Mozart Effect" },
+      ),
+    ).toBe(0)
+    expect(
+      matchScore(
+        { artist: 'Adele', title: 'Someone Like You' },
+        { artist: 'Adele', title: 'Someone Like You' },
+      ),
+    ).toBe(1)
+  })
 })
 
 describe('la bibliothèque réelle', () => {

@@ -108,7 +108,7 @@ Orelsan;La terre est ronde;2011;fr;hiphop:0.8|chanson:0.3;0.7;0.6;0.15;0.5;0.75;
 Central Cee;Doja;2022;en;hiphop:1.0;0.6;0.6;0.15;0.75;0.85;0.3;0.95;0.85;0.85;0.4;0.1
 J Dilla;Don't Cry;2006;-;hiphop:0.8|rnb_soul:0.5;0.4;0.45;0.35;0.4;0.6;0.7;0.3;0.6;0.35;0.85;0.6
 Nujabes;Aruarian Dance;2005;-;hiphop:0.7|jazz:0.5|ambient:0.3;0.35;0.55;0.5;0.4;0.6;0.5;0.05;0.5;0.4;0.8;0.6
-MF DOOM;Accordion;2004;en;hiphop:1.0;0.45;0.4;0.4;0.4;0.65;0.7;0.9;0.5;0.3;0.6;0.55
+Madvillain;Accordion;2004;en;hiphop:1.0;0.45;0.4;0.4;0.4;0.65;0.7;0.9;0.5;0.3;0.6;0.55
 potsu;i'm closing my eyes;2017;en;hiphop:0.4|ambient:0.6;0.3;0.6;0.5;0.4;0.55;0.35;0.4;0.5;0.3;0.8;0.6
 Aretha Franklin;Respect;1967;en;rnb_soul:1.0;0.75;0.8;0.5;0.7;0.75;0.3;0.95;0.5;0.45;0.85;0.1
 Otis Redding;(Sittin' On) The Dock of the Bay;1968;en;rnb_soul:1.0;0.35;0.55;0.6;0.4;0.6;0.3;0.9;0.4;0.45;0.9;0.15
@@ -176,7 +176,7 @@ Enya;Orinoco Flow;1988;en;ambient:0.6|pop:0.4|folk:0.3;0.45;0.65;0.4;0.45;0.45;0
 Vangelis;Chariots of Fire;1981;-;ambient:0.4|electro:0.5|classical:0.4;0.4;0.65;0.2;0.35;0.25;0.3;0.0;0.3;0.7;0.6;0.1
 Ólafur Arnalds;Near Light;2013;-;classical:0.6|ambient:0.5;0.35;0.35;0.7;0.45;0.3;0.5;0.0;0.3;0.75;0.7;0.45
 Hans Zimmer;Time;2010;-;classical:0.6|ambient:0.5;0.5;0.3;0.5;0.3;0.15;0.4;0.0;0.4;0.9;0.6;0.08
-Midori Takada;Mr. Henri Rousseau's Dream;1983;-;ambient:0.8|classical:0.3;0.25;0.6;0.85;0.35;0.2;0.6;0.0;0.15;0.5;0.7;0.85
+Brian Eno;1/1;1978;-;ambient:1.0;0.25;0.6;0.85;0.35;0.2;0.6;0.0;0.15;0.5;0.7;0.85
 Miles Davis;So What;1959;-;jazz:1.0;0.35;0.5;0.85;0.5;0.4;0.8;0.0;0.3;0.3;0.85;0.2
 John Coltrane;Giant Steps;1960;-;jazz:1.0;0.65;0.55;0.9;0.85;0.3;0.95;0.0;0.25;0.3;0.8;0.4
 The Dave Brubeck Quartet;Take Five;1959;-;jazz:1.0;0.4;0.6;0.9;0.5;0.45;0.8;0.0;0.3;0.35;0.85;0.15
@@ -193,12 +193,12 @@ Esperanza Spalding;I Know You Know;2008;en;jazz:0.9;0.5;0.7;0.75;0.5;0.6;0.7;0.9
 GoGo Penguin;Hopopono;2014;-;jazz:0.8|electro:0.3;0.55;0.45;0.75;0.6;0.45;0.8;0.0;0.4;0.7;0.6;0.65
 Ahmad Jamal;Poinciana;1958;-;jazz:1.0;0.3;0.65;0.9;0.45;0.5;0.6;0.0;0.3;0.3;0.85;0.4
 Billie Holiday;Strange Fruit;1939;en;jazz:0.7|blues:0.6;0.1;0.05;0.8;0.2;0.1;0.4;0.95;0.1;0.15;0.7;0.3
-Johann Sebastian Bach;Cello Suite No. 1 in G Major, BWV 1007: I. Prélude;1983;-;classical:1.0;0.3;0.55;1.0;0.45;0.2;0.6;0.0;0.15;0.6;0.8;0.15
+Johann Sebastian Bach;Cello Suite No. 1;1983;-;classical:1.0;0.3;0.55;1.0;0.45;0.2;0.6;0.0;0.15;0.6;0.8;0.15
 Claude Debussy;Clair de lune;1990;-;classical:1.0;0.1;0.5;1.0;0.25;0.05;0.4;0.0;0.05;0.65;0.85;0.05
 Erik Satie;Gymnopédie No. 1;1980;-;classical:1.0;0.05;0.4;1.0;0.15;0.05;0.2;0.0;0.05;0.6;0.85;0.05
 Wolfgang Amadeus Mozart;Requiem in D Minor, K. 626: Lacrimosa;1991;la;classical:1.0;0.4;0.15;0.95;0.3;0.1;0.6;0.7;0.2;0.7;0.7;0.1
 Ludwig van Beethoven;Für Elise;1990;-;classical:1.0;0.2;0.5;1.0;0.45;0.15;0.3;0.0;0.05;0.6;0.75;0.03
-Igor Stravinsky;The Rite of Spring: Augurs of Spring;1960;-;classical:1.0;0.85;0.3;0.95;0.6;0.3;0.95;0.0;0.5;0.6;0.4;0.45
+Igor Stravinsky;The Rite of Spring;1960;-;classical:1.0;0.85;0.3;0.95;0.6;0.3;0.95;0.0;0.5;0.6;0.4;0.45
 Arvo Pärt;Spiegel im Spiegel;1999;-;classical:1.0;0.05;0.4;1.0;0.1;0.05;0.35;0.0;0.05;0.7;0.75;0.35
 Philip Glass;Opening;1982;-;classical:1.0;0.25;0.4;1.0;0.5;0.15;0.55;0.0;0.05;0.6;0.65;0.4
 Frédéric Chopin;Nocturne in E-Flat Major, Op. 9 No. 2;1985;-;classical:1.0;0.1;0.55;1.0;0.3;0.1;0.4;0.0;0.05;0.6;0.85;0.05
@@ -206,7 +206,7 @@ Ludovico Einaudi;Nuvole Bianche;2004;-;classical:0.8|ambient:0.3;0.2;0.4;1.0;0.3
 Pyotr Ilyich Tchaikovsky;Dance of the Sugar Plum Fairy;1985;-;classical:1.0;0.25;0.6;0.95;0.4;0.4;0.4;0.0;0.15;0.6;0.7;0.05
 Johann Pachelbel;Canon in D;1983;-;classical:1.0;0.2;0.75;1.0;0.3;0.2;0.3;0.0;0.15;0.65;0.85;0.03
 Giuseppe Verdi;Messa da Requiem: Dies irae;1990;la;classical:1.0;0.95;0.15;0.9;0.6;0.2;0.7;0.85;0.6;0.75;0.4;0.1
-Antonio Vivaldi;The Four Seasons, Winter: I. Allegro non molto;1988;-;classical:1.0;0.8;0.35;0.95;0.75;0.35;0.6;0.0;0.3;0.65;0.55;0.05
+Antonio Vivaldi;Winter;1988;-;classical:1.0;0.8;0.35;0.95;0.75;0.35;0.6;0.0;0.3;0.65;0.55;0.05
 Joe Hisaishi;One Summer's Day;2001;-;classical:0.7|kpop_jpop:0.2|ambient:0.2;0.25;0.6;0.9;0.35;0.2;0.4;0.0;0.15;0.75;0.85;0.15
 Ryuichi Sakamoto;Merry Christmas Mr. Lawrence;1983;-;classical:0.6|kpop_jpop:0.3|ambient:0.3;0.3;0.45;0.6;0.4;0.25;0.5;0.0;0.15;0.65;0.75;0.3
 Bob Dylan;Blowin' in the Wind;1963;en;folk:1.0;0.25;0.6;1.0;0.5;0.3;0.3;0.95;0.05;0.15;0.8;0.1
@@ -226,7 +226,7 @@ Mercedes Sosa;Gracias a la vida;1971;es;folk:0.9|latin:0.5;0.25;0.55;0.95;0.35;0
 Alan Stivell;Tri martolod;1972;br;folk:1.0;0.6;0.7;0.85;0.55;0.6;0.4;0.85;0.25;0.35;0.85;0.5
 Iron & Wine;Naked As We Came;2004;en;folk:1.0;0.1;0.45;1.0;0.45;0.2;0.3;0.9;0.05;0.4;0.8;0.5
 Cesária Évora;Sodade;1992;pt;folk:0.6|latin:0.4|afro:0.3;0.25;0.45;0.9;0.35;0.45;0.35;0.95;0.2;0.45;0.95;0.3
-Oum Kalthoum;Enta Omri;1964;ar;folk:0.6|classical:0.4;0.4;0.5;0.8;0.4;0.35;0.7;0.95;0.2;0.3;0.85;0.4
+Umm Kulthum;Enta Omri;1964;ar;folk:0.6|classical:0.4;0.4;0.5;0.8;0.4;0.35;0.7;0.95;0.2;0.3;0.85;0.4
 Fairuz;Kifak Inta;1991;ar;folk:0.5|chanson:0.3;0.3;0.4;0.7;0.4;0.4;0.45;0.95;0.25;0.5;0.85;0.4
 Johnny Cash;Ring of Fire;1963;en;country:1.0;0.6;0.8;0.6;0.6;0.55;0.2;0.9;0.4;0.35;0.8;0.08
 Johnny Cash;Hurt;2002;en;country:0.6|folk:0.6;0.2;0.1;0.9;0.3;0.2;0.3;0.95;0.15;0.5;0.7;0.05
@@ -269,12 +269,12 @@ Caetano Veloso;Leãozinho;1977;pt;latin:0.7|folk:0.5;0.25;0.75;0.9;0.4;0.45;0.35
 Anitta;Envolver;2021;es;latin:0.9|pop:0.3;0.6;0.6;0.1;0.45;0.85;0.25;0.9;0.85;0.85;0.5;0.1
 Los Ángeles Azules;Cómo Te Voy a Olvidar;1996;es;latin:1.0;0.6;0.6;0.5;0.5;0.85;0.3;0.9;0.5;0.45;0.85;0.3
 KAROL G;PROVENZA;2022;es;latin:0.9|pop:0.3;0.55;0.75;0.2;0.5;0.85;0.3;0.9;0.7;0.85;0.7;0.08
-Gipsy Kings;Bamboléo;1987;es;latin:0.9|folk:0.3;0.8;0.85;0.85;0.65;0.75;0.35;0.9;0.4;0.55;0.85;0.1
+Gipsy Kings;Bamboleo;1987;es;latin:0.9|folk:0.3;0.8;0.85;0.85;0.65;0.75;0.35;0.9;0.4;0.55;0.85;0.1
 Fela Kuti;Water No Get Enemy;1975;pcm;afro:1.0|funk_disco:0.5|jazz:0.3;0.65;0.65;0.4;0.5;0.85;0.7;0.6;0.65;0.4;0.85;0.4
 Miriam Makeba;Pata Pata;1967;xh;afro:1.0|pop:0.3;0.7;0.9;0.6;0.6;0.85;0.3;0.9;0.45;0.4;0.9;0.2
 Youssou N'Dour;7 Seconds;1994;wo;afro:0.5|pop:0.6;0.45;0.45;0.35;0.45;0.6;0.35;0.95;0.5;0.75;0.75;0.08
 Salif Keita;Madan;2002;bm;afro:1.0;0.8;0.75;0.5;0.6;0.85;0.4;0.9;0.6;0.6;0.8;0.4
-Amadou & Mariam;Dimanche à Bamako;2004;fr;afro:0.9|pop:0.4;0.7;0.85;0.5;0.55;0.8;0.3;0.9;0.5;0.55;0.85;0.3
+Amadou & Mariam;Beaux dimanches;2004;fr;afro:0.9|pop:0.4;0.7;0.85;0.5;0.55;0.8;0.3;0.9;0.5;0.55;0.85;0.3
 Ali Farka Touré;Diaraby;1994;son;afro:0.8|blues:0.6;0.35;0.5;0.95;0.4;0.45;0.5;0.8;0.3;0.3;0.85;0.5
 Burna Boy;Last Last;2022;en;afro:1.0|pop:0.3;0.6;0.6;0.15;0.5;0.85;0.3;0.9;0.75;0.85;0.75;0.05
 Wizkid;Essence;2020;en;afro:1.0|rnb_soul:0.4;0.45;0.6;0.2;0.45;0.85;0.3;0.9;0.7;0.85;0.8;0.08
@@ -283,7 +283,7 @@ Tems;Free Mind;2020;en;afro:0.7|rnb_soul:0.6;0.35;0.4;0.25;0.4;0.75;0.35;0.95;0.
 Tinariwen;Cler Achel;2007;tmh;afro:0.8|blues:0.6|rock:0.3;0.55;0.45;0.6;0.5;0.6;0.5;0.8;0.45;0.4;0.75;0.55
 Tyla;Water;2023;en;afro:0.8|pop:0.4|rnb_soul:0.3;0.55;0.75;0.1;0.5;0.9;0.25;0.9;0.7;0.85;0.7;0.08
 Magic System;1er gaou;2000;fr;afro:1.0;0.8;0.9;0.3;0.6;0.9;0.25;0.95;0.6;0.55;0.8;0.3
-Mory Kanté;Yé ké yé ké;1987;man;afro:0.9|pop:0.3;0.85;0.85;0.3;0.65;0.9;0.35;0.9;0.6;0.65;0.75;0.2
+Mory Kanté;Yéké Yéké;1987;man;afro:0.9|pop:0.3;0.85;0.85;0.3;0.65;0.9;0.35;0.9;0.6;0.65;0.75;0.2
 Angélique Kidjo;Agolo;1994;fon;afro:0.9|pop:0.3;0.75;0.8;0.3;0.6;0.85;0.4;0.9;0.6;0.7;0.75;0.35
 Aya Nakamura;Djadja;2018;fr;afro:0.6|rnb_soul:0.5|pop:0.4;0.65;0.7;0.1;0.5;0.85;0.25;0.95;0.75;0.85;0.6;0.15
 Khaled;Didi;1992;ar;afro:0.4|pop:0.6;0.85;0.85;0.3;0.65;0.85;0.35;0.95;0.6;0.65;0.75;0.15
@@ -312,7 +312,7 @@ BIGBANG;FANTASTIC BABY;2012;ko;kpop_jpop:1.0|electro:0.4;0.9;0.75;0.0;0.65;0.85;
 IU;Blueming;2019;ko;kpop_jpop:0.9|pop:0.4;0.7;0.85;0.4;0.65;0.65;0.35;0.95;0.4;0.85;0.7;0.25
 Stray Kids;God's Menu;2020;ko;kpop_jpop:1.0|hiphop:0.4;0.95;0.5;0.05;0.6;0.8;0.6;0.9;0.9;0.9;0.2;0.2
 TWICE;TT;2016;ko;kpop_jpop:1.0;0.8;0.85;0.05;0.65;0.8;0.35;0.95;0.6;0.95;0.5;0.15
-Utada Hikaru;First Love;1999;ja;kpop_jpop:0.9|rnb_soul:0.3;0.3;0.3;0.5;0.35;0.4;0.3;0.95;0.3;0.75;0.8;0.2
+Hikaru Utada;First Love;1999;ja;kpop_jpop:0.9|rnb_soul:0.3;0.3;0.3;0.5;0.35;0.4;0.3;0.95;0.3;0.75;0.8;0.2
 YOASOBI;Idol;2023;ja;kpop_jpop:1.0;0.9;0.7;0.1;0.95;0.65;0.75;0.95;0.6;0.95;0.4;0.08
 Mariya Takeuchi;Plastic Love;1984;ja;kpop_jpop:0.8|funk_disco:0.5;0.6;0.6;0.3;0.55;0.8;0.45;0.9;0.6;0.8;0.85;0.3
 Yellow Magic Orchestra;Rydeen;1980;-;kpop_jpop:0.5|electro:0.8;0.75;0.75;0.0;0.75;0.7;0.55;0.0;0.55;0.6;0.4;0.45
@@ -342,7 +342,7 @@ The Prodigy;Smack My Bitch Up;1997;en;electro:0.9|punk:0.3;0.95;0.35;0.0;0.7;0.7
 Underworld;Born Slippy (Nuxx);1995;en;electro:1.0;0.9;0.5;0.0;0.75;0.8;0.5;0.35;0.85;0.8;0.2;0.3
 Mazzy Star;Fade Into You;1993;en;indie:0.7|folk:0.4;0.2;0.2;0.6;0.15;0.25;0.2;0.9;0.2;0.4;0.6;0.3
 Low;Words;1994;en;indie:0.8|ambient:0.3;0.15;0.1;0.5;0.05;0.1;0.25;0.8;0.2;0.3;0.4;0.75
-Henryk Górecki;Symphony No. 3, Op. 36: II. Lento e largo;1992;pl;classical:1.0;0.15;0.05;0.95;0.05;0.0;0.3;0.8;0.2;0.7;0.5;0.4
+Henryk Górecki;Symphony No. 3;1992;pl;classical:1.0;0.15;0.05;0.95;0.05;0.0;0.3;0.8;0.2;0.7;0.5;0.4
 Samuel Barber;Adagio for Strings;1990;-;classical:1.0;0.2;0.05;1.0;0.05;0.0;0.4;0.0;0.2;0.8;0.6;0.08
 The Shaggs;My Pal Foot Foot;1969;en;rock:0.6|folk:0.3;0.5;0.6;0.6;0.5;0.3;0.3;0.85;0.2;0.0;0.4;0.9
 Las Ketchup;The Ketchup Song (Aserejé);2002;es;pop:0.7|latin:0.5;0.75;0.85;0.4;0.6;0.85;0.1;0.9;0.5;0.7;0.6;0.15
