@@ -31,10 +31,12 @@ Dans Supabase, **Project Settings** :
 
 Où les mettre sur GitHub : `https://github.com/krokow/spectra/settings/variables/actions` (variables) et `https://github.com/krokow/spectra/settings/secrets/actions` (secrets). Voir aussi `SETUP_GITHUB.md`.
 
-## 3. Authentification : e-mail + mot de passe, aucun e-mail envoyé
+## 3. Authentification : e-mail + mot de passe + pseudo
 
-Choix validé : inscription avec **e-mail + mot de passe + pseudo**, pas de fournisseur externe
-(GitHub, Discord, Google) et **aucun e-mail envoyé** par Supabase.
+Choix validé : inscription avec **e-mail + mot de passe + pseudo unique**, connexion avec **e-mail ou
+pseudo + mot de passe**. Pas de fournisseur externe (GitHub, Discord, Google).
+Les e-mails (confirmation d'adresse, mot de passe oublié) passent par un **compte Gmail dédié** utilisé
+comme serveur SMTP : gratuit, sans carte, sans nom de domaine.
 
 ### 3.1 URL de l'app
 
@@ -45,35 +47,52 @@ Choix validé : inscription avec **e-mail + mot de passe + pseudo**, pas de four
   - `https://krokow.github.io/spectra/**`
   - `http://localhost:5173/**`
 
-> Sans e-mail ni OAuth, ces URL ne servent presque jamais (aucun lien de redirection n'est envoyé).
-> Elles limitent seulement les adresses vers lesquelles Supabase accepterait de rediriger, si un jour
-> on ajoute un fournisseur. La seconde sert au développement local.
+Les liens des e-mails (confirmation, réinitialisation) ramènent vers ces adresses.
 
-### 3.2 Provider Email, sans confirmation
+### 3.2 Créer l'expéditeur Gmail (une seule fois)
+
+> Le SMTP intégré de Supabase n'envoie qu'aux membres de ton équipe Supabase et quelques e-mails par heure :
+> inutilisable pour de vrais utilisateurs. D'où un SMTP externe.
+
+1. Crée un compte Gmail **dédié** (ex. `spectra.app.<quelque-chose>@gmail.com`), pas ton adresse perso.
+2. Sur ce compte : `https://myaccount.google.com/security` → active la **Validation en deux étapes**
+   (obligatoire pour l'étape suivante).
+3. `https://myaccount.google.com/apppasswords` → nom `supabase-spectra` → **Créer**. Google affiche un
+   **mot de passe d'application** de 16 lettres. Copie-le dans ton gestionnaire de mots de passe.
+   Ne le colle nulle part ailleurs que dans Supabase (étape 3.3).
+
+Limite Gmail : environ 500 e-mails par jour, largement suffisant au départ. Les e-mails partent
+réellement de Gmail, donc ils sont authentifiés (SPF/DKIM) et arrivent rarement en spam.
+
+### 3.3 Brancher le SMTP dans Supabase
+
+**Authentication → Emails → SMTP Settings → Enable Custom SMTP** :
+
+| Champ                           | Valeur                                                   |
+| ------------------------------- | -------------------------------------------------------- |
+| Sender email                    | l'adresse Gmail dédiée                                   |
+| Sender name                     | `Spectra`                                                |
+| Host                            | `smtp.gmail.com`                                         |
+| Port                            | `465`                                                    |
+| Username                        | l'adresse Gmail dédiée                                   |
+| Password                        | le mot de passe d'application (16 lettres, sans espaces) |
+| Minimum interval between emails | `60` secondes                                            |
+
+Puis **Authentication → Rate Limits** : « Rate limit for sending emails » à `30` par heure (ajustable).
+
+### 3.4 Provider Email
 
 **Authentication → Sign In / Providers** :
 
 - **Allow new users to sign up** : activé.
 - **Allow anonymous sign-ins** : désactivé.
 - **Email** : activé, avec :
-  - **Confirm email** : ❌ **désactivé** (sinon Supabase enverrait un e-mail de confirmation) ;
-  - **Secure email change** : ❌ désactivé (l'app ne proposera pas de changer d'e-mail au départ) ;
-  - **Minimum password length** : `10` ; **Password requirements** : lettres minuscules, majuscules et chiffres.
+  - **Confirm email** : ✅ activé (on vérifie que l'adresse appartient bien à la personne) ;
+  - **Secure email change** : ✅ activé ;
+  - **Minimum password length** : `10` ; **Password requirements** : minuscules, majuscules et chiffres.
 - Tous les autres providers (GitHub, Google, Discord…) : désactivés.
 
-**Authentication → Rate Limits** : garde les valeurs par défaut (elles limitent les inscriptions et
-connexions par IP).
-
-### 3.3 Conséquences à connaître
-
-- **Mot de passe oublié** : impossible par e-mail. Spectra génère à l'inscription des **codes de
-  secours** (à conserver par l'utilisateur, stockés hachés en base) qui permettent de choisir un
-  nouveau mot de passe via une Edge Function.
-- **Adresse non vérifiée** : n'importe qui peut s'inscrire avec une adresse qui n'est pas la sienne.
-  L'e-mail sert seulement d'identifiant de connexion ; il n'est jamais affiché aux autres. Le **pseudo**
-  (unique) est l'identité publique.
-- **Robots** : les limites de Supabase suffisent au départ. Si des inscriptions automatisées apparaissent,
-  on ajoutera Cloudflare Turnstile (gratuit, sans carte).
+Les textes des e-mails (Authentication → Emails → Templates) seront fournis en français à l'étape 3.
 
 ## 4. Extensions (étape 3 et suivantes)
 
