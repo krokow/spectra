@@ -99,6 +99,27 @@ describe('correspondance Deezer', () => {
     ).toBe(0)
   })
 
+  it('ne confond pas deux titres dans une autre écriture', () => {
+    expect(
+      matchScore(
+        { artist: 'YOASOBI', title: 'アイドル' },
+        { artist: 'YOASOBI', title: 'アイドル' },
+      ),
+    ).toBe(1)
+    expect(
+      matchScore(
+        { artist: 'Umm Kulthum', title: 'Enta Omri' },
+        { artist: 'Umm Kulthum', title: 'الف ليله وليله' },
+      ),
+    ).toBe(0)
+    expect(
+      matchScore(
+        { artist: 'Adele', title: 'Someone Like You' },
+        { artist: 'Sing To Adele', title: 'Someone Like You' },
+      ),
+    ).toBe(0)
+  })
+
   it('écarte karaoké, hommages, medleys et compilations « pour bébé »', () => {
     const row = { artist: 'Mumford & Sons', title: 'Little Lion Man' }
     expect(

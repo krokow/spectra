@@ -262,21 +262,24 @@ export function coverage(rows: AnchorRow[]): Coverage {
 // Correspondance avec les résultats Deezer
 // ---------------------------------------------------------------------------
 export function simplify(s: string): string {
-  return s
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
-    .replace(/\(.*?\)|\[.*?\]/g, ' ')
-    .replace(/\b(feat|ft|featuring)\b.*$/, ' ')
-    .replace(/&/g, ' and ')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim()
+  return (
+    s
+      .normalize('NFD')
+      .replace(/[̀-ͯ]/g, '')
+      .toLowerCase()
+      .replace(/\(.*?\)|\[.*?\]/g, ' ')
+      .replace(/\b(feat|ft|featuring)\b.*$/, ' ')
+      .replace(/&/g, ' and ')
+      // Toutes les écritures sont conservées (arabe, japonais…), seule la ponctuation saute.
+      .replace(/[^\p{L}\p{N}]+/gu, ' ')
+      .trim()
+  )
 }
 
 /** Score de ressemblance [0, 1] entre une ligne source et un résultat. */
 // Versions à écarter : karaoké, hommages, reprises « à la manière de », medleys, berceuses…
 const JUNK_ARTIST =
-  /karaoke|tribute|made famous|in the style of|originally performed|hello i'?m|cover band|lullaby|baby/i
+  /karaoke|tribute|made famous|in the style of|originally performed|hello i'?m|sing to|cover band|lullaby|baby/i
 const JUNK_TITLE =
   /karaoke|tribute|medley|instrumental version|8-?bit|lullaby|cover version|baby'?s brain|mozart effect|remake/i
 
@@ -295,6 +298,8 @@ export function matchScore(
   cand: { artist: string; title: string },
 ): number {
   if (isJunk(cand, row)) return 0
+  // Un titre vide après simplification ne doit correspondre à rien.
+  if (!simplify(row.title) || !simplify(cand.title) || !simplify(cand.artist)) return 0
   const ta = simplify(row.title)
   const tb = simplify(cand.title)
   const aa = simplify(row.artist)
