@@ -1,7 +1,7 @@
-import { Download, KeyRound, Loader2, LogOut, Trash2 } from 'lucide-react'
+import { Download, KeyRound, Loader2, LogOut, ShieldCheck, Trash2 } from 'lucide-react'
 import { useState, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { Avatar } from '@/components/profile/Avatar'
 import { Button } from '@/components/ui/button'
 import { Card, CardDescription, CardTitle } from '@/components/ui/card'
@@ -16,6 +16,7 @@ import {
   deleteMyAccount,
   exportMyData,
   useMyProfile,
+  useIsAdmin,
   useMySettings,
   useRecoveryRemaining,
   useUpdateProfile,
@@ -137,6 +138,7 @@ export default function ProfilePage() {
   const profile = useMyProfile()
   const settings = useMySettings()
   const remaining = useRecoveryRemaining()
+  const isAdmin = useIsAdmin().data === true
   const updateProfile = useUpdateProfile()
   const updateSettings = useUpdateSettings()
 
@@ -207,120 +209,138 @@ export default function ProfilePage() {
         <div className="min-w-0">
           <h1 className="truncate text-2xl font-bold">{p.display_name || p.username}</h1>
           <p className="text-fg-muted">@{p.username}</p>
+          {isAdmin && (
+            <Link
+              to="/admin"
+              className="bg-spectrum-soft mt-2 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold text-night"
+            >
+              <ShieldCheck className="size-4" aria-hidden />
+              {t('profile.adminBadge')}
+            </Link>
+          )}
         </div>
       </header>
 
-      <Card className="flex flex-col gap-4">
-        <CardTitle>{t('profile.identity')}</CardTitle>
-        <DisplayNameForm
-          key={p.display_name ?? ''}
-          initial={p.display_name ?? ''}
-          placeholder={p.username}
-          pending={updateProfile.isPending}
-          onSave={(v) => updateProfile.mutate({ display_name: v === '' ? null : v.slice(0, 40) })}
-        />
-        <Button
-          variant="outline"
-          size="sm"
-          className="self-start"
-          onClick={() =>
-            updateProfile.mutate({
-              avatar_seed: crypto
-                .getRandomValues(new Uint8Array(6))
-                .reduce((a, b) => a + b.toString(16).padStart(2, '0'), ''),
-            })
-          }
-        >
-          {t('profile.shuffleAvatar')}
-        </Button>
-      </Card>
+      <div className="grid gap-6 lg:grid-cols-2 lg:items-start">
+        <div className="flex flex-col gap-6">
+          <Card className="flex flex-col gap-4">
+            <CardTitle>{t('profile.identity')}</CardTitle>
+            <DisplayNameForm
+              key={p.display_name ?? ''}
+              initial={p.display_name ?? ''}
+              placeholder={p.username}
+              pending={updateProfile.isPending}
+              onSave={(v) =>
+                updateProfile.mutate({ display_name: v === '' ? null : v.slice(0, 40) })
+              }
+            />
+            <Button
+              variant="outline"
+              size="sm"
+              className="self-start"
+              onClick={() =>
+                updateProfile.mutate({
+                  avatar_seed: crypto
+                    .getRandomValues(new Uint8Array(6))
+                    .reduce((a, b) => a + b.toString(16).padStart(2, '0'), ''),
+                })
+              }
+            >
+              {t('profile.shuffleAvatar')}
+            </Button>
+          </Card>
 
-      <Card className="flex flex-col gap-5">
-        <div>
-          <CardTitle>{t('profile.privacy.title')}</CardTitle>
-          <CardDescription>{t('profile.privacy.explain')}</CardDescription>
-        </div>
-        {(['profile_visibility', 'stats_visibility', 'activity_visibility'] as const).map((key) => (
-          <Segmented
-            key={key}
-            label={t(`profile.privacy.${key}`)}
-            value={s[key]}
-            options={LEVELS}
-            onChange={(v) => patch({ [key]: v })}
-            render={(v) => t(`profile.privacy.level.${v}`)}
-          />
-        ))}
-        <Toggle
-          label={t('profile.privacy.searchable')}
-          description={t('profile.privacy.searchableHint')}
-          checked={s.searchable}
-          onChange={(v) => patch({ searchable: v })}
-        />
-        <Toggle
-          label={t('profile.privacy.twins')}
-          description={t('profile.privacy.twinsHint')}
-          checked={s.twins_opt_in}
-          onChange={(v) => patch({ twins_opt_in: v })}
-        />
-      </Card>
-
-      <Card className="flex flex-col gap-4">
-        <CardTitle>{t('profile.language')}</CardTitle>
-        <Segmented
-          label={t('profile.language')}
-          value={
-            (LANGUAGES as readonly string[]).includes(i18n.language)
-              ? (i18n.language as Language)
-              : 'fr'
-          }
-          options={LANGUAGES}
-          onChange={onLanguage}
-          render={(v) => (v === 'fr' ? 'Français' : 'English')}
-        />
-      </Card>
-
-      <Card className="flex flex-col gap-4">
-        <div>
-          <CardTitle>{t('profile.security.title')}</CardTitle>
-          <CardDescription>
-            {t('profile.security.remaining', { count: remaining.data ?? 0 })}
-          </CardDescription>
-        </div>
-        <Button variant="glass" className="self-start" onClick={() => setRegenOpen(true)}>
-          <KeyRound aria-hidden />
-          {t('profile.security.regenerate')}
-        </Button>
-      </Card>
-
-      <Card className="flex flex-col gap-3">
-        <CardTitle>{t('profile.data.title')}</CardTitle>
-        <CardDescription>{t('profile.data.explain')}</CardDescription>
-        <div className="flex flex-wrap gap-2">
-          <Button variant="glass" onClick={() => void onExport()} disabled={busy === 'export'}>
-            {busy === 'export' ? (
-              <Loader2 className="animate-spin" aria-hidden />
-            ) : (
-              <Download aria-hidden />
+          <Card className="flex flex-col gap-5">
+            <div>
+              <CardTitle>{t('profile.privacy.title')}</CardTitle>
+              <CardDescription>{t('profile.privacy.explain')}</CardDescription>
+            </div>
+            {(['profile_visibility', 'stats_visibility', 'activity_visibility'] as const).map(
+              (key) => (
+                <Segmented
+                  key={key}
+                  label={t(`profile.privacy.${key}`)}
+                  value={s[key]}
+                  options={LEVELS}
+                  onChange={(v) => patch({ [key]: v })}
+                  render={(v) => t(`profile.privacy.level.${v}`)}
+                />
+              ),
             )}
-            {t('profile.data.export')}
-          </Button>
-          <Button
-            variant="outline"
-            onClick={() => void signOut().then(() => navigate('/welcome', { replace: true }))}
-          >
-            <LogOut aria-hidden />
-            {t('profile.logout')}
-          </Button>
+            <Toggle
+              label={t('profile.privacy.searchable')}
+              description={t('profile.privacy.searchableHint')}
+              checked={s.searchable}
+              onChange={(v) => patch({ searchable: v })}
+            />
+            <Toggle
+              label={t('profile.privacy.twins')}
+              description={t('profile.privacy.twinsHint')}
+              checked={s.twins_opt_in}
+              onChange={(v) => patch({ twins_opt_in: v })}
+            />
+          </Card>
         </div>
-        <Button
-          variant="ghost"
-          className="self-start text-danger"
-          onClick={() => setDeleteOpen(true)}
-        >
-          <Trash2 aria-hidden />
-          {t('profile.data.delete')}
-        </Button>
-      </Card>
+        <div className="flex flex-col gap-6">
+          <Card className="flex flex-col gap-4">
+            <CardTitle>{t('profile.language')}</CardTitle>
+            <Segmented
+              label={t('profile.language')}
+              value={
+                (LANGUAGES as readonly string[]).includes(i18n.language)
+                  ? (i18n.language as Language)
+                  : 'fr'
+              }
+              options={LANGUAGES}
+              onChange={onLanguage}
+              render={(v) => (v === 'fr' ? 'Français' : 'English')}
+            />
+          </Card>
+
+          <Card className="flex flex-col gap-4">
+            <div>
+              <CardTitle>{t('profile.security.title')}</CardTitle>
+              <CardDescription>
+                {t('profile.security.remaining', { count: remaining.data ?? 0 })}
+              </CardDescription>
+            </div>
+            <Button variant="glass" className="self-start" onClick={() => setRegenOpen(true)}>
+              <KeyRound aria-hidden />
+              {t('profile.security.regenerate')}
+            </Button>
+          </Card>
+
+          <Card className="flex flex-col gap-3">
+            <CardTitle>{t('profile.data.title')}</CardTitle>
+            <CardDescription>{t('profile.data.explain')}</CardDescription>
+            <div className="flex flex-wrap gap-2">
+              <Button variant="glass" onClick={() => void onExport()} disabled={busy === 'export'}>
+                {busy === 'export' ? (
+                  <Loader2 className="animate-spin" aria-hidden />
+                ) : (
+                  <Download aria-hidden />
+                )}
+                {t('profile.data.export')}
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => void signOut().then(() => navigate('/welcome', { replace: true }))}
+              >
+                <LogOut aria-hidden />
+                {t('profile.logout')}
+              </Button>
+            </div>
+            <Button
+              variant="ghost"
+              className="self-start text-danger"
+              onClick={() => setDeleteOpen(true)}
+            >
+              <Trash2 aria-hidden />
+              {t('profile.data.delete')}
+            </Button>
+          </Card>
+        </div>
+      </div>
 
       <Dialog
         open={regenOpen}

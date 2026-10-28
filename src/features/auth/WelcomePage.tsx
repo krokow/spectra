@@ -16,27 +16,27 @@ export default function WelcomePage() {
   const [tab, setTab] = useState<Tab>('signup')
 
   return (
-    <div className="mx-auto flex min-h-dvh max-w-md flex-col gap-8 px-4 py-10">
+    <div className="mx-auto flex min-h-dvh max-w-md flex-col gap-8 px-4 py-10 lg:grid lg:max-w-6xl lg:grid-cols-2 lg:items-center lg:gap-16 lg:px-10">
       <div className="ambient-glow" aria-hidden />
       <motion.header
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col items-center gap-4 text-center"
+        className="flex flex-col items-center gap-4 text-center lg:items-start lg:text-left"
       >
         <LogoMark size={88} animated />
-        <h1 className="text-4xl font-bold">
+        <h1 className="text-4xl font-bold lg:text-6xl lg:leading-[1.05]">
           <span className="text-spectrum">{t('home.title')}</span>
         </h1>
-        <p className="text-fg-muted">{t('home.subtitle')}</p>
+        <p className="text-fg-muted lg:text-lg">{t('home.subtitle')}</p>
         <Spectrum
           values={demoSpectrum}
           height={70}
           label={t('home.preview')}
-          className="max-w-60 opacity-80"
+          className="max-w-60 opacity-80 lg:max-w-md"
         />
       </motion.header>
 
-      <Card className="p-6">
+      <Card className="p-6 lg:p-8">
         <div
           role="tablist"
           aria-label={t('auth.chooseAction')}

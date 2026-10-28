@@ -17,7 +17,9 @@
     "spectrum": "My spectrum",
     "friends": "Friends",
     "playlists": "Playlists",
-    "profile": "Profile"
+    "profile": "Profile",
+    "home": "Spectra, home",
+    "admin": "Admin"
   },
   "theme": {
     "toggle": "Toggle theme",
@@ -95,7 +97,8 @@
       "deleteWarn": "Your profile, spectrum, friends and whole history will be erased. This cannot be undone.",
       "deleteConfirmLabel": "Type your username ({{username}}) to confirm",
       "deleteConfirm": "Delete forever"
-    }
+    },
+    "adminBadge": "Administrator"
   },
   "daily": {
     "title": "Question of the day"
@@ -239,6 +242,13 @@
       "origin_not_allowed": "This address isn't allowed to contact the server.",
       "server_error": "The server had a problem. Try again shortly.",
       "unknown": "Something went wrong. Please try again."
+    }
+  },
+  "admin": {
+    "title": "Administration",
+    "questions": {
+      "title": "Question bank",
+      "soon": "The question editor (add, edit, validate) arrives in step 5, along with the profiling engine."
     }
   }
 }

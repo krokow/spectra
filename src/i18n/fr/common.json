@@ -17,7 +17,9 @@
     "spectrum": "Mon spectre",
     "friends": "Amis",
     "playlists": "Playlists",
-    "profile": "Profil"
+    "profile": "Profil",
+    "home": "Spectra, accueil",
+    "admin": "Admin"
   },
   "theme": {
     "toggle": "Changer de thème",
@@ -95,7 +97,8 @@
       "deleteWarn": "Ton profil, ton spectre, tes amis et tout ton historique seront effacés. C'est irréversible.",
       "deleteConfirmLabel": "Tape ton pseudo ({{username}}) pour confirmer",
       "deleteConfirm": "Supprimer pour toujours"
-    }
+    },
+    "adminBadge": "Administrateur"
   },
   "daily": {
     "title": "Question du jour"
@@ -239,6 +242,13 @@
       "origin_not_allowed": "Cette adresse n'est pas autorisée à contacter le serveur.",
       "server_error": "Le serveur a eu un souci. Réessaie dans un instant.",
       "unknown": "Quelque chose s'est mal passé. Réessaie."
+    }
+  },
+  "admin": {
+    "title": "Administration",
+    "questions": {
+      "title": "Banque de questions",
+      "soon": "L'éditeur de questions (ajout, modification, validation) arrive à l'étape 5, avec le moteur de profilage."
     }
   }
 }

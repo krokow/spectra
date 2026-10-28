@@ -13,14 +13,14 @@ export default function HomePage() {
   const { canInstall, install } = useInstallPrompt()
 
   return (
-    <div className="flex flex-col gap-8 pt-6">
+    <div className="flex flex-col gap-8 pt-6 lg:grid lg:grid-cols-2 lg:items-center lg:gap-12 lg:pt-16">
       <motion.section
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ type: 'spring', stiffness: 120, damping: 20 }}
         className="flex flex-col gap-4"
       >
-        <h1 className="text-4xl leading-[1.05] font-bold sm:text-5xl">
+        <h1 className="text-4xl leading-[1.05] font-bold sm:text-5xl xl:text-6xl">
           <span className="text-spectrum">{t('home.title')}</span>
         </h1>
         <p className="text-lg text-fg-muted">{t('home.subtitle')}</p>
@@ -32,12 +32,12 @@ export default function HomePage() {
         </Button>
       </motion.section>
 
-      <Card className="p-6">
+      <Card className="p-6 lg:p-10">
         <Spectrum values={demoSpectrum} height={180} label={t('home.preview')} />
       </Card>
 
       {canInstall && (
-        <Card className="flex items-center gap-4">
+        <Card className="flex items-center gap-4 lg:col-span-2">
           <div className="flex-1">
             <p className="font-semibold">{t('pwa.install')}</p>
             <p className="text-sm text-fg-muted">{t('pwa.installHint')}</p>

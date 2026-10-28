@@ -15,6 +15,7 @@ const FriendsPage = lazy(() => import('@/features/friends/FriendsPage'))
 const PlaylistsPage = lazy(() => import('@/features/playlists/PlaylistsPage'))
 const ProfilePage = lazy(() => import('@/features/profile/ProfilePage'))
 const DailyPage = lazy(() => import('@/features/daily/DailyPage'))
+const AdminPage = lazy(() => import('@/features/admin/AdminPage'))
 const NotFoundPage = lazy(() => import('@/features/home/NotFoundPage'))
 
 // HashRouter : GitHub Pages ne réécrit pas les URL ; les liens profonds marchent dès le 1er chargement.
@@ -64,6 +65,7 @@ export const router = createHashRouter([
       { path: 'playlists', element: <PlaylistsPage /> },
       { path: 'profile', element: <ProfilePage /> },
       { path: 'daily', element: <DailyPage /> },
+      { path: 'admin', element: <AdminPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   },

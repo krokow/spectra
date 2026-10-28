@@ -23,6 +23,14 @@ export default defineConfig({
         ...(executablePath ? { launchOptions: { executablePath } } : {}),
       },
     },
+    {
+      name: 'ordinateur',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1440, height: 900 },
+        ...(executablePath ? { launchOptions: { executablePath } } : {}),
+      },
+    },
   ],
   webServer: {
     command: 'npx vite preview --port 4173 --strictPort',

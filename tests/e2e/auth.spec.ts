@@ -47,8 +47,11 @@ test('inscription : pseudo vérifié, règles du mot de passe, codes de secours,
 
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Chacun son spectre')
   await expect(page.getByRole('navigation', { name: 'Navigation principale' })).toBeVisible()
-  await page.getByRole('link', { name: 'Profil' }).first().click()
-  await expect(page.getByText('@theo_95')).toBeVisible()
+  await page
+    .getByRole('navigation', { name: 'Navigation principale' })
+    .getByRole('link', { name: 'Profil' })
+    .click()
+  await expect(page.getByRole('main').getByText('@theo_95')).toBeVisible()
 })
 
 test('connexion par pseudo, et message clair si le mot de passe est faux', async ({ page }) => {

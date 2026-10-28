@@ -111,6 +111,21 @@ export function useUpdateSettings() {
   })
 }
 
+/** Affichage seulement : chaque action d'administration est vérifiée côté serveur (RLS). */
+export function useIsAdmin() {
+  const uid = useAuth().session?.user.id
+  return useQuery({
+    queryKey: ['profile', 'is-admin', uid],
+    enabled: !!uid,
+    staleTime: 5 * 60_000,
+    queryFn: async () => {
+      const { data, error } = await requireSupabase().rpc('is_admin')
+      if (error) throw error
+      return z.boolean().parse(data)
+    },
+  })
+}
+
 export function useRecoveryRemaining() {
   const uid = useAuth().session?.user.id
   return useQuery({
