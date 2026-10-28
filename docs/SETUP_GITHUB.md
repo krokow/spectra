@@ -20,19 +20,16 @@
 | ------------------------ | ------------------------------------------------------------------------------------------------------ | ---------------------------------------- |
 | `VITE_SUPABASE_URL`      | Supabase → Project Settings → API → Project URL                                                        | publique                                 |
 | `VITE_SUPABASE_ANON_KEY` | Supabase → Project Settings → API Keys → clé **publishable** (`sb_publishable_…`) ou clé `anon` legacy | publique (la sécurité repose sur la RLS) |
-| `SUPABASE_PROJECT_REF`   | l'identifiant dans l'URL du projet (`https://<ref>.supabase.co`)                                       | publique                                 |
 
-## 3. Secrets du dépôt (étapes 3, 4 et 9)
+## 3. Secrets du dépôt (plus tard : étapes 4 et 9, rien à faire avant)
 
 `Settings → Secrets and variables → Actions → onglet Secrets → New repository secret` :
 
-| Nom                     | Sert à                                                                         | Étape |
-| ----------------------- | ------------------------------------------------------------------------------ | ----- |
-| `SUPABASE_ACCESS_TOKEN` | déployer migrations et Edge Functions (supabase.com → Account → Access Tokens) | 3     |
-| `SUPABASE_DB_PASSWORD`  | `supabase db push` (mot de passe choisi à la création du projet)               | 3     |
-| `SUPABASE_SECRET_KEY`   | analyseur audio nocturne (écriture des features) : clé **secret** Supabase     | 4     |
-| `SUPABASE_DB_URL`       | sauvegarde hebdomadaire                                                        | 9     |
-| `BACKUP_AGE_RECIPIENT`  | clé **publique** age pour chiffrer les sauvegardes                             | 9     |
+| Nom                    | Sert à                                                                     | Étape |
+| ---------------------- | -------------------------------------------------------------------------- | ----- |
+| `SUPABASE_SECRET_KEY`  | analyseur audio nocturne (écriture des features) : clé **secret** Supabase | 4     |
+| `SUPABASE_DB_URL`      | sauvegarde hebdomadaire                                                    | 9     |
+| `BACKUP_AGE_RECIPIENT` | clé **publique** age pour chiffrer les sauvegardes                         | 9     |
 
 > Les secrets ne sont jamais visibles dans les logs ni accessibles aux PR de forks.
 

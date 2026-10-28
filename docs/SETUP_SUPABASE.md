@@ -1,115 +1,101 @@
 # Configuration Supabase (pas à pas)
 
 > Règle d'or : **ne colle jamais un mot de passe, un token ou une clé secrète dans le chat, un fichier du dépôt ou une issue.**
-> Les valeurs publiques (URL, clé publishable) vont dans les _variables_ GitHub ; les valeurs secrètes dans les _secrets_ GitHub.
+
+Méthode retenue (même logique que Synapse, en plus traçable) : **aucun token ni mot de passe de base dans GitHub**.
+Le schéma s'applique en collant des fichiers SQL dans le SQL Editor, les Edge Functions se déploient depuis le
+tableau de bord, et l'authentification se fait par e-mail + mot de passe, sans envoi d'e-mail.
 
 ## 1. Créer le projet
 
-| Champ                           | Valeur                                                     | Pourquoi                                                                                                                                                                                       |
-| ------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Organization                    | ton organisation **Free**                                  | 0 €                                                                                                                                                                                            |
-| GitHub (optional)               | **ne pas connecter**                                       | Nos migrations et fonctions sont déployées par notre workflow `supabase-deploy.yml`, testées en CI avant. L'intégration Supabase déploierait en parallèle, sans nos tests ni notre ordre.      |
-| Project name                    | `spectra`                                                  |                                                                                                                                                                                                |
-| Database password               | **Generate a password**                                    | Copie-le immédiatement dans un gestionnaire de mots de passe (Bitwarden, 1Password, trousseau…). Il ira aussi dans le secret GitHub `SUPABASE_DB_PASSWORD`. Supabase ne te le remontrera plus. |
-| Region                          | **Europe** (Paris `eu-west-3` si proposé, sinon Francfort) | Proche de tes utilisateurs, RGPD                                                                                                                                                               |
-| Enable Data API                 | ✅ **coché**                                               | `supabase-js` passe par cette API REST                                                                                                                                                         |
-| Automatically expose new tables | ❌ **décoché**                                             | Aucune table n'est exposée sans `GRANT` explicite : nos migrations accordent les droits table par table. Une table oubliée reste inaccessible au lieu d'être publique.                         |
-| Enable automatic RLS            | ✅ **coché**                                               | Filet de sécurité : toute nouvelle table a la RLS activée d'office. Nos migrations l'activent de toute façon explicitement, et un test pgTAP vérifie qu'aucune table n'en est dépourvue.       |
+| Champ                           | Valeur                                                     | Pourquoi                                                                                                          |
+| ------------------------------- | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Organization                    | ton organisation **Free**                                  | 0 €                                                                                                               |
+| GitHub (optional)               | **ne pas connecter**                                       | Le schéma est appliqué à la main, fichier par fichier (section 4).                                                |
+| Project name                    | `spectra`                                                  |                                                                                                                   |
+| Database password               | **Generate a password**                                    | À garder dans ton gestionnaire de mots de passe. Il ne va **nulle part** ailleurs.                                |
+| Region                          | **Europe** (Paris `eu-west-3` si proposé, sinon Francfort) | Proche de tes utilisateurs, RGPD                                                                                  |
+| Enable Data API                 | ✅ **coché**                                               | `supabase-js` passe par cette API REST                                                                            |
+| Automatically expose new tables | ❌ **décoché**                                             | Aucune table n'est exposée sans `GRANT` explicite dans nos fichiers SQL. Une table oubliée reste fermée.          |
+| Enable automatic RLS            | ✅ **coché**                                               | Filet de sécurité : toute nouvelle table a la RLS activée d'office (nos fichiers l'activent aussi explicitement). |
 
-Clique sur **Create new project** et attends 1 à 2 minutes.
+## 2. Variables GitHub (valeurs publiques)
 
-## 2. Récupérer les identifiants → GitHub
+`https://github.com/krokow/spectra/settings/variables/actions` → **New repository variable** :
 
-Dans Supabase, **Project Settings** :
+| Variable                 | Où la trouver dans Supabase                                             |
+| ------------------------ | ----------------------------------------------------------------------- |
+| `VITE_SUPABASE_URL`      | Project Settings → Data API → Project URL (`https://<ref>.supabase.co`) |
+| `VITE_SUPABASE_ANON_KEY` | Project Settings → API Keys → **Publishable key** (`sb_publishable_…`)  |
 
-1. **General → Project ID** (le `ref`, ~20 lettres) → variable GitHub `SUPABASE_PROJECT_REF`.
-2. **Data API → Project URL** (`https://<ref>.supabase.co`) → variable GitHub `VITE_SUPABASE_URL`.
-3. **API Keys → Publishable key** (`sb_publishable_…`) → variable GitHub `VITE_SUPABASE_ANON_KEY`.
-   ⚠️ **Ne prends jamais la _Secret key_** (`sb_secret_…`) pour cette variable.
-4. Sur supabase.com, ton avatar → **Account preferences → Access Tokens → Generate new token** (nom : `github-actions-spectra`) → secret GitHub `SUPABASE_ACCESS_TOKEN`.
-5. Le mot de passe de la base (étape 1) → secret GitHub `SUPABASE_DB_PASSWORD`.
+⚠️ Jamais la _Secret key_ (`sb_secret_…`). Aucun **secret** GitHub n'est nécessaire à cette étape.
 
-Où les mettre sur GitHub : `https://github.com/krokow/spectra/settings/variables/actions` (variables) et `https://github.com/krokow/spectra/settings/secrets/actions` (secrets). Voir aussi `SETUP_GITHUB.md`.
-
-## 3. Authentification : e-mail + mot de passe + pseudo
-
-Choix validé : inscription avec **e-mail + mot de passe + pseudo unique**, connexion avec **e-mail ou
-pseudo + mot de passe**. Pas de fournisseur externe (GitHub, Discord, Google).
-Les e-mails (confirmation d'adresse, mot de passe oublié) passent par un **compte Gmail dédié** utilisé
-comme serveur SMTP : gratuit, sans carte, sans nom de domaine.
+## 3. Authentification : e-mail + mot de passe + pseudo, aucun e-mail envoyé
 
 ### 3.1 URL de l'app
 
 **Authentication → URL Configuration** :
 
 - **Site URL** : `https://krokow.github.io/spectra/`
-- **Redirect URLs** (bouton **Add URL**, une entrée à la fois) :
-  - `https://krokow.github.io/spectra/**`
-  - `http://localhost:5173/**`
+- **Redirect URLs** : `https://krokow.github.io/spectra/**` et `http://localhost:5173/**`
 
-Les liens des e-mails (confirmation, réinitialisation) ramènent vers ces adresses.
-
-### 3.2 Créer l'expéditeur Gmail (une seule fois)
-
-> Le SMTP intégré de Supabase n'envoie qu'aux membres de ton équipe Supabase et quelques e-mails par heure :
-> inutilisable pour de vrais utilisateurs. D'où un SMTP externe.
-
-1. Crée un compte Gmail **dédié** (ex. `spectra.app.<quelque-chose>@gmail.com`), pas ton adresse perso.
-2. Sur ce compte : `https://myaccount.google.com/security` → active la **Validation en deux étapes**
-   (obligatoire pour l'étape suivante).
-3. `https://myaccount.google.com/apppasswords` → nom `supabase-spectra` → **Créer**. Google affiche un
-   **mot de passe d'application** de 16 lettres. Copie-le dans ton gestionnaire de mots de passe.
-   Ne le colle nulle part ailleurs que dans Supabase (étape 3.3).
-
-Limite Gmail : environ 500 e-mails par jour, largement suffisant au départ. Les e-mails partent
-réellement de Gmail, donc ils sont authentifiés (SPF/DKIM) et arrivent rarement en spam.
-
-### 3.3 Brancher le SMTP dans Supabase
-
-**Authentication → Emails → SMTP Settings → Enable Custom SMTP** :
-
-| Champ                           | Valeur                                                   |
-| ------------------------------- | -------------------------------------------------------- |
-| Sender email                    | l'adresse Gmail dédiée                                   |
-| Sender name                     | `Spectra`                                                |
-| Host                            | `smtp.gmail.com`                                         |
-| Port                            | `465`                                                    |
-| Username                        | l'adresse Gmail dédiée                                   |
-| Password                        | le mot de passe d'application (16 lettres, sans espaces) |
-| Minimum interval between emails | `60` secondes                                            |
-
-Puis **Authentication → Rate Limits** : « Rate limit for sending emails » à `30` par heure (ajustable).
-
-### 3.4 Provider Email
+### 3.2 Provider Email
 
 **Authentication → Sign In / Providers** :
 
 - **Allow new users to sign up** : activé.
 - **Allow anonymous sign-ins** : désactivé.
 - **Email** : activé, avec :
-  - **Confirm email** : ✅ activé (on vérifie que l'adresse appartient bien à la personne) ;
-  - **Secure email change** : ✅ activé ;
+  - **Confirm email** : ❌ **désactivé** (aucun e-mail envoyé ; le compte est utilisable tout de suite) ;
+  - **Secure email change** : ❌ désactivé ;
   - **Minimum password length** : `10` ; **Password requirements** : minuscules, majuscules et chiffres.
-- Tous les autres providers (GitHub, Google, Discord…) : désactivés.
+- Tous les autres providers : désactivés.
+- **Pas de SMTP personnalisé** (Authentication → Emails → SMTP Settings : laisser tel quel).
 
-Les textes des e-mails (Authentication → Emails → Templates) seront fournis en français à l'étape 3.
+### 3.3 Ce que ça implique
 
-## 4. Extensions (étape 3 et suivantes)
+- Connexion par **e-mail ou pseudo** + mot de passe. Le pseudo est l'identité publique ; l'e-mail n'est jamais
+  montré aux autres.
+- **Mot de passe oublié** : à l'inscription, l'app affiche des **codes de secours** à noter ; un code permet de
+  choisir un nouveau mot de passe. (Si un jour tu veux la réinitialisation par e-mail, il suffira de brancher un
+  SMTP gratuit, par exemple un Gmail dédié avec mot de passe d'application, et d'activer « Confirm email ».)
+- Adresse non vérifiée : quelqu'un pourrait s'inscrire avec une adresse qui n'est pas la sienne. Sans
+  conséquence ici, puisque l'e-mail ne sert qu'à se connecter.
 
-Les migrations les activent elles-mêmes (`vector`, `pg_jsonschema`, `pg_cron`, `pg_net`). Si l'une échoue : **Database → Extensions**, recherche le nom, active-la.
+## 4. Appliquer le schéma de la base (à chaque étape)
 
-## 5. Te déclarer administrateur (après ta première connexion)
+Les fichiers sont dans `supabase/migrations/`, numérotés (`0001_…sql`, `0002_…sql`…).
 
-**SQL Editor** :
+1. Ouvre le fichier sur GitHub, bouton **Copy raw file**.
+2. Supabase → **SQL Editor → New query**, colle, **Run**.
+3. Fais-les **dans l'ordre**, une seule fois chacun.
+
+Chaque fichier s'enregistre lui-même dans la table privée `ops.schema_migrations` et refuse de s'exécuter si le
+précédent manque. Pour voir où en est le projet :
+
+```sql
+select version, name, applied_at from ops.schema_migrations order by version;
+```
+
+Avant chaque fichier, il est testé en CI sur une base Supabase locale (tests des règles RLS inclus).
+
+## 5. Edge Functions (à partir de l'étape 4)
+
+Déploiement depuis le tableau de bord, comme pour Synapse : **Edge Functions → Deploy a new function → Via
+Editor**, nom de la fonction, coller le fichier **déjà assemblé** que je fournirai (`supabase/functions-bundled/<nom>.ts`,
+un seul fichier par fonction), **Deploy**. Les secrets de fonction se règlent dans **Edge Functions → Secrets**.
+
+## 6. Te déclarer administrateur (après ta première inscription)
+
+**SQL Editor** (à taper dans Supabase, jamais à commiter avec ta vraie adresse) :
 
 ```sql
 insert into public.app_admins (user_id)
 select id from auth.users where email = 'TON_EMAIL_ICI';
--- (requête à taper dans le SQL Editor de Supabase, jamais à commiter avec ta vraie adresse)
 ```
 
-## 6. Ce qui viendra aux étapes suivantes
+## 7. Plus tard (facultatif)
 
-- Étape 4 : clé Last.fm (`https://www.last.fm/api/account/create`, usage non commercial) à déposer avec
-  `supabase secrets set LASTFM_API_KEY=...` (je te donnerai la commande exacte) ; secret GitHub `SUPABASE_SECRET_KEY` pour l'analyseur audio.
-- Étape 9 : sauvegardes chiffrées (`SUPABASE_DB_URL`, `BACKUP_AGE_RECIPIENT`).
+- Étape 4 : une clé Last.fm gratuite (secret de fonction `LASTFM_API_KEY`). L'analyseur audio nocturne aura
+  besoin d'un secret GitHub (`SUPABASE_SECRET_KEY`) : je t'expliquerai pourquoi et comment à ce moment-là.
+- Étape 9 : sauvegardes chiffrées (facultatif).
