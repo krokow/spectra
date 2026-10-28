@@ -1,6 +1,6 @@
 {
- "generated_at": "2026-10-28T23:17:58.123Z",
- "count": 333,
+ "generated_at": "2026-10-28T23:30:19.862Z",
+ "count": 340,
  "anchors": [
   {
    "source": {
@@ -367,33 +367,32 @@
     "energy": 0.25,
     "valence": 0.2,
     "acoustic": 0.9,
-    "tempo": 0.491,
+    "tempo": 0.3,
     "dance": 0.3,
     "complexity": 0.3,
     "vocal": 0.95,
     "bass": 0.15,
     "polish": 0.7,
     "warmth": 0.8,
-    "niche": 0.254,
+    "niche": 0.441,
     "era": 0.82
    },
-   "confidence": 0.65,
+   "confidence": 0.6,
    "track": {
     "title": "Someone Like You",
     "artist": {
-     "name": "Hello I'm Adele",
-     "deezer_id": 12258842,
-     "image_url": "https://cdn-images.dzcdn.net/images/artist/66a4bf0751de50d0e76640eaf55570d7/250x250-000000-80-0-0.jpg"
+     "name": "Sing To Adele",
+     "deezer_id": 12157314,
+     "image_url": "https://cdn-images.dzcdn.net/images/artist/3702e44e6ca58b34ab8559e864f70aa6/250x250-000000-80-0-0.jpg"
     },
-    "album": "Someone Like You",
-    "cover_url": "https://cdn-images.dzcdn.net/images/cover/35becca9e8a8ea0267ff467f7832d214/1000x1000-000000-80-0-0.jpg",
-    "duration_s": 286,
+    "album": "Rolling In The Deep",
+    "cover_url": "https://cdn-images.dzcdn.net/images/cover/3702e44e6ca58b34ab8559e864f70aa6/1000x1000-000000-80-0-0.jpg",
+    "duration_s": 89,
     "release_year": 2011,
     "isrc": "UKG8V1600024",
-    "deezer_id": 376730901,
-    "rank": 139873,
-    "bpm": 134.23,
-    "gain": -10.5,
+    "deezer_id": 144602658,
+    "rank": 24848,
+    "gain": -11.2,
     "explicit": false
    }
   },
@@ -6648,6 +6647,69 @@
   },
   {
    "source": {
+    "artist": "Madvillain",
+    "title": "Accordion",
+    "year": 2004,
+    "lang": "en",
+    "genres": {
+     "hiphop": 1
+    },
+    "energy": 0.45,
+    "valence": 0.4,
+    "acoustic": 0.4,
+    "tempo": 0.4,
+    "dance": 0.65,
+    "complexity": 0.7,
+    "vocal": 0.9,
+    "bass": 0.5,
+    "polish": 0.3,
+    "warmth": 0.6,
+    "niche": 0.55
+   },
+   "match": {
+    "provider": "deezer",
+    "score": 1
+   },
+   "lang": "en",
+   "cell": "hiphop|2000s|mid",
+   "genres": {
+    "hiphop": 1
+   },
+   "features": {
+    "energy": 0.45,
+    "valence": 0.4,
+    "acoustic": 0.4,
+    "tempo": 0.4,
+    "dance": 0.65,
+    "complexity": 0.7,
+    "vocal": 0.9,
+    "bass": 0.5,
+    "polish": 0.3,
+    "warmth": 0.6,
+    "niche": 0.347,
+    "era": 0.68
+   },
+   "confidence": 0.6,
+   "track": {
+    "title": "Accordion",
+    "artist": {
+     "name": "Madvillain",
+     "deezer_id": 3228,
+     "image_url": "https://cdn-images.dzcdn.net/images/artist/7b575e9a02552135c2abc45b0fc625ab/250x250-000000-80-0-0.jpg"
+    },
+    "album": "Madvillainy",
+    "cover_url": "https://cdn-images.dzcdn.net/images/cover/22d68d10ed024e92b65d010d5df24c04/1000x1000-000000-80-0-0.jpg",
+    "duration_s": 118,
+    "release_year": 2004,
+    "isrc": "US2S70465002",
+    "deezer_id": 446028242,
+    "rank": 517959,
+    "gain": -10.1,
+    "explicit": true
+   }
+  },
+  {
+   "source": {
     "artist": "potsu",
     "title": "i'm closing my eyes",
     "year": 2017,
@@ -11013,6 +11075,70 @@
   },
   {
    "source": {
+    "artist": "Brian Eno",
+    "title": "1/1",
+    "year": 1978,
+    "lang": "-",
+    "genres": {
+     "ambient": 1
+    },
+    "energy": 0.25,
+    "valence": 0.6,
+    "acoustic": 0.85,
+    "tempo": 0.35,
+    "dance": 0.2,
+    "complexity": 0.6,
+    "vocal": 0,
+    "bass": 0.15,
+    "polish": 0.5,
+    "warmth": 0.7,
+    "niche": 0.85
+   },
+   "match": {
+    "provider": "deezer",
+    "score": 1
+   },
+   "lang": "-",
+   "cell": "ambient|1970s|low",
+   "genres": {
+    "ambient": 1
+   },
+   "features": {
+    "energy": 0.25,
+    "valence": 0.6,
+    "acoustic": 0.85,
+    "tempo": 0.476,
+    "dance": 0.2,
+    "complexity": 0.6,
+    "vocal": 0,
+    "bass": 0.15,
+    "polish": 0.5,
+    "warmth": 0.7,
+    "niche": 0.521,
+    "era": 0.22
+   },
+   "confidence": 0.65,
+   "track": {
+    "title": "1/1 (Remastered 2004)",
+    "artist": {
+     "name": "Brian Eno",
+     "deezer_id": 2042,
+     "image_url": "https://cdn-images.dzcdn.net/images/artist/206fb71e27938b4e5d40766de12b9f95/250x250-000000-80-0-0.jpg"
+    },
+    "album": "Ambient 1: Music For Airports (Remastered 2004)",
+    "cover_url": "https://cdn-images.dzcdn.net/images/cover/c4ae667b0e909274ee408dd0712e6ae2/1000x1000-000000-80-0-0.jpg",
+    "duration_s": 999,
+    "release_year": 1978,
+    "isrc": "GBAAA0400426",
+    "deezer_id": 3137841,
+    "rank": 413841,
+    "bpm": 127.2,
+    "gain": -21.5,
+    "explicit": false
+   }
+  },
+  {
+   "source": {
     "artist": "Miles Davis",
     "title": "So What",
     "year": 1959,
@@ -12307,6 +12433,70 @@
   },
   {
    "source": {
+    "artist": "Igor Stravinsky",
+    "title": "The Rite of Spring",
+    "year": 1960,
+    "lang": "-",
+    "genres": {
+     "classical": 1
+    },
+    "energy": 0.85,
+    "valence": 0.3,
+    "acoustic": 0.95,
+    "tempo": 0.6,
+    "dance": 0.3,
+    "complexity": 0.95,
+    "vocal": 0,
+    "bass": 0.5,
+    "polish": 0.6,
+    "warmth": 0.4,
+    "niche": 0.45
+   },
+   "match": {
+    "provider": "deezer",
+    "score": 0.8
+   },
+   "lang": "-",
+   "cell": "classical|1960s|high",
+   "genres": {
+    "classical": 1
+   },
+   "features": {
+    "energy": 0.85,
+    "valence": 0.3,
+    "acoustic": 0.95,
+    "tempo": 0.616,
+    "dance": 0.3,
+    "complexity": 0.95,
+    "vocal": 0,
+    "bass": 0.5,
+    "polish": 0.6,
+    "warmth": 0.4,
+    "niche": 0.54,
+    "era": 0
+   },
+   "confidence": 0.65,
+   "track": {
+    "title": "The Rite of Spring: Sacrificial Dance - The Chosen Victim",
+    "artist": {
+     "name": "Igor Stravinsky",
+     "deezer_id": 73571,
+     "image_url": "https://cdn-images.dzcdn.net/images/artist/670364fa56dc2cd2e84febef0ad4b8a5/250x250-000000-80-0-0.jpg"
+    },
+    "album": "Stravinsky: Le sacre du printemps (The Rite of Spring)",
+    "cover_url": "https://cdn-images.dzcdn.net/images/cover/b93bfddde2e652e18978a6fd9b1ffafe/1000x1000-000000-80-0-0.jpg",
+    "duration_s": 254,
+    "release_year": 1960,
+    "isrc": "USSM11206814",
+    "deezer_id": 71950298,
+    "rank": 55312,
+    "bpm": 135.1,
+    "gain": -17.3,
+    "explicit": false
+   }
+  },
+  {
+   "source": {
     "artist": "Arvo Pärt",
     "title": "Spiegel im Spiegel",
     "year": 1999,
@@ -12748,7 +12938,7 @@
   {
    "source": {
     "artist": "Antonio Vivaldi",
-    "title": "The Four Seasons, Winter: I. Allegro non molto",
+    "title": "Winter",
     "year": 1988,
     "lang": "-",
     "genres": {
@@ -12768,7 +12958,7 @@
    },
    "match": {
     "provider": "deezer",
-    "score": 0.8
+    "score": 1
    },
    "lang": "-",
    "cell": "classical|1980s|high",
@@ -12779,33 +12969,32 @@
     "energy": 0.8,
     "valence": 0.35,
     "acoustic": 0.95,
-    "tempo": 0.801,
+    "tempo": 0.75,
     "dance": 0.35,
     "complexity": 0.6,
     "vocal": 0,
     "bass": 0.3,
     "polish": 0.65,
     "warmth": 0.55,
-    "niche": 0.068,
+    "niche": 0.08,
     "era": 0.41
    },
-   "confidence": 0.65,
+   "confidence": 0.6,
    "track": {
-    "title": "The Four Seasons. Winter. I. Allegro Non Molto. Great for Baby's Brain, Mozart Effect, Stress Reduction and Pure Enjoyment.",
+    "title": "Winter",
     "artist": {
      "name": "Antonio Vivaldi",
      "deezer_id": 4081,
      "image_url": "https://cdn-images.dzcdn.net/images/artist/b2db4f4aeb6284f7f3273bf51a2a8bed/250x250-000000-80-0-0.jpg"
     },
-    "album": "The Four Seasons. Winter. I. Allegro Non Molto. Great for Baby's Brain, Mozart Effect, Stress Reduction and Pure Enjoyment.",
-    "cover_url": "https://cdn-images.dzcdn.net/images/cover/0abe85cf1022666c2062b0540f616246/1000x1000-000000-80-0-0.jpg",
-    "duration_s": 195,
+    "album": "Classical Music For Working From Home",
+    "cover_url": "https://cdn-images.dzcdn.net/images/cover/e0b3bced39896e73a201f342fc492dc3/1000x1000-000000-80-0-0.jpg",
+    "duration_s": 557,
     "release_year": 1988,
-    "isrc": "USTCF1065484",
-    "deezer_id": 71119094,
-    "rank": 674071,
-    "bpm": 160.2,
-    "gain": -14.2,
+    "isrc": "FR96X1962982",
+    "deezer_id": 1103272332,
+    "rank": 605664,
+    "gain": -29.3,
     "explicit": false
    }
   },
@@ -13482,8 +13671,8 @@
     "niche": 0.08
    },
    "match": {
-    "provider": "deezer",
-    "score": 0.8
+    "provider": "itunes",
+    "score": 1
    },
    "lang": "en",
    "cell": "folk|2000s|high",
@@ -13495,34 +13684,27 @@
     "energy": 0.8,
     "valence": 0.5,
     "acoustic": 0.8,
-    "tempo": 0.694,
+    "tempo": 0.75,
     "dance": 0.5,
     "complexity": 0.3,
     "vocal": 0.95,
     "bass": 0.3,
     "polish": 0.7,
     "warmth": 0.7,
-    "niche": 0.41,
+    "niche": 0.08,
     "era": 0.78
    },
-   "confidence": 0.65,
+   "confidence": 0.55,
    "track": {
-    "title": "Little lion man",
+    "title": "Little Lion Man (Live from Shepherd's Bush Empire, 2010)",
     "artist": {
-     "name": "Made famous by Mumford & Sons",
-     "deezer_id": 4195460,
-     "image_url": "https://cdn-images.dzcdn.net/images/artist//250x250-000000-80-0-0.jpg"
+     "name": "Mumford & Sons"
     },
-    "album": "Little lion man",
-    "cover_url": "https://cdn-images.dzcdn.net/images/cover/03adfb811c6ba2e6ee1ab86b8b748c0c/1000x1000-000000-80-0-0.jpg",
-    "duration_s": 223,
+    "album": "Live from Shepherd's Bush Empire",
+    "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/5d/dd/77/5ddd77b5-0331-5ce2-ac33-901e3aad85bd/0044003151451_Cover.jpg/600x600bb.jpg",
+    "duration_s": 256,
     "release_year": 2009,
-    "isrc": "ARG991010826",
-    "deezer_id": 10153582,
-    "rank": 33284,
-    "bpm": 138.7,
-    "gain": -10.9,
-    "explicit": false
+    "itunes_id": 1771707796
    }
   },
   {
@@ -13681,8 +13863,8 @@
     "niche": 0.03
    },
    "match": {
-    "provider": "deezer",
-    "score": 0.8
+    "provider": "itunes",
+    "score": 1
    },
    "lang": "en",
    "cell": "folk|2010s|mid",
@@ -13695,34 +13877,27 @@
     "energy": 0.6,
     "valence": 0.25,
     "acoustic": 0.6,
-    "tempo": 0.524,
+    "tempo": 0.45,
     "dance": 0.45,
     "complexity": 0.35,
     "vocal": 0.95,
     "bass": 0.4,
     "polish": 0.75,
     "warmth": 0.75,
-    "niche": 0.368,
+    "niche": 0.03,
     "era": 0.86
    },
-   "confidence": 0.65,
+   "confidence": 0.55,
    "track": {
-    "title": "Take Me to Church (Karaoke)",
+    "title": "Take Me to Church",
     "artist": {
-     "name": "Andrew Hozier-Byrne",
-     "deezer_id": 5930073,
-     "image_url": "https://cdn-images.dzcdn.net/images/artist/3c99ef43343602b7c61a65161fd8c41f/250x250-000000-80-0-0.jpg"
+     "name": "Hozier"
     },
-    "album": "Les Goes Top Forty!",
-    "cover_url": "https://cdn-images.dzcdn.net/images/cover/3c99ef43343602b7c61a65161fd8c41f/1000x1000-000000-80-0-0.jpg",
-    "duration_s": 239,
+    "album": "Hozier (Expanded Edition)",
+    "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/5e/1b/f1/5e1bf1de-e5f1-e73e-0752-e7882b4f2d57/886444718820.jpg/600x600bb.jpg",
+    "duration_s": 242,
     "release_year": 2013,
-    "isrc": "USE831596581",
-    "deezer_id": 134086304,
-    "rank": 38848,
-    "bpm": 128.8,
-    "gain": -12.4,
-    "explicit": false
+    "itunes_id": 900672609
    }
   },
   {
@@ -14049,6 +14224,71 @@
     "rank": 722584,
     "bpm": 160.9,
     "gain": -10.8,
+    "explicit": false
+   }
+  },
+  {
+   "source": {
+    "artist": "Umm Kulthum",
+    "title": "Enta Omri",
+    "year": 1964,
+    "lang": "ar",
+    "genres": {
+     "folk": 0.6,
+     "classical": 0.4
+    },
+    "energy": 0.4,
+    "valence": 0.5,
+    "acoustic": 0.8,
+    "tempo": 0.4,
+    "dance": 0.35,
+    "complexity": 0.7,
+    "vocal": 0.95,
+    "bass": 0.2,
+    "polish": 0.3,
+    "warmth": 0.85,
+    "niche": 0.4
+   },
+   "match": {
+    "provider": "deezer",
+    "score": 0.8
+   },
+   "lang": "ar",
+   "cell": "folk|1960s|mid",
+   "genres": {
+    "folk": 0.6,
+    "classical": 0.4
+   },
+   "features": {
+    "energy": 0.4,
+    "valence": 0.5,
+    "acoustic": 0.8,
+    "tempo": 0.4,
+    "dance": 0.35,
+    "complexity": 0.7,
+    "vocal": 0.95,
+    "bass": 0.2,
+    "polish": 0.3,
+    "warmth": 0.85,
+    "niche": 0.318,
+    "era": 0.04
+   },
+   "confidence": 0.6,
+   "track": {
+    "title": "الف ليله وليله",
+    "artist": {
+     "name": "Umm Kulthum",
+     "deezer_id": 1236161,
+     "image_url": "https://cdn-images.dzcdn.net/images/artist/e9fee29059b16f7304a4030afbfb4a63/250x250-000000-80-0-0.jpg"
+    },
+    "album": "الف ليلة وليلة",
+    "cover_url": "https://cdn-images.dzcdn.net/images/cover/93b68338fbe951ae2af9d968cbd39ed2/1000x1000-000000-80-0-0.jpg",
+    "duration_s": 2497,
+    "release_year": 1964,
+    "isrc": "TCAJY2515975",
+    "deezer_id": 3623232582,
+    "rank": 337190,
+    "gain": -12.8,
     "explicit": false
    }
   },
@@ -16765,7 +17005,7 @@
   {
    "source": {
     "artist": "Gipsy Kings",
-    "title": "Bamboléo",
+    "title": "Bamboleo",
     "year": 1987,
     "lang": "es",
     "genres": {
@@ -16785,8 +17025,8 @@
     "niche": 0.1
    },
    "match": {
-    "provider": "deezer",
-    "score": 0.6
+    "provider": "itunes",
+    "score": 1
    },
    "lang": "es",
    "cell": "latin|1980s|high",
@@ -16798,34 +17038,27 @@
     "energy": 0.8,
     "valence": 0.85,
     "acoustic": 0.85,
-    "tempo": 0.559,
+    "tempo": 0.65,
     "dance": 0.75,
     "complexity": 0.35,
     "vocal": 0.9,
     "bass": 0.4,
     "polish": 0.55,
     "warmth": 0.85,
-    "niche": 0.278,
+    "niche": 0.1,
     "era": 0.39
    },
-   "confidence": 0.65,
+   "confidence": 0.55,
    "track": {
-    "title": "Medley: Bamboleo, Volare, Djobi Djoba, Pida Me La, Baila Me",
+    "title": "Bamboléo",
     "artist": {
-     "name": "Gipsy Kings",
-     "deezer_id": 723,
-     "image_url": "https://cdn-images.dzcdn.net/images/artist/bf764dda30afa25b050d8e45274d7d23/250x250-000000-80-0-0.jpg"
+     "name": "Gipsy Kings"
     },
-    "album": "Best of Gipsy Kings",
-    "cover_url": "https://cdn-images.dzcdn.net/images/cover/bae429f5b39cde2ae56e828b42c3b781/1000x1000-000000-80-0-0.jpg",
-    "duration_s": 287,
+    "album": "¡Volaré! The Very Best of the Gipsy Kings",
+    "cover_url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0d/d2/f8/0dd2f824-8730-6bd3-a645-6697c470fe47/s06.pnsyuean.jpg/600x600bb.jpg",
+    "duration_s": 203,
     "release_year": 1987,
-    "isrc": "USNO11200238",
-    "deezer_id": 85090606,
-    "rank": 122802,
-    "bpm": 119.8,
-    "gain": -13.8,
-    "explicit": false
+    "itunes_id": 31739286
    }
   },
   {
@@ -17088,6 +17321,72 @@
     "deezer_id": 956264572,
     "rank": 516737,
     "gain": -8.3,
+    "explicit": false
+   }
+  },
+  {
+   "source": {
+    "artist": "Amadou & Mariam",
+    "title": "Beaux dimanches",
+    "year": 2004,
+    "lang": "fr",
+    "genres": {
+     "afro": 0.9,
+     "pop": 0.4
+    },
+    "energy": 0.7,
+    "valence": 0.85,
+    "acoustic": 0.5,
+    "tempo": 0.55,
+    "dance": 0.8,
+    "complexity": 0.3,
+    "vocal": 0.9,
+    "bass": 0.5,
+    "polish": 0.55,
+    "warmth": 0.85,
+    "niche": 0.3
+   },
+   "match": {
+    "provider": "deezer",
+    "score": 1
+   },
+   "lang": "fr",
+   "cell": "afro|2000s|high",
+   "genres": {
+    "afro": 0.9,
+    "pop": 0.4
+   },
+   "features": {
+    "energy": 0.7,
+    "valence": 0.85,
+    "acoustic": 0.5,
+    "tempo": 0.465,
+    "dance": 0.8,
+    "complexity": 0.3,
+    "vocal": 0.9,
+    "bass": 0.5,
+    "polish": 0.55,
+    "warmth": 0.85,
+    "niche": 0.208,
+    "era": 0.68
+   },
+   "confidence": 0.65,
+   "track": {
+    "title": "Beaux Dimanches",
+    "artist": {
+     "name": "Amadou & Mariam",
+     "deezer_id": 5,
+     "image_url": "https://cdn-images.dzcdn.net/images/artist/7d9d89f95ded2fbf1bad76b22144156b/250x250-000000-80-0-0.jpg"
+    },
+    "album": "Dimanche à Bamako",
+    "cover_url": "https://cdn-images.dzcdn.net/images/cover/f6f28ee6268377f5f78b5e1ebf09b40a/1000x1000-000000-80-0-0.jpg",
+    "duration_s": 211,
+    "release_year": 2004,
+    "isrc": "FR91P0400070",
+    "deezer_id": 515871052,
+    "rank": 585790,
+    "bpm": 109.09,
+    "gain": -9,
     "explicit": false
    }
   },
@@ -17605,6 +17904,72 @@
     "rank": 818101,
     "bpm": 118.8,
     "gain": -17,
+    "explicit": false
+   }
+  },
+  {
+   "source": {
+    "artist": "Mory Kanté",
+    "title": "Yéké Yéké",
+    "year": 1987,
+    "lang": "man",
+    "genres": {
+     "afro": 0.9,
+     "pop": 0.3
+    },
+    "energy": 0.85,
+    "valence": 0.85,
+    "acoustic": 0.3,
+    "tempo": 0.65,
+    "dance": 0.9,
+    "complexity": 0.35,
+    "vocal": 0.9,
+    "bass": 0.6,
+    "polish": 0.65,
+    "warmth": 0.75,
+    "niche": 0.2
+   },
+   "match": {
+    "provider": "deezer",
+    "score": 1
+   },
+   "lang": "man",
+   "cell": "afro|1980s|high",
+   "genres": {
+    "afro": 0.9,
+    "pop": 0.3
+   },
+   "features": {
+    "energy": 0.85,
+    "valence": 0.85,
+    "acoustic": 0.3,
+    "tempo": 0.6,
+    "dance": 0.9,
+    "complexity": 0.35,
+    "vocal": 0.9,
+    "bass": 0.6,
+    "polish": 0.65,
+    "warmth": 0.75,
+    "niche": 0.214,
+    "era": 0.39
+   },
+   "confidence": 0.65,
+   "track": {
+    "title": "Yeke Yeke (Hardfloor Edit)",
+    "artist": {
+     "name": "Mory Kanté",
+     "deezer_id": 4656,
+     "image_url": "https://cdn-images.dzcdn.net/images/artist/82f15e6858df749a5822d3be5392dfab/250x250-000000-80-0-0.jpg"
+    },
+    "album": "Rave Classics",
+    "cover_url": "https://cdn-images.dzcdn.net/images/cover/b88821b45e039a3deed307efcbbc0be4/1000x1000-000000-80-0-0.jpg",
+    "duration_s": 236,
+    "release_year": 1987,
+    "isrc": "GBAMY9600239",
+    "deezer_id": 1696118167,
+    "rank": 351219,
+    "bpm": 128,
+    "gain": -9.3,
     "explicit": false
    }
   },
@@ -19434,6 +19799,72 @@
     "deezer_id": 1256485422,
     "rank": 505417,
     "gain": -8,
+    "explicit": false
+   }
+  },
+  {
+   "source": {
+    "artist": "Hikaru Utada",
+    "title": "First Love",
+    "year": 1999,
+    "lang": "ja",
+    "genres": {
+     "kpop_jpop": 0.9,
+     "rnb_soul": 0.3
+    },
+    "energy": 0.3,
+    "valence": 0.3,
+    "acoustic": 0.5,
+    "tempo": 0.35,
+    "dance": 0.4,
+    "complexity": 0.3,
+    "vocal": 0.95,
+    "bass": 0.3,
+    "polish": 0.75,
+    "warmth": 0.8,
+    "niche": 0.2
+   },
+   "match": {
+    "provider": "deezer",
+    "score": 1
+   },
+   "lang": "ja",
+   "cell": "kpop_jpop|1990s|low",
+   "genres": {
+    "kpop_jpop": 0.9,
+    "rnb_soul": 0.3
+   },
+   "features": {
+    "energy": 0.3,
+    "valence": 0.3,
+    "acoustic": 0.5,
+    "tempo": 0.289,
+    "dance": 0.4,
+    "complexity": 0.3,
+    "vocal": 0.95,
+    "bass": 0.3,
+    "polish": 0.75,
+    "warmth": 0.8,
+    "niche": 0.197,
+    "era": 0.585
+   },
+   "confidence": 0.65,
+   "track": {
+    "title": "First Love",
+    "artist": {
+     "name": "Hikaru Utada",
+     "deezer_id": 211217,
+     "image_url": "https://cdn-images.dzcdn.net/images/artist/9e50dbf307f0df27e13aaf2d3d7a6b5a/250x250-000000-80-0-0.jpg"
+    },
+    "album": "First Love",
+    "cover_url": "https://cdn-images.dzcdn.net/images/cover/e004947115457f462c63988ece2ba45a/1000x1000-000000-80-0-0.jpg",
+    "duration_s": 258,
+    "release_year": 1999,
+    "isrc": "JPTO09901670",
+    "deezer_id": 435816202,
+    "rank": 408764,
+    "bpm": 89.88,
+    "gain": -11.5,
     "explicit": false
    }
   },
